@@ -89,3 +89,20 @@
 .form__inputWrapper__checkbox[type="checkbox"]:checked+.form__inputWrapper__label--labelTerms::after {
     content: "";
 }
+
+/* Large button component */
+
+.form__inputWrapper__largeBtn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Rubik', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: #FFF;
+    background: #6271D2;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 4px;
+    letter-spacing: 0.05rem;
+}
