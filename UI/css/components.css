@@ -106,3 +106,21 @@
     border-radius: 4px;
     letter-spacing: 0.05rem;
 }
+
+/* Footer component */
+
+.form__inputWrapper--alignCenter {
+    text-align: center;
+}
+
+.form__inputWrapper__footer {
+    font-size: 0.8rem;
+    text-align: center;
+    color: #6271D2;
+}
+
+.form__inputWrapper__footer__link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #6271D2;
+}
