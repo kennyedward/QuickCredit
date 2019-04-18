@@ -1,0 +1,21 @@
+.smallCard {
+    background: #FFF;
+    border-radius: 4px;
+    border: none;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    width: 270px;
+    height: 180px;
+    margin-left: 30px;/* remove */
+    -webkit-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
+    -moz-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
+    box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
+    text-align: center;
+    padding: 2rem;
+    color: #79828B;
+}
+
+.smallCard__paragraph {
+    line-height: 21px;
+    font-size: 0.82rem;
+}
