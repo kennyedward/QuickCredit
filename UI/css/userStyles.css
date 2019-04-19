@@ -158,6 +158,112 @@
     display: block;
 }
 
+.updateProfileSection {
+    padding: 3rem; 
+    text-align: left;
+}
+
+.updateProfileSection__textArea {
+    text-align: left; 
+    width: 100%; 
+    border: 1px solid #CCC;
+}
+
+.uploadWrapper {
+    display: flex; 
+    align-items: center; 
+    margin-top: 1.5rem;
+}
+
+.realImageUploadHolder {
+    display: none; 
+    width: 70px; 
+    height: 60px; 
+    margin-right: 1rem;
+}
+
+.uploadWrapper__text__label {
+    cursor: pointer; 
+    color: #CCC; 
+    display: block; 
+    text-decoration: underline;
+}
+
+.uploadWrapper__text__upload {
+    display: none; 
+    color: #CCC;
+}
+
+.uploadWrapper__text__sizeLimit {
+    color: #6271D2; 
+    font-size: 0.7rem;
+}
+
+.imgPlacehoder {
+    margin-right: 1rem;
+}
+
+.showNotification {
+    display: flex !important; 
+    position: absolute; 
+    top: 9rem; 
+    z-index: 1; 
+    background: #FFF;  
+    align-items: center;  
+    padding: 1.5rem; 
+    border-radius: 4px;
+}
+
+.notificationMessage {
+    display: none;
+}
+
+.smallNotificationIcon {
+    margin-right: 1rem;
+}
+
+.smallNotificationIconText {
+    font-size: 0.8rem; 
+    line-height: 1.2;
+}
+
+.verifiedText {
+    color: #03CB4E;
+}
+
+.LoanAplicationWrapper {
+    padding: 2rem;
+}
+
+.loanForm {
+    display: flex;
+    justify-content: space-between;
+}
+
+.loanTextLabel {
+    font-size: 2rem;
+}
+
+.requestLoanBtn {
+    width: 40%;
+    margin: 2rem auto;
+}
+
+.loanForm__left, .loanForm__right {
+    width: 40%;
+}
+
+.paymentRate {
+    color: #FF08A3;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.interestRate {
+    font-weight: bold;
+}
+
+
 /* Media Queries */
 
 @media (max-width: 710px) {
@@ -206,6 +312,10 @@
     .smallCard {
         margin-top: 3rem;
     }
+
+    .updateProfile {
+        padding: 1rem;
+    }
 }
 
 @media (min-width: 425px) and (max-width: 980px) {
@@ -218,17 +328,41 @@
         margin-right: 0;
      }
      
-     .largeCard__rightSection {
-        margin-top: 0;
-        margin-right: 0;
-     }
-     
      .smallCard {
         margin-top: 3rem;
         width: -webkit-fill-available;
-     }
-
-     .largeCard__rightSection  {
-         margin-top: 3rem;
-     }
+     }   
 }
+
+@media  (max-width: 426px) {
+    .avatar {
+        display: none;
+    }
+}
+
+@media (min-width: 710px) { 
+
+    .showNotification {
+        top: 8rem;
+        right: 9rem;
+    }
+}
+
+@media (min-width: 1300px) { 
+
+    .showNotification {
+        top: 8rem;
+        right: 15rem;
+    }
+}
+
+@media (max-width: 769px) {
+    .loanForm { 
+        display: block;
+    }
+
+    .loanForm__left, .loanForm__right, .requestLoanBtn { 
+        width: 100%;
+    }
+}
+

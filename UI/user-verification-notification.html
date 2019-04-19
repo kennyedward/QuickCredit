@@ -15,24 +15,32 @@
 </head>
 
 <body>
-        <section class="topNavbar">
-                <div class="dashboard__container">
+        <section class="topNavbar" >
+                
+                <div class="dashboard__container" class="positionRelative">
+                                <div class="notificationMessage"><span class="notificationCloseBtn">&times</span>
+                                        <img src="./img/check-small.svg" alt="Notification message check icon" class="smallNotificationIcon"> <span
+                                               class="smallNotificationIconText">Your account verification <br>was
+                                                successful</span>
+                                </div>
                         <div class="topNavbar__wrapper">
                                 <img src="./img/logo-w.svg" alt="QuickCredit Logo">
 
                                 <div class="topNavbar__wrapper__notificationArea">
-                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">
-                                                <span class="notificationNumber">0</span>
+                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor" id="notify">
+                                                <span class="notificationNumber pink">1</span>
                                                 <img src="./img/notification.svg" alt="Notification icon"></a>
                                         <img src="./img/avatar.svg" alt="User Avatar"
                                                 class="topNavbar__wrapper__notificationArea__anchor avatar">
                                         <a class="topNavbar__wrapper__notificationArea__anchor">Kenny E.</a>
                                         <a href="#" class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
                                 </div>
+
                         </div>
 
+
                         <div class="topLoanBtn-wrapper">
-                                <button type="button" disabled="disabled"
+                                <button type="button" disabled="disabled" id="cta-upper"
                                         class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--whiteDisabled">Apply
                                         for loan</button>
                         </div>
@@ -51,11 +59,10 @@
                                                         <span class="largeCard__rightSection__upper__title uppercase">Verification
                                                                 status</span>
                                                         <span
-                                                                class="largeCard__rightSection__upper__verificationStatus uppercase">Unverified</span>
+                                                                class="largeCard__rightSection__upper__verificationStatus uppercase">Pending</span>
                                                         <img src="./img/unverified-icon.svg"
                                                                 alt="Unverifies status icon">
-                                                        <span class="statusText">Update
-                                                                profile to get verified.</span>
+                                                        <span class="statusText">Awaiting QuickCredit approval.</span>
                                                 </div>
 
                                                 <div class="largeCard__rightSection__lower">
@@ -63,7 +70,8 @@
                                                                 Eligibility</span>
                                                         <span class="minorBtns minorBtns--orange uppercase">Not
                                                                 Eligible</span>
-                                                        <span class="statusText">Not eligible for a loan at this
+                                                        <span class="statusText lowertText">Not eligible for a loan at
+                                                                this
                                                                 time.</span>
                                                 </div>
 
@@ -71,13 +79,12 @@
 
                                 </div>
                                 <div class="smallCard">
-                                        <img src="./img/lock.svg" alt="Account Lock icon" class="mb-1rem">
-                                        <p class="smallCard__paragraph mb-1rem">
-                                                Upload your profile picture, home or work
-                                                address to get your account verified.
+                                        <p class="smallCard__paragraph mb-1rem loanStatusText">
+                                                After requesting for a loan, your loan status will appear here.
                                         </p>
-                                        <button class="form__inputWrapper__largeBtn smallCard__btn"
-                                                onclick="location.href='user-dashboard-update-details.html'">update</button>
+                                        <buton
+                                                class="minorBtns minorBtns--orange darkGrey loanStatusTextOnBtn minorBtn--padding">
+                                                No transaction yet</button>
                                 </div>
                         </div>
                         <p class="repaymentText">Your loan repayment history will appear here.
@@ -89,7 +96,7 @@
                                                 transaction recorded yet</span>
 
                                         <div class="form__inputWrapper">
-                                                <input type="submit" value="Apply for loan"
+                                                <input type="submit" value="Apply for loan" id="cta-main"
                                                         class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--purpleDisabled"
                                                         disabled>
                                         </div>
@@ -98,6 +105,7 @@
                 </div>
         </section>
 
+        <script src="./js/notificationScripts.js"></script>
 </body>
 
 </html>

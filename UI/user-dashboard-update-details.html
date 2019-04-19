@@ -71,33 +71,58 @@
 
                                 </div>
                                 <div class="smallCard">
-                                        <img src="./img/lock.svg" alt="Account Lock icon" class="mb-1rem">
-                                        <p class="smallCard__paragraph mb-1rem">
-                                                Upload your profile picture, home or work
-                                                address to get your account verified.
+                                        <p class="smallCard__paragraph mb-1rem loanStatusText">
+                                                After requesting for a loan, your loan status will appear here.
                                         </p>
-                                        <button class="form__inputWrapper__largeBtn smallCard__btn"
-                                                onclick="location.href='user-dashboard-update-details.html'">update</button>
+                                        <buton class="minorBtns minorBtns--orange darkGrey loanStatusTextOnBtn minorBtn--padding">
+                                                No transaction yet</button>
                                 </div>
                         </div>
-                        <p class="repaymentText">Your loan repayment history will appear here.
+                        <p class="repaymentText">Update your profile for verification.
                         </p>
 
-                        <div class="lowerCardHolder boxShadow">
+                        <div class="lowerCardHolder boxShadow updateProfileSection">
                                 <div class="contentWrapper">
-                                        <span class="contentWrapper__noTransaction mb-1rem">No
-                                                transaction recorded yet</span>
+                                        <form class="updateProfile" action="user-verification-request-sent.html">
+                                                <h1 class="formHeading">Update Profile</h1>
+                                                <div class="form__inputWrapper">
+                                                        <label class="form__inputWrapper__label" for="address">Home or
+                                                                Work
+                                                                Address</label>
+                                                        <textarea name="" id="address" cols="30" rows="10"
+                                                                class="updateProfileSection__textArea" id="address"
+                                                                required></textarea>
+                                                </div>
 
-                                        <div class="form__inputWrapper">
-                                                <input type="submit" value="Apply for loan"
-                                                        class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--purpleDisabled"
-                                                        disabled>
-                                        </div>
+                                                <div class="form__inputWrapper">
+                                                        <label class="form__inputWrapper__label">Profile Piture</label>
+                                                        <div class="uploadWrapper">
+                                                                <img src="" alt="" class="realImageUploadHolder">
+                                                                <img src="./img/img-placeholder.svg" class="imgPlacehoder"
+                                                                        alt="Upload image placeholder">
+                                                                <div class="uploadWrapper__text">
+                                                                        <label for="picture"
+                                                                                class="uploadWrapper__text__label">Click
+                                                                                to upload picture</label>
+                                                                        <input type="file" name="picture" id="picture" accept="image/jpeg, imagge/png"                                                                               value="Upload picture"
+                                                                                class="uploadWrapper__text__upload" required>
+                                                                        <span class="uploadWrapper__text__sizeLimit">Image
+                                                                                size not more than 120kb. Accepts only .JPEG or .PNG</span>
+                                                                </div>
+                                                        </div>
+                                                </div>
+
+                                                <div class="form__inputWrapper">
+                                                        <input type="submit" value="Request Verification"
+                                                                class="form__inputWrapper__largeBtn requestVerfication">
+                                                </div>
+                                        </form>
                                 </div>
                         </div>
                 </div>
         </section>
 
+        <script src="./js/updateProfileScripts.js"></script>
 </body>
 
 </html>
