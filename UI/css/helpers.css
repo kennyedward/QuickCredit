@@ -35,6 +35,11 @@
     background: rgb(255, 239, 233);
 }
 
+.minorBtns--deepOrange {
+    color: #FFF; 
+    background: #FFAD08;
+}
+
 .minorBtn--padding {
     padding: 1.5rem 4rem; 
 }

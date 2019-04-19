@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>QuickCredit</title>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/components.css">
+        <link rel="stylesheet" href="css/userStyles.css">
+        <link rel="stylesheet" href="css/helpers.css">
+        <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
+</head>
+
+<body>
+        <section class="topNavbar">
+
+                <div class="dashboard__container">
+                        <div class="topNavbar__wrapper">
+                                <img src="./img/logo-w.svg" alt="QuickCredit Logo">
+
+                                <div class="topNavbar__wrapper__notificationArea">
+                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">
+                                                <span class="notificationNumber">0</span>
+                                                <img src="./img/notification.svg" alt="Notification icon"></a>
+                                        <img src="./img/avatar.svg" alt="User Avatar"
+                                                class="topNavbar__wrapper__notificationArea__anchor avatar">
+                                        <a class="topNavbar__wrapper__notificationArea__anchor">Kenny E.</a>
+                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
+                                </div>
+
+                        </div>
+
+
+                        <div class="topLoanBtn-wrapper">
+                                <button type="button" disabled="disabled" id="cta-upper"
+                                        class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--whiteDisabled">Apply
+                                        for loan</button>
+                        </div>
+
+                        <div class="cardHolder">
+                                <div class="largeCard">
+                                        <div class="largeCard__leftSection">
+                                                <span class="largeCard__leftSection__ongoingLoans uppercase">Ongoing
+                                                        loan</span>
+                                                <span class="largeCard__leftSection__amount">₦0.00</span>
+                                                <span class="largeCard__leftSection__daysLeft">0 days left</span>
+                                        </div>
+
+                                        <div class="largeCard__rightSection">
+                                                <div class="largeCard__rightSection__upper">
+                                                        <span class="largeCard__rightSection__upper__title uppercase">Verification
+                                                                status</span>
+                                                        <span
+                                                                class="largeCard__rightSection__upper__verificationStatus verifiedText uppercase">Verified</span>
+                                                        <img src="./img/verified-icon.svg"
+                                                                alt="user verified status icon">
+                                                        <span class="statusText">Your verification was successful</span>
+                                                </div>
+
+                                                <div class="largeCard__rightSection__lower">
+                                                        <span class="largeCard__rightSection__lower__title uppercase">Loan
+                                                                Eligibility</span>
+                                                        <span class="minorBtns minorBtns--orange uppercase">
+                                                                Not Eligible</span>
+                                                        <span class="statusText lowertText">You have an ongoing loan</span>
+                                                </div>
+
+                                        </div>
+
+                                </div>
+                                <div class="smallCard">
+                                        <p class="smallCard__paragraph mb-1rem loanStatusText">
+                                                        N50,000.00 requested
+                                                        for business. Due in 8 months.
+                                        </p>
+                                        <buton
+                                                class="minorBtns minorBtns--deepOrange loanStatusTextOnBtn minorBtn--padding">
+                                                Pending</button>
+                                </div>
+                        </div>
+                        <p class="repaymentText">Loan Application Sent
+                        </p>
+
+                        <div class="lowerCardHolder boxShadow">
+                                        <div class="contentWrapper">
+                                                <span class="darkGreyText mb-1rem">Your request for loan
+                                                                has been sent.</span>
+        
+                                                <div class="checkIcon">
+                                                        <img src="./img/check.svg" alt="Update Request Sent Icon">
+                                                </div>
+                                        </div>
+                                </div>
+                </div>
+        </section>
+
+        <script src="./js/notificationScripts.js"></script>
+</body>
+
+</html>
