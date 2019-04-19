@@ -15,24 +15,32 @@
 </head>
 
 <body>
-        <section class="topNavbar">
-                <div class="dashboard__container">
+        <section class="topNavbar" >
+                
+                <div class="dashboard__container" class="positionRelative">
+                                <div class="notificationMessage"><span class="notificationCloseBtn">&times</span>
+                                        <img src="./img/check-small.svg" alt="Notification message check icon" class="smallNotificationIcon"> <span
+                                               class="smallNotificationIconText">Your account verification <br>was
+                                                successful</span>
+                                </div>
                         <div class="topNavbar__wrapper">
                                 <img src="./img/logo-w.svg" alt="QuickCredit Logo">
 
                                 <div class="topNavbar__wrapper__notificationArea">
-                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">
-                                                <span class="notificationNumber">0</span>
+                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor" id="notify">
+                                                <span class="notificationNumber pink">1</span>
                                                 <img src="./img/notification.svg" alt="Notification icon"></a>
                                         <img src="./img/avatar.svg" alt="User Avatar"
                                                 class="topNavbar__wrapper__notificationArea__anchor avatar">
                                         <a class="topNavbar__wrapper__notificationArea__anchor">Kenny E.</a>
                                         <a href="#" class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
                                 </div>
+
                         </div>
 
+
                         <div class="topLoanBtn-wrapper">
-                                <button type="button" disabled="disabled"
+                                <button type="button" disabled="disabled" id="cta-upper"
                                         class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--whiteDisabled">Apply
                                         for loan</button>
                         </div>
@@ -51,11 +59,10 @@
                                                         <span class="largeCard__rightSection__upper__title uppercase">Verification
                                                                 status</span>
                                                         <span
-                                                                class="largeCard__rightSection__upper__verificationStatus uppercase">Unverified</span>
+                                                                class="largeCard__rightSection__upper__verificationStatus uppercase">Pending</span>
                                                         <img src="./img/unverified-icon.svg"
                                                                 alt="Unverifies status icon">
-                                                        <span class="statusText">Update
-                                                                profile to get verified.</span>
+                                                        <span class="statusText">Awaiting QuickCredit approval.</span>
                                                 </div>
 
                                                 <div class="largeCard__rightSection__lower">
@@ -63,7 +70,8 @@
                                                                 Eligibility</span>
                                                         <span class="minorBtns minorBtns--orange uppercase">Not
                                                                 Eligible</span>
-                                                        <span class="statusText">Not eligible for a loan at this
+                                                        <span class="statusText lowertText">Not eligible for a loan at
+                                                                this
                                                                 time.</span>
                                                 </div>
 
@@ -74,55 +82,30 @@
                                         <p class="smallCard__paragraph mb-1rem loanStatusText">
                                                 After requesting for a loan, your loan status will appear here.
                                         </p>
-                                        <buton class="minorBtns minorBtns--orange darkGrey loanStatusTextOnBtn minorBtn--padding">
+                                        <buton
+                                                class="minorBtns minorBtns--orange darkGrey loanStatusTextOnBtn minorBtn--padding">
                                                 No transaction yet</button>
                                 </div>
                         </div>
-                        <p class="repaymentText">Update your profile for verification.
+                        <p class="repaymentText">Your loan repayment history will appear here.
                         </p>
 
-                        <div class="lowerCardHolder boxShadow updateProfileSection">
+                        <div class="lowerCardHolder boxShadow">
                                 <div class="contentWrapper">
-                                        <form class="updateProfile" action="user-verification-request-sent.html">
-                                                <h1 class="formHeading">Update Profile</h1>
-                                                <div class="form__inputWrapper">
-                                                        <label class="form__inputWrapper__label" for="address">Home or
-                                                                Work
-                                                                Address</label>
-                                                        <textarea name="" id="address" cols="30" rows="10"
-                                                                class="updateProfileSection__textArea" id="address"
-                                                                required></textarea>
-                                                </div>
+                                        <span class="contentWrapper__noTransaction mb-1rem">No
+                                                transaction recorded yet</span>
 
-                                                <div class="form__inputWrapper">
-                                                        <label class="form__inputWrapper__label">Profile Piture</label>
-                                                        <div class="uploadWrapper">
-                                                                <img src="" alt="" class="realImageUploadHolder">
-                                                                <img src="./img/img-placeholder.svg" class="imgPlacehoder"
-                                                                        alt="Upload image placeholder">
-                                                                <div class="uploadWrapper__text">
-                                                                        <label for="picture"
-                                                                                class="uploadWrapper__text__label">Click
-                                                                                to upload picture</label>
-                                                                        <input type="file" name="picture" id="picture" accept="image/jpeg, imagge/png"                                                                               value="Upload picture"
-                                                                                class="uploadWrapper__text__upload" required>
-                                                                        <span class="uploadWrapper__text__sizeLimit">Image
-                                                                                size not more than 120kb. Accepts only .JPEG or .PNG</span>
-                                                                </div>
-                                                        </div>
-                                                </div>
-
-                                                <div class="form__inputWrapper">
-                                                        <input type="submit" value="Request Verification"
-                                                                class="form__inputWrapper__largeBtn requestVerfication">
-                                                </div>
-                                        </form>
+                                        <div class="form__inputWrapper">
+                                                <input type="submit" value="Apply for loan" id="cta-main"
+                                                        class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--purpleDisabled"
+                                                        disabled>
+                                        </div>
                                 </div>
                         </div>
                 </div>
         </section>
 
-        <script src="./js/updateProfileScripts.js"></script>
+        <script src="./js/notificationScripts.js"></script>
 </body>
 
 </html>

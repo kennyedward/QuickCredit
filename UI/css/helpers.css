@@ -88,3 +88,11 @@
     margin-top: 2rem;
     padding-bottom: 2rem;
 }
+
+.pink {
+    background: #FF08A3;
+}
+
+.positionRelative {
+    position: relative;
+}
