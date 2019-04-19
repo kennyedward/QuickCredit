@@ -227,6 +227,43 @@
     line-height: 1.2;
 }
 
+.verifiedText {
+    color: #03CB4E;
+}
+
+.LoanAplicationWrapper {
+    padding: 2rem;
+}
+
+.loanForm {
+    display: flex;
+    justify-content: space-between;
+}
+
+.loanTextLabel {
+    font-size: 2rem;
+}
+
+.requestLoanBtn {
+    width: 40%;
+    margin: 2rem auto;
+}
+
+.loanForm__left, .loanForm__right {
+    width: 40%;
+}
+
+.paymentRate {
+    color: #FF08A3;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.interestRate {
+    font-weight: bold;
+}
+
+
 /* Media Queries */
 
 @media (max-width: 710px) {

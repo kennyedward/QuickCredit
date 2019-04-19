@@ -96,3 +96,15 @@
 .positionRelative {
     position: relative;
 }
+
+.loanFormSpacer {
+    width: 10%;
+}
+
+.loanAppHeight {
+    height: 50px;
+}
+
+.displayBlock {
+    display: block;
+}
