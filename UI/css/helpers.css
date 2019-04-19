@@ -44,10 +44,14 @@
     background: rgb(237, 255, 244);
 }
 
-.darkGreyText {
+.darkGrey {
     color: rgb(96, 101, 107);
-    font-weight: bold;
     background: rgb(238, 238, 238);
+}
+
+.loanStatusTextOnBtn {
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .notificationNumber {
