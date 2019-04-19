@@ -1,0 +1,234 @@
+.dashboard__container {
+    width: 1200px;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 4rem 0;
+}
+
+.topNavbar__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.topNavbar__wrapper__notificationArea {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.topNavbar__wrapper__notificationArea__anchor {
+    margin-left: 1.5rem;
+    text-decoration: none;
+    color: #FFF;
+}
+
+.topNavbar__wrapper__notificationArea__anchor:first-of-type {
+    margin-right: 1.2rem;
+}
+
+.topNavbar__wrapper__notificationArea__anchor:nth-child(3) {
+    margin: 0;
+}
+
+.topLoanBtn-wrapper {
+    width: 200px;
+    margin-bottom: 3rem;
+}
+
+.form__inputWrapper__largeBtn--whiteDisabled {
+    background: #FFF;
+    color: #6271D2;
+}
+
+.form__inputWrapper__largeBtn--whiteDisabled:disabled {
+    color: rgb(150, 150, 150);
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.form__inputWrapper__largeBtn--purpleDisabled:disabled {
+    color: #FFF;
+    cursor: not-allowed;
+    background: rgb(188, 196, 252);
+}
+
+.cardHolder {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5rem;
+}
+
+.largeCard {
+    background: #FFF;
+    border-radius: 4px;
+    border: none;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    width: 60%;
+    -webkit-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
+    -moz-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
+    box-shadow: 0px 15px 17px 0px rgba(235, 235, 235, 0.82);
+    margin-right: 2rem;
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.largeCard__leftSection__ongoingLoans {
+    color: #79828B;
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.largeCard__leftSection__amount {
+    font-weight: bold;
+    font-size: 3rem;
+    display: block;
+    color: #79828B;
+}
+
+.largeCard__leftSection__daysLeft {
+    color: #03CB4E;
+}
+
+.largeCard__rightSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 3rem;
+}
+
+.largeCard__rightSection__upper__title {
+    color: #79828B;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.largeCard__rightSection__upper__verificationStatus {
+    font-size: 2rem;
+    display: inline-block;
+    color: #FFAD08;
+}
+
+.largeCard__rightSection__lower__title {
+    color: #79828B;
+    display: block;
+    margin-top: 2rem;
+}
+
+.smallCard {
+    background: #FFF;
+    border-radius: 4px;
+    border: none;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    width: 30%;
+    -webkit-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
+    -moz-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
+    box-shadow: 0px 15px 17px 0px rgba(235, 235, 235, 0.82);
+    text-align: center;
+    color: #79828B;
+    padding: 3rem 2rem;
+}
+
+.smallCard__paragraph {
+    line-height: 21px;
+    font-size: 0.82rem;
+}
+
+.smallCard__btn {
+    width: 60%;
+}
+
+.lowerCardHolder {
+    padding: 6rem;
+    text-align: center;
+}
+
+.contentWrapper {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.contentWrapper__noTransaction {
+    color: #CCC;
+    font-size: 1.3rem;
+    display: block;
+}
+
+/* Media Queries */
+
+@media (max-width: 710px) {
+    .topNavbar__wrapper {
+        display: block;
+        text-align: center;
+    }
+    .topNavbar__wrapper__notificationArea {
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+    .topLoanBtn-wrapper {
+        width: 100%;
+    }
+    .cardHolder {
+        display: block;
+    }
+    .largeCard, .smallCard, .lowerCardHolder {
+        display: block;
+        width: 100%;
+        padding: 0;
+    }
+
+    .largeCard, .smallCard {
+        padding: 2rem 0;
+    }
+    .contentWrapper {
+        width: 100%;
+    }
+    .dashboard__container {
+        padding-top: 2rem;
+    }
+    .topNavbar__wrapper {
+        margin-bottom: 2rem;
+    }
+    .largeCard__rightSection {
+        display: block;
+        text-align: center;
+        margin-top: 3rem;
+        margin-right: 0;
+    }
+    .largeCard__leftSection {
+        text-align: center;
+    }
+
+    .smallCard {
+        margin-top: 3rem;
+    }
+}
+
+@media (min-width: 425px) and (max-width: 980px) {
+    .cardHolder {
+        display: block;
+     }
+     
+     .largeCard {
+        width: -webkit-fill-available;
+        margin-right: 0;
+     }
+     
+     .largeCard__rightSection {
+        margin-top: 0;
+        margin-right: 0;
+     }
+     
+     .smallCard {
+        margin-top: 3rem;
+        width: -webkit-fill-available;
+     }
+
+     .largeCard__rightSection  {
+         margin-top: 3rem;
+     }
+}

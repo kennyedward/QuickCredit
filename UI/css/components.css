@@ -124,3 +124,10 @@
     font-weight: bold;
     color: #6271D2;
 }
+
+/* NAvbar */
+
+.topNavbar {
+    height: 300px;
+    background: #6271D2;
+}

@@ -1,0 +1,60 @@
+.mt-1rem {
+    margin-top: 1rem;
+}
+
+.mb-1rem {
+    margin-bottom: 1rem;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.boxShadow {
+    -webkit-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
+    -moz-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
+    box-shadow: 0px 15px 17px 0px rgba(235, 235, 235, 0.82);
+}
+
+.statusText {
+    color: #CCC; 
+    font-size: 0.9rem; 
+    display: block;
+}
+
+.minorBtns {
+    font-size: 0.7rem; 
+    margin: 0.5rem 0;  
+    display: inline-block;  
+    padding: 0.6rem 1rem; 
+    border-radius: 25px;
+}
+
+.minorBtns--orange {
+    color: #D28662; 
+    background: rgb(255, 239, 233);
+}
+
+.minorBtns--green {
+    color: #03CB4E; 
+    background: rgb(237, 255, 244);
+}
+
+.notificationNumber {
+    font-size: 0.8rem; 
+    position: absolute;
+    top: -4px; 
+    left: 32px; 
+    text-align: center; 
+    background: #4C5EBB; 
+    border-radius: 50%; 
+    width:20px; 
+    height: 20px; 
+    line-height: 20px;
+}
+
+.repaymentText {
+    color: #79828B; 
+    margin-bottom: 3rem;
+    line-height: 1.4;
+}
