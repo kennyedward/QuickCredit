@@ -331,14 +331,7 @@
      .smallCard {
         margin-top: 3rem;
         width: -webkit-fill-available;
-     }
-
-     /* .showNotification {
-         top: 8rem;
-         right: 8rem;
-     } */
-
-     
+     }   
 }
 
 @media  (max-width: 426px) {
@@ -360,6 +353,16 @@
     .showNotification {
         top: 8rem;
         right: 15rem;
+    }
+}
+
+@media (max-width: 769px) {
+    .loanForm { 
+        display: block;
+    }
+
+    .loanForm__left, .loanForm__right, .requestLoanBtn { 
+        width: 100%;
     }
 }
 
