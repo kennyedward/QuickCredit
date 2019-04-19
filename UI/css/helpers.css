@@ -35,9 +35,19 @@
     background: rgb(255, 239, 233);
 }
 
+.minorBtn--padding {
+    padding: 1.5rem 4rem; 
+}
+
 .minorBtns--green {
     color: #03CB4E; 
     background: rgb(237, 255, 244);
+}
+
+.darkGreyText {
+    color: rgb(96, 101, 107);
+    font-weight: bold;
+    background: rgb(238, 238, 238);
 }
 
 .notificationNumber {
@@ -57,4 +67,9 @@
     color: #79828B; 
     margin-bottom: 3rem;
     line-height: 1.4;
+}
+
+.loanStatusText {
+    font-size: 1rem; 
+    line-height: 1.6
 }
