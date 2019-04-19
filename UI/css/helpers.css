@@ -49,6 +49,12 @@
     background: rgb(238, 238, 238);
 }
 
+.darkGreyText {
+    color: rgb(96, 101, 107);
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
 .loanStatusTextOnBtn {
     font-weight: bold;
     text-transform: uppercase;
@@ -76,4 +82,9 @@
 .loanStatusText {
     font-size: 1rem; 
     line-height: 1.6
+}
+
+.checkIcon {
+    margin-top: 2rem;
+    padding-bottom: 2rem;
 }

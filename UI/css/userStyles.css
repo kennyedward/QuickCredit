@@ -179,7 +179,6 @@
     display: none; 
     width: 70px; 
     height: 60px; 
-    background: red; 
     margin-right: 1rem;
 }
 
@@ -198,6 +197,10 @@
 .uploadWrapper__text__sizeLimit {
     color: #6271D2; 
     font-size: 0.7rem;
+}
+
+.imgPlacehoder {
+    margin-right: 1rem;
 }
 
 
@@ -249,6 +252,10 @@
     .smallCard {
         margin-top: 3rem;
     }
+
+    .updateProfile {
+        padding: 1rem;
+    }
 }
 
 @media (min-width: 425px) and (max-width: 980px) {
@@ -267,4 +274,10 @@
      }
 
      
+}
+
+@media  (max-width: 426px) {
+    .avatar {
+        display: none;
+    }
 }
