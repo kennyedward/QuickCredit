@@ -40,13 +40,27 @@
     background: #FFAD08;
 }
 
+.minorBtns--purple {
+    color: #6271D2; 
+    background: #dee3ff;
+}
+
+.minorBtns--whiteTextGreenBG {
+    color: #FFF; 
+    background: rgb(148, 239, 183)
+}
+
 .minorBtn--padding {
     padding: 1.5rem 4rem; 
 }
 
 .minorBtns--green {
-    color: #03CB4E; 
+    color: rgb(148, 239, 183); 
     background: rgb(237, 255, 244);
+}
+
+.minorBtns--grey {
+    background: rgb(237, 237, 237);
 }
 
 .darkGrey {
@@ -112,4 +126,41 @@
 
 .displayBlock {
     display: block;
+}
+
+.paidIndicator, .unPaidIndicator, .greyIndicator {
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.paidIndicator {
+    background: rgb(148, 239, 183);
+}
+
+.unPaidIndicator {
+    background: #FFAD08;
+}
+
+.greyIndicator {
+    background: rgb(201, 204, 206);
+}
+
+.emphasis {
+    font-weight: bold;
+    color: #79828B;
+}
+
+.grey {
+    color: rgb(201, 204, 206);
+}
+
+.amountSize, .amountDue {
+    font-size: 2rem;
+}
+
+.amountDue {
+    margin-top: 2rem
 }
