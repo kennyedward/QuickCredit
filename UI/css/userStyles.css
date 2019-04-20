@@ -264,6 +264,58 @@
 }
 
 
+.historyWrapper {
+    display: flex;
+    background: #F5F5F5;
+    margin-bottom: 2rem;
+}
+
+.whiteSpace {
+    padding: 3rem 2rem;
+}
+
+.loanID {
+    border-right: 1px solid #CCC;
+    margin-left: 1rem;
+    width: 25%;
+}
+
+.repaymentBreakdown {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.loanID__code {
+    font-weight: bold;
+    color: #79828B;
+}
+
+.loanID__purpose {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: #79828B;
+}
+
+.repaymentSpacer {
+    width: 4%;
+}
+
+.paymentDateWrapper {
+    display: flex;
+    width: 30%;
+}
+
+.paymentDateWrapper:last-child {
+    flex: 0 30%;
+}
+
+
+.paymentDateWrapper__text {
+    font-size: 0.8rem;
+}
+
+
 /* Media Queries */
 
 @media (max-width: 710px) {
@@ -364,5 +416,35 @@
     .loanForm__left, .loanForm__right, .requestLoanBtn { 
         width: 100%;
     }
+
+    .historyWrapper {
+        display: block;
+        text-align: center;
+       }
+       
+       .loanID {
+           width: 100%;
+           margin-left: 0;
+           border-right: none;
+       }
+       
+       .repaymentSpacer {
+         display: none;
+       }
+       
+       .repaymentBreakdown, .paymentDateWrapper {
+           display: block;
+           width: 100%;
+       }
+
+       .paymentDateWrapper {
+            margin: 1.5rem 0;
+       }
 }
 
+@media (min-width: 769px) {
+    .paymentDateWrapper__text {
+        font-size: 0.7rem;
+        line-height: 1.2;
+    }
+}
