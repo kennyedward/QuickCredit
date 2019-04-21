@@ -164,3 +164,13 @@
 .amountDue {
     margin-top: 2rem
 }
+
+.greenBold {
+    color: #03CB4E; 
+    font-weight: bold;
+}
+
+.yellowBold {
+    color: #FFAD08; 
+    font-weight: bold;
+}
