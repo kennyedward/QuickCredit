@@ -144,6 +144,11 @@
     .verifyWrapper:first-child {
         margin-top: 0;
     }
+
+    .numbering {
+        margin-bottom: 1rem;
+        display: block;
+    }
 }
 
 @media (min-width: 769px) {
@@ -151,4 +156,33 @@
         margin-top: -16px;
     }
 
+}
+
+@media (max-width: 425px) {
+
+    .topNavbar__wrapper__notificationArea__anchor:first-of-type, .admin-mr  {
+        margin-right: 0
+    } 
+    
+    .topNavbar__wrapper__notificationArea__anchor:nth-child(3) {
+        margin-right: 1.5rem;
+    } 
+}
+
+@media (max-width: 508px) {
+    .adminTopNavBar {
+        display: flex;
+        text-align: center;
+    }
+    
+    .admin-hyperlinks {
+        margin: 0 0.8rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .admin-hyperlinks {
+        margin: 0 0.4rem;
+        font-size: 0.9rem;
+    }
 }
