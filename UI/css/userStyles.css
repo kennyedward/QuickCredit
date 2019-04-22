@@ -304,6 +304,7 @@
 .paymentDateWrapper {
     display: flex;
     width: 30%;
+    position: relative;
 }
 
 .paymentDateWrapper:last-child {

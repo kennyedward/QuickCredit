@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>QuickCredit</title>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/components.css">
+        <link rel="stylesheet" href="css/userStyles.css">
+        <link rel="stylesheet" href="css/adminStyles.css">
+        <link rel="stylesheet" href="css/helpers.css">
+        <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
+</head>
+
+<body>
+        <section class="topNavbar">
+
+                <div class="dashboard__container">
+                        <div class="topNavbar__wrapper">
+                                <img src="./img/logo-w.svg" alt="QuickCredit Logo">
+
+                                <div class="topNavbar__wrapper__notificationArea">
+                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">
+                                                <span class="notificationNumber pink">1</span>
+                                                <img src="./img/notification.svg" alt="Notification icon"></a>
+                                        <a class="topNavbar__wrapper__notificationArea__anchor admin-mr">Admin</a>
+                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
+                                </div>
+
+                        </div>
+
+
+                        <div class="topLoanBtn-wrapper adminTopNavBar">
+                                <a href="" class="admin-hyperlinks">All Verification</a>
+                                <a href="" class="admin-hyperlinks">Loan Request</a>
+                                <a href="" class="admin-hyperlinks">All Loan Application</a>
+                        </div>
+
+                        <div class="verificationListWrapper">
+                                <p class="repaymentText">Loan Request
+
+                                </p>
+
+                                <form>
+                                        <select name="" id="" class="filter">
+                                                <option>Filter By...</option>
+                                                <option>Approved</option>
+                                                <option>Pending</option>
+                                                <option>Rejected</option>
+                                        </select>
+                                </form>
+                        </div>
+
+                        <div class="boxShadow whiteSPace">
+                                        <div class="historyWrapper whiteSpace">
+                                                <span class="numbering">1.</span>
+                                                <div class="loanID">
+                                                        <strong class="loanID__code">Loan ID: QC-552625TF</strong>
+                                                        <p class="loanID__purpose"><strong
+                                                                        class="emphasis">Amount: </strong> N50,000.00
+                                                        </p>
+                                                        <p class="loanID__purpose"><strong
+                                                                class="emphasis">Payment Installment: </strong> N6562.50
+                                                </p>
+                                                <p class="loanID__purpose"><strong
+                                                        class="emphasis">Total Repayment: </strong> N52,500.00
+                                        </p>
+                                        <p class="loanID__purpose"><strong
+                                                class="emphasis">Due Date: </strong> 31-12-2019
+                                </p>
+                                                        <span class="minorBtns minorBtns--green uppercase">
+                                                                Verified</span>
+                                                                <span class="minorBtns minorBtns--green uppercase">
+                                                                                Eligible</span>
+                                                </div>
+                                                <div class="repaymentSpacer"></div>
+                                                <div class="repaymentBreakdown verifyColumn alignCenter">
+                                                        <div class="paymentDateWrapper verifyColumn">
+                                                                        <input type="radio" name="approve-one"
+                                                                        class="form__inputWrapper__checkbox radioCheck"
+                                                                        id="approve-one" required>
+                                                                <label for="approve-one" class="radioCheck__label greenBold lineHeightInitial uppercase">
+                                                                        Approve
+                                                                </label>
+                                                        </div>
+        
+                                                        <div class="paymentDateWrapper verifyColumn">
+                                                                        <input type="radio" name="approve-one"
+                                                                        class="form__inputWrapper__checkbox radioCheck2"
+                                                                        id="pending-one" required checked>
+                                                                <label for="pending-one"
+                                                                        class="radioCheck2__label pendingLabel yellowBold lineHeightInitial uppercase">
+                                                                        Pending
+                                                                </label>
+                                                        </div>
+        
+                                                        <div class="paymentDateWrapper verifyColumn">
+                                                                        <input type="radio" name="approve-one"
+                                                                        class="form__inputWrapper__checkbox radioCheck2"
+                                                                        id="reject-one" required>
+                                                                <label for="reject-one"
+                                                                        class="radioCheck2__label rejectLabel redBold uppercase">
+                                                                        Reject
+                                                                </label>
+                                                        </div>
+                                                </div>
+        
+                                        </div>
+        
+                                        
+        
+                                </div>
+                </div>
+        </section>
+
+        <script src="./js/notificationScripts.js"></script>
+</body>
+
+</html>
