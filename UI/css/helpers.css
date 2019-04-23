@@ -165,12 +165,26 @@
     margin-top: 2rem
 }
 
+.greenBold, .yellowBold, .redBold {
+    font-weight: bold;
+}
+
 .greenBold {
     color: #03CB4E; 
-    font-weight: bold;
 }
 
 .yellowBold {
     color: #FFAD08; 
-    font-weight: bold;
+}
+
+.redBold {
+    color: rgb(255, 8, 8); 
+}
+
+.alignCenter {
+    align-items: center;
+}
+
+.lineHeightInitial {
+    line-height: initial;
 }
