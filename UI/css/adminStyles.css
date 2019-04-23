@@ -15,7 +15,7 @@
 
 .adminTopNavBar {
     width: 100%;
-    margin-bottom: 8rem;
+    margin-bottom: 6rem;
 }
 
 .radioCheck[type="radio"], .radioCheck2[type="radio"] {
@@ -166,13 +166,13 @@
 }
 
 .modalWrapper {
-    display: flex; 
-    justify-content: center; 
+    display: flex;
+    justify-content: center;
     flex-direction: column;
 }
 
 .modalWrapper__header {
-    display: flex; 
+    display: flex;
     justify-content: center;
 }
 
@@ -180,8 +180,54 @@
     margin: 0 1rem;
 }
 
-.loanRepaymentWrapper{
+.loanRepaymentWrapper {
     margin: 0 auto;
+}
+
+.logoIcon, .navIcon {
+    display: none;
+}
+
+.navIcon {
+    color: #FFF;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-top: -1rem;
+}
+
+.sideMenu {
+    background-color: #6271D2;
+    font-size: 1.5rem;
+    height: 100%;
+    overflow-x: hidden;
+    padding-top: 60px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    width: 0;
+    z-index: 1;
+}
+
+.sideBarLinks, .closeBtn {
+    color: #FFFFFF;
+    display: block;
+    padding: 2rem 1.5rem;
+    text-decoration: none;
+}
+
+.sideMenu .closeBtn {
+    font-size: 3rem;
+    padding: 0;
+    position: fixed;
+    right: 1.3rem;
+    top: 2rem;
+}
+
+.closeBtn {
+    display: none;
 }
 
 @media (max-width: 768px) {
@@ -266,5 +312,19 @@
     }
     .modalClose {
         top: 2px;
+    }
+}
+
+@media (max-width: 688px) {
+    .mainLogo, .admin-hyperlinks {
+        display: none;
+    }
+    .logoIcon, .navIcon {
+        display: inline-block;
+    }
+    .logoWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 }
