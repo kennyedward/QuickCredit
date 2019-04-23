@@ -45,6 +45,11 @@
     background: #dee3ff;
 }
 
+.minorBtns--red {
+    color: rgb(255, 8, 8);
+    background: rgb(255, 228, 228);
+}
+
 .minorBtns--whiteTextGreenBG {
     color: #FFF; 
     background: rgb(148, 239, 183)
@@ -187,4 +192,12 @@
 
 .lineHeightInitial {
     line-height: initial;
+}
+
+.removeUnderline {
+    text-decoration: none;
+}
+
+.fullyBold {
+    font-weight: bold;
 }
