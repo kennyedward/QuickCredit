@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>QuickCredit</title>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/components.css">
+        <link rel="stylesheet" href="css/userStyles.css">
+        <link rel="stylesheet" href="css/adminStyles.css">
+        <link rel="stylesheet" href="css/helpers.css">
+        <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
+</head>
+
+<body>
+        <section class="topNavbar">
+
+                <div class="dashboard__container">
+                        <div class="topNavbar__wrapper">
+                                <img src="./img/logo-w.svg" alt="QuickCredit Logo">
+
+                                <div class="topNavbar__wrapper__notificationArea">
+                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">
+                                                <span class="notificationNumber">0</span>
+                                                <img src="./img/notification.svg" alt="Notification icon"></a>
+                                        <a class="topNavbar__wrapper__notificationArea__anchor admin-mr">Admin</a>
+                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
+                                </div>
+
+                        </div>
+
+
+                        <div class="topLoanBtn-wrapper adminTopNavBar">
+                                <a href="" class="admin-hyperlinks">All Verification</a>
+                                <a href="" class="admin-hyperlinks">Loan Request</a>
+                                <a href="" class="admin-hyperlinks">All Loan Application</a>
+                                <a href="" class="admin-hyperlinks">Loan Repayment</a>
+                        </div>
+
+                        <div class="verificationListWrapper">
+                                <p class="repaymentText">Loan Repayment
+
+                                </p>
+                        </div>
+
+                        <div class="boxShadow whiteSPace">
+                                <div class="LoanAplicationWrapper">
+                                        <form class="loanForm">
+                                                <div class="loanRepaymentWrapper">
+                                                        <div class="form__inputWrapper">
+                                                                <label class="form__inputWrapper__label loanTextLabel"
+                                                                        for="amount">Loan ID</label>
+                                                                <input type="number"
+                                                                        class="form__inputWrapper__input loanAppHeight"
+                                                                        id="amount" placeholder="Enter Loan ID"
+                                                                        required>
+                                                        </div>
+
+                                                        <div class="form__inputWrapper">
+                                                                <label class="form__inputWrapper__label loanTextLabel"
+                                                                        for="date">Start Date</label>
+                                                                <input type="date"
+                                                                        class="form__inputWrapper__input loanAppHeight"
+                                                                        id="date" placeholder="26-04-2019" required>
+                                                        </div>
+
+                                                        <div class="form__inputWrapper">
+                                                                <label class="form__inputWrapper__label loanTextLabel"
+                                                                        for="amount">Amount</label>
+                                                                <input type="number"
+                                                                        class="form__inputWrapper__input loanAppHeight"
+                                                                        id="amount" placeholder="eg. N8,000.00"
+                                                                        required>
+                                                        </div>
+                                                </div>
+                                        </form>
+                                        <div class="requestLoanBtn">
+                                                <input type="submit" value="Make payment Loan"
+                                                        class="form__inputWrapper__largeBtn">
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </section>
+
+        <script src="./js/notificationScripts.js"></script>
+</body>
+
+</html>

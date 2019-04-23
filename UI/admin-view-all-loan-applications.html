@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="boxShadow whiteSPace">
-                                <a href="#" class="removeUnderline">
+                                <a href="#" class="removeUnderline specificLoanSelector">
                                         <div class="historyWrapper whiteSpace">
                                                 <span class="numbering">1.</span>
                                                 <div class="loanID">
@@ -74,7 +74,7 @@
                                                 </div>
                                         </div>
                                 </a>
-                                <a href="#" class="removeUnderline">
+                                <a href="#" class="removeUnderline specificLoanSelector">
                                         <div class="historyWrapper whiteSpace">
                                         <span class="numbering">2.</span>
                                         <div class="loanID">
@@ -93,7 +93,7 @@
                                         </div>
                                         </div>
                                 </a>
-                                <a href="#" class="removeUnderline">
+                                <a href="#" class="removeUnderline specificLoanSelector">
                                                 <div class="historyWrapper whiteSpace">
                                                                 <span class="numbering">3.</span>
                                                                 <div class="loanID">
@@ -112,7 +112,7 @@
                                                         </div>
                                 </a>
 
-                                <a href="#" class="removeUnderline">
+                                <a href="#" class="removeUnderline specificLoanSelector">
                                                 <div class="historyWrapper whiteSpace">
                                                                 <span class="numbering">4.</span>
                                                                 <div class="loanID">
@@ -132,7 +132,7 @@
                                                         </div>
                                 </a>
 
-                                <a href="#" class="removeUnderline">
+                                <a href="#" class="removeUnderline specificLoanSelector">
                                                 <div class="historyWrapper whiteSpace">
                                                                 <span class="numbering">5.</span>
                                                                 <div class="loanID">
@@ -153,9 +153,40 @@
                                 </a>
                         </div>
                 </div>
+
+                <div class="modal" id="myModal">
+                                <div class="modalContent">
+                                        <span id="modalClose" class="modalClose">&times;</span>
+                                        <div class="modalWrapper">
+                                                <div class="modalWrapper__header">
+                                                        <span class="minorBtns minorBtns--green fullyBold uppercase">
+                                                                Verified</span>
+                                                        <img src="./img/avatar.svg" alt="User Avatar" class="modalWrapper_Avatar">
+                                                        <span class="minorBtns minorBtns--green fullyBold uppercase">
+                                                                Eligible</span>
+                                                </div>
+        
+                                                <div class="mb-1rem mt-1rem">
+                                                        <p class="mb-1rem"> <strong class="emphasis" >Loan ID: </strong>QC-552625TF</p>
+                                                        <p class="mb-1rem">  <strong class="emphasis">Amount: </strong>N50,000.00</p>
+                                                        <p class="mb-1rem"> <strong class="emphasis">Tenor: </strong>8 months</p>
+                                                        <p class="mb-1rem"> <strong class="emphasis">Due Date: </strong>25-05-2019</p>
+                                                        <p class="mb-1rem"> <strong class="emphasis">Payment Installment: </strong>N6562.50</p>
+                                                        <p class="mb-1rem"> <strong class="emphasis">Total Repayment: </strong>N52,500.00</p>
+                                                        <p class="mb-1rem"> <strong class="emphasis">Date Created: </strong>01-01-2018</p>
+                                                        <p> <strong class="emphasis">Purpose: </strong>Business</p>
+                                                </div>
+        
+                                                <div>
+                                                                <span class="minorBtns minorBtns--green fullyBold uppercase">
+                                                                                Fully Paid</span>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
         </section>
 
-        <script src="./js/notificationScripts.js"></script>
+        <script src="./js/modalScripts.js"></script>
 </body>
 
 </html>
