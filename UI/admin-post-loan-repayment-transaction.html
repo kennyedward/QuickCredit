@@ -20,7 +20,30 @@
 
                 <div class="dashboard__container">
                         <div class="topNavbar__wrapper">
-                                <img src="./img/logo-w.svg" alt="QuickCredit Logo">
+                                <div class="logoWrapper">
+                                        <img src="./img/logo-w.svg" alt="QuickCredit Logo" class="mainLogo">
+                                        <img src="./img//logo-icon.svg" alt="QuickCredit Logo Icon" class="logoIcon">
+
+                                        <nav role="navigation" class="navIcon">
+                                                &#9776;
+                                        </nav>
+                                </div>
+
+                                <div id="sideMenu" class="sideMenu">
+                                        <a href="#" id="closeBtn" class="closeBtn">&times;</a>
+                                        <a href="#" class="sideBarLinks">
+                                                All Verification
+                                        </a>
+                                        <a href="#" class="sideBarLinks">
+                                                Loan Request
+                                        </a>
+                                        <a href="#" class="sideBarLinks">
+                                                All Loan Application
+                                        </a>
+                                        <a href="#" class="sideBarLinks">
+                                                Loan Repayment
+                                        </a>
+                                </div>
 
                                 <div class="topNavbar__wrapper__notificationArea">
                                         <a href="#" class="topNavbar__wrapper__notificationArea__anchor">
@@ -75,18 +98,20 @@
                                                                         id="amount" placeholder="eg. N8,000.00"
                                                                         required>
                                                         </div>
+
+                                                        <div class="requestLoanBtn centerBtn">
+                                                                <input type="submit" value="Make payment Loan"
+                                                                        class="form__inputWrapper__largeBtn">
+                                                        </div>
                                                 </div>
                                         </form>
-                                        <div class="requestLoanBtn">
-                                                <input type="submit" value="Make payment Loan"
-                                                        class="form__inputWrapper__largeBtn">
-                                        </div>
+                                        
                                 </div>
                         </div>
                 </div>
         </section>
 
-        <script src="./js/notificationScripts.js"></script>
+        <script src="./js/sideMenuScripts.js"></script>
 </body>
 
 </html>
