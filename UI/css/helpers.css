@@ -201,3 +201,7 @@
 .fullyBold {
     font-weight: bold;
 }
+
+.centerBtn {
+    width: inherit;
+}

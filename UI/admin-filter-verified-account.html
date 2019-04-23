@@ -20,14 +20,38 @@
 
                 <div class="dashboard__container">
                         <div class="topNavbar__wrapper">
-                                <img src="./img/logo-w.svg" alt="QuickCredit Logo">
+                                <div class="logoWrapper">
+                                        <img src="./img/logo-w.svg" alt="QuickCredit Logo" class="mainLogo">
+                                        <img src="./img//logo-icon.svg" alt="QuickCredit Logo Icon" class="logoIcon">
+
+                                        <nav role="navigation" class="navIcon">
+                                                &#9776;
+                                        </nav>
+                                </div>
+
+                                <div id="sideMenu" class="sideMenu">
+                                        <a href="#" id="closeBtn" class="closeBtn">&times;</a>
+                                        <a href="#" class="sideBarLinks">
+                                                All Verification
+                                        </a>
+                                        <a href="#" class="sideBarLinks">
+                                                Loan Request
+                                        </a>
+                                        <a href="#" class="sideBarLinks">
+                                                All Loan Application
+                                        </a>
+                                        <a href="#" class="sideBarLinks">
+                                                Loan Repayment
+                                        </a>
+                                </div>
+
 
                                 <div class="topNavbar__wrapper__notificationArea">
                                         <a href="#" class="topNavbar__wrapper__notificationArea__anchor">
                                                 <span class="notificationNumber pink">1</span>
                                                 <img src="./img/notification.svg" alt="Notification icon"></a>
                                         <a class="topNavbar__wrapper__notificationArea__anchor admin-mr">Admin</a>
-                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
+                                        <a href="login.html" class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
                                 </div>
 
                         </div>
@@ -37,6 +61,7 @@
                                 <a href="" class="admin-hyperlinks">All Verification</a>
                                 <a href="" class="admin-hyperlinks">Loan Request</a>
                                 <a href="" class="admin-hyperlinks">All Loan Application</a>
+                                <a href="" class="admin-hyperlinks">Loan Repayment</a>
                         </div>
 
                         <div class="verificationListWrapper">
@@ -68,8 +93,9 @@
                                                         <div class="radioBtnWrapper">
                                                                 <input type="radio" name="selector-one"
                                                                         class="form__inputWrapper__checkbox radioCheck"
-                                                                        id="verify-one" required  checked>
-                                                                <label for="verify-one" class="radioCheck__label greenBold uppercase">
+                                                                        id="verify-one" required checked>
+                                                                <label for="verify-one"
+                                                                        class="radioCheck__label greenBold uppercase">
                                                                         Verify
                                                                 </label>
 
@@ -87,7 +113,8 @@
                                                 <span class="numbering">2.</span>
                                                 <div class="loanID verificationText">
                                                         <strong class="loanID__code">Charles Taiwo</strong>
-                                                        <p class="loanID__purpose">14 Akinte Street Off Ndike Busstop, Obawole,
+                                                        <p class="loanID__purpose">14 Akinte Street Off Ndike Busstop,
+                                                                Obawole,
                                                                 Lagos, Nigeria
                                                         </p>
                                                         <p class="loanID__purpose">charlesmobolaji9@gmail.com
@@ -96,7 +123,8 @@
                                                                 <input type="radio" name="selector-two"
                                                                         class="form__inputWrapper__checkbox radioCheck"
                                                                         id="verify-two" required checked>
-                                                                <label for="verify-two" class="radioCheck__label greenBold uppercase">
+                                                                <label for="verify-two"
+                                                                        class="radioCheck__label greenBold uppercase">
                                                                         Verify
                                                                 </label>
 
@@ -123,7 +151,8 @@
                                                                 <input type="radio" name="selector-three"
                                                                         class="form__inputWrapper__checkbox radioCheck"
                                                                         id="verify-three" required checked>
-                                                                <label for="verify-three" class="radioCheck__label greenBold uppercase">
+                                                                <label for="verify-three"
+                                                                        class="radioCheck__label greenBold uppercase">
                                                                         Verify
                                                                 </label>
 
@@ -137,38 +166,12 @@
                                                         </div>
                                                 </div>
                                         </div>
-                                        <div class="verifyWrapper">
-                                                <span class="numbering">4.</span>
-                                                <div class="loanID verificationText">
-                                                        <strong class="loanID__code">Willaim Smith</strong>
-                                                        <p class="loanID__purpose">1 Mobolaji Bank ANthony Road, Murtala Airport, Igando, Lagos, Nigeria.
-                                                        </p>
-                                                        <p class="loanID__purpose">william@yahoo.com
-                                                        </p>
-                                                        <div class="radioBtnWrapper">
-                                                                <input type="radio" name="selector-four"
-                                                                        class="form__inputWrapper__checkbox radioCheck"
-                                                                        id="verify-four" required checked>
-                                                                <label for="verify-four" class="radioCheck__label greenBold uppercase">
-                                                                        Verify
-                                                                </label>
-
-                                                                <input type="radio" name="selector-four"
-                                                                        class="form__inputWrapper__checkbox radioCheck2"
-                                                                        id="unVerify-four" required>
-                                                                <label for="unVerify-four"
-                                                                        class="radioCheck2__label yellowBold uppercase">
-                                                                        Unverified
-                                                                </label>
-                                                        </div>
-                                                </div>
-                                        </div>
                                 </div>
                         </div>
                 </div>
         </section>
 
-        <script src="./js/notificationScripts.js"></script>
+        <script src="./js/sideMenuScripts.js"></script>
 </body>
 
 </html>
