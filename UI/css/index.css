@@ -8,6 +8,8 @@ body {
     max-width: 90%;
     margin: 0 auto;
     padding: 6rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -26,16 +28,15 @@ body {
 }
 
 .body__container__one__logo {
-    width: 30%; 
-    display: block; 
+    width: 30%;
+    display: block;
     margin: 1rem;
 }
 
 .body__container__one__hero {
-    width: 60%; 
+    width: 60%;
     margin-top: 6rem;
 }
-
 
 /* Media Queries */
 
@@ -44,24 +45,19 @@ body {
         display: block;
         padding: 0;
     }
-
     .body__container__one, .body__container__two {
         width: 100%;
     }
-
     .form {
         width: auto;
     }
-
     .body__container__two {
         padding: 1rem 0;
     }
-
     .body__container__one__hero {
         width: 60%;
         margin-top: 2rem;
     }
-
     .body__container__one__logo {
         width: 45%;
         margin-bottom: 0;

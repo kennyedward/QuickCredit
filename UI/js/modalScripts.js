@@ -2,7 +2,7 @@ let modal = document.getElementById("myModal");
 let modalClose = document.getElementById("modalClose");
 let allLoans = document.querySelectorAll(".specificLoanSelector")
 
-for (i = 0; i < allLoans.length; i++ ) {
+for (i = 0; i < allLoans.length; i++) {
     allLoans[i].addEventListener("click", (e) => {
         e.preventDefault();
         modal.style.display = "block"

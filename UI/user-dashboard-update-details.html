@@ -17,12 +17,12 @@
 <body>
         <section class="topNavbar">
                 <div class="dashboard__container">
-                        <div class="topNavbar__wrapper">
+                        <div class="topNavbar__wrapper mb">
                                 <img src="./img/logo-w.svg" alt="QuickCredit Logo">
 
                                 <div class="topNavbar__wrapper__notificationArea">
                                         <a href="#" class="topNavbar__wrapper__notificationArea__anchor">
-                                                <span class="notificationNumber">0</span>
+                                                <span class="notificationNumber notificationNumberUser ">0</span>
                                                 <img src="./img/notification.svg" alt="Notification icon"></a>
                                         <img src="./img/avatar.svg" alt="User Avatar"
                                                 class="topNavbar__wrapper__notificationArea__anchor avatar">
@@ -72,9 +72,11 @@
                                 </div>
                                 <div class="smallCard">
                                         <p class="smallCard__paragraph mb-1rem loanStatusText">
-                                                After requesting for a loan, your loan status will appear here.
+                                                Upload your <span class="emphasis">profile picture, home or work
+                                                        address</span> to get your account verified.
                                         </p>
-                                        <buton class="minorBtns minorBtns--orange darkGrey loanStatusTextOnBtn minorBtn--padding">
+                                        <buton
+                                                class="minorBtns minorBtns--orange darkGrey loanStatusTextOnBtn minorBtn--padding">
                                                 No transaction yet</button>
                                 </div>
                         </div>
@@ -98,16 +100,21 @@
                                                         <label class="form__inputWrapper__label">Profile Piture</label>
                                                         <div class="uploadWrapper">
                                                                 <img src="" alt="" class="realImageUploadHolder">
-                                                                <img src="./img/img-placeholder.svg" class="imgPlacehoder"
+                                                                <img src="./img/img-placeholder.svg"
+                                                                        class="imgPlacehoder"
                                                                         alt="Upload image placeholder">
                                                                 <div class="uploadWrapper__text">
                                                                         <label for="picture"
                                                                                 class="uploadWrapper__text__label">Click
                                                                                 to upload picture</label>
-                                                                        <input type="file" name="picture" id="picture" accept="image/jpeg, imagge/png"                                                                               value="Upload picture"
-                                                                                class="uploadWrapper__text__upload" required>
+                                                                        <input type="file" name="picture" id="picture"
+                                                                                accept="image/jpeg, imagge/png"
+                                                                                value="Upload picture"
+                                                                                class="uploadWrapper__text__upload"
+                                                                                required>
                                                                         <span class="uploadWrapper__text__sizeLimit">Image
-                                                                                size not more than 120kb. Accepts only .JPEG or .PNG</span>
+                                                                                size not more than 120kb. Accepts only
+                                                                                .JPEG or .PNG</span>
                                                                 </div>
                                                         </div>
                                                 </div>

@@ -6,14 +6,24 @@
 }
 
 .topNavbar__wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     margin-bottom: 4rem;
 }
 
 .topNavbar__wrapper__notificationArea {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     position: relative;
 }
@@ -55,7 +65,11 @@
 }
 
 .cardHolder {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
     margin-bottom: 5rem;
 }
@@ -68,11 +82,14 @@
     box-sizing: content-box;
     width: 60%;
     -webkit-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
-    -moz-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
     box-shadow: 0px 15px 17px 0px rgba(235, 235, 235, 0.82);
     margin-right: 2rem;
     padding: 3rem 2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
 }
 
@@ -94,8 +111,15 @@
 }
 
 .largeCard__rightSection {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
     margin-right: 3rem;
 }
@@ -126,7 +150,6 @@
     box-sizing: content-box;
     width: 30%;
     -webkit-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
-    -moz-box-shadow: -1px 10px 18px 1px rgba(235, 235, 235, 1);
     box-shadow: 0px 15px 17px 0px rgba(235, 235, 235, 0.82);
     text-align: center;
     color: #79828B;
@@ -159,43 +182,47 @@
 }
 
 .updateProfileSection {
-    padding: 3rem; 
+    padding: 3rem;
     text-align: left;
 }
 
 .updateProfileSection__textArea {
-    text-align: left; 
-    width: 100%; 
+    text-align: left;
+    width: 100%;
     border: 1px solid #CCC;
 }
 
 .uploadWrapper {
-    display: flex; 
-    align-items: center; 
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
     margin-top: 1.5rem;
 }
 
 .realImageUploadHolder {
-    display: none; 
-    width: 70px; 
-    height: 60px; 
+    display: none;
+    width: 70px;
+    height: 60px;
     margin-right: 1rem;
 }
 
 .uploadWrapper__text__label {
-    cursor: pointer; 
-    color: #CCC; 
-    display: block; 
+    cursor: pointer;
+    color: #CCC;
+    display: block;
     text-decoration: underline;
 }
 
 .uploadWrapper__text__upload {
-    display: none; 
+    display: none;
     color: #CCC;
 }
 
 .uploadWrapper__text__sizeLimit {
-    color: #6271D2; 
+    color: #6271D2;
     font-size: 0.7rem;
 }
 
@@ -204,13 +231,17 @@
 }
 
 .showNotification {
-    display: flex !important; 
-    position: absolute; 
-    top: 9rem; 
-    z-index: 1; 
-    background: #FFF;  
-    align-items: center;  
-    padding: 1.5rem; 
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    position: absolute;
+    top: 9rem;
+    z-index: 1;
+    background: #FFF;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 1.5rem;
     border-radius: 4px;
 }
 
@@ -223,7 +254,7 @@
 }
 
 .smallNotificationIconText {
-    font-size: 0.8rem; 
+    font-size: 0.8rem;
     line-height: 1.2;
 }
 
@@ -236,7 +267,11 @@
 }
 
 .loanForm {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
 }
 
@@ -263,8 +298,9 @@
     font-weight: bold;
 }
 
-
 .historyWrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     background: #F5F5F5;
     margin-bottom: 2rem;
@@ -282,7 +318,10 @@
 
 .repaymentBreakdown {
     width: 70%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
 
@@ -302,20 +341,26 @@
 }
 
 .paymentDateWrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 30%;
     position: relative;
 }
 
 .paymentDateWrapper:last-child {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 30%;
     flex: 0 30%;
 }
-
 
 .paymentDateWrapper__text {
     font-size: 0.8rem;
 }
 
+.mb {
+    margin-bottom: 2rem;
+}
 
 /* Media Queries */
 
@@ -325,6 +370,8 @@
         text-align: center;
     }
     .topNavbar__wrapper__notificationArea {
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
         justify-content: space-between;
         margin-top: 1rem;
     }
@@ -339,7 +386,6 @@
         width: 100%;
         padding: 0;
     }
-
     .largeCard, .smallCard {
         padding: 2rem 0;
     }
@@ -361,48 +407,48 @@
     .largeCard__leftSection {
         text-align: center;
     }
-
     .smallCard {
         margin-top: 3rem;
     }
-
     .updateProfile {
         padding: 1rem;
+    }
+    .mb {
+        margin-bottom: 0.7rem;
     }
 }
 
 @media (min-width: 425px) and (max-width: 980px) {
     .cardHolder {
         display: block;
-     }
-     
-     .largeCard {
+    }
+    .largeCard {
         width: -webkit-fill-available;
         margin-right: 0;
-     }
-     
-     .smallCard {
+    }
+    .smallCard {
         margin-top: 3rem;
         width: -webkit-fill-available;
-     }   
-}
-
-@media  (max-width: 426px) {
-    .avatar {
-        display: none;
     }
 }
 
-@media (min-width: 710px) { 
+@media (max-width: 426px) {
+    .avatar {
+        display: none;
+    }
+    .notificationNumber {
+        top: -11px;
+    }
+}
 
+@media (min-width: 710px) {
     .showNotification {
         top: 8rem;
         right: 9rem;
     }
 }
 
-@media (min-width: 1300px) { 
-
+@media (min-width: 1300px) {
     .showNotification {
         top: 8rem;
         right: 15rem;
@@ -410,37 +456,31 @@
 }
 
 @media (max-width: 769px) {
-    .loanForm { 
+    .loanForm {
         display: block;
     }
-
-    .loanForm__left, .loanForm__right, .requestLoanBtn { 
+    .loanForm__left, .loanForm__right, .requestLoanBtn {
         width: 100%;
     }
-
     .historyWrapper {
         display: block;
         text-align: center;
-       }
-       
-       .loanID {
-           width: 100%;
-           margin-left: 0;
-           border-right: none;
-       }
-       
-       .repaymentSpacer {
-         display: none;
-       }
-       
-       .repaymentBreakdown, .paymentDateWrapper {
-           display: block;
-           width: 100%;
-       }
-
-       .paymentDateWrapper {
-            margin: 1.5rem 0;
-       }
+    }
+    .loanID {
+        width: 100%;
+        margin-left: 0;
+        border-right: none;
+    }
+    .repaymentSpacer {
+        display: none;
+    }
+    .repaymentBreakdown, .paymentDateWrapper {
+        display: block;
+        width: 100%;
+    }
+    .paymentDateWrapper {
+        margin: 1.5rem 0;
+    }
 }
 
 @media (min-width: 769px) {
