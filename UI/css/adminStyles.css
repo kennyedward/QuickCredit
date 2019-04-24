@@ -97,7 +97,10 @@
 }
 
 .verifySection {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     text-align: left;
 }
@@ -122,7 +125,11 @@
 }
 
 .verificationListWrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
 }
 
@@ -166,13 +173,24 @@
 }
 
 .modalWrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
 }
 
 .modalWrapper__header {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 
@@ -253,6 +271,9 @@
         display: block;
     }
     .verifyColumn {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
         margin-left: auto;
         margin-right: auto;
@@ -276,6 +297,8 @@
 
 @media (max-width: 508px) {
     .adminTopNavBar {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
         text-align: center;
     }
@@ -323,8 +346,14 @@
         display: inline-block;
     }
     .logoWrapper {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
         justify-content: space-between;
     }
 }
