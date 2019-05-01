@@ -1,0 +1,27 @@
+{
+  "name": "quickcredit",
+  "version": "1.0.0",
+  "description": "Quick Credit is an online lending platform that provides short term soft loans to individuals.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kennyedward/QuickCredit.git"
+  },
+  "keywords": [
+    "QuickCredit"
+  ],
+  "author": "Kehinde Edward",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kennyedward/QuickCredit/issues"
+  },
+  "homepage": "https://github.com/kennyedward/QuickCredit#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2"
+  }
+}
