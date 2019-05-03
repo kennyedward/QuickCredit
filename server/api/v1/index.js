@@ -1,14 +1,16 @@
 import express from 'express';
 
+import indexRoute from './routes/indexRoute';
+import usersRoute from './routes/usersRoute';
+
 const app = express();
 const port = process.env.PORT || 7000;
 
-app.use('/', (req, res) => {
-  res.json({
-    status: 200,
-    message: 'You\'re welcome',
-  });
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/', indexRoute);
+app.use('/api/v1/users', usersRoute);
 
 app.listen(port);
 
