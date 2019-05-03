@@ -1,5 +1,5 @@
 const getIndex = (req, res) => {
-  res.json({
+  res.status(200).json({
     status: 200,
     message: 'You\'re welcome to index API Endpoint',
   });

@@ -39,7 +39,7 @@ const valiidateSignUp = (req, res, next) => {
     validationMessage += 'Address can only contain alphabets, numbers, comma and hyphen.';
   }
   return (validationMessage.length === 0) ? next()
-    : res.json({ status: 400, error: validationMessage });
+    : res.status(400).json({ status: 400, error: validationMessage });
 };
 
 export default {

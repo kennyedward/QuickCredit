@@ -10,12 +10,12 @@ const createToken = (newUser, res) => {
   };
   jwt.sign(payLoad, 'bonjourmonamicavabienmerci', (err, token) => {
     if (err) {
-      return res.json({
+      return res.status(500).json({
         status: 500,
         error: 'There was an error creating token.',
       });
     }
-    return res.json({
+    return res.status(201).json({
       status: 201,
       data: {
         token,

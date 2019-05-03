@@ -22,7 +22,7 @@ const userSignUp = (req, res) => {
   if (!result) {
     bcrypt.hash(newUser.password, 8, (err, hashPassword) => {
       if (err) {
-        return res.json({
+        return res.status(400).json({
           status: 400,
           error: 'An error occured during signup. Please try again.',
         });
@@ -32,7 +32,7 @@ const userSignUp = (req, res) => {
       return jwt.createToken(newUser, res);
     });
   } else {
-    res.json({
+    res.status(409).json({
       status: 409,
       error: 'User already exists',
     });
