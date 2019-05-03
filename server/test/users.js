@@ -433,3 +433,96 @@ describe('SignUp Test', () => {
       });
   });
 });
+describe('Login Test', () => {
+  it('should fail if email field is empty', (done) => {
+    const user = {
+      email: '',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(user)
+      .end((err, res) => {
+        res.body.should.have.status(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Email is required');
+        done();
+      });
+  });
+  it('should fail if email field is invalid', (done) => {
+    const user = {
+      email: 'kennyedwardatgmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(user)
+      .end((err, res) => {
+        res.body.should.have.status(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Invalid email: example - user@domain.com');
+        done();
+      });
+  });
+  it('should fail if password field is empty', (done) => {
+    const user = {
+      email: 'kennyedward99@gmail.com',
+      password: '',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(user)
+      .end((err, res) => {
+        res.body.should.have.status(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('password is required');
+        done();
+      });
+  });
+  it('should fail if user is not found', (done) => {
+    const user = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(user)
+      .end((err, res) => {
+        res.body.should.have.status(404);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('User not found');
+        done();
+      });
+  });
+  it('should return success if signup fields supplied are valid', (done) => {
+    const user = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(user)
+      .end((err, res) => {
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.should.have.property('data');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('id');
+        res.body.data.should.have.property('firstName').eql(res.body.data.firstName);
+        res.body.data.should.have.property('lastName').eql(res.body.data.lastName);
+        res.body.data.should.have.property('email').eql(res.body.data.email);
+        res.body.data.should.have.property('address').eql(res.body.data.address);
+        res.body.data.should.have.property('status').eql(res.body.data.status);
+        res.body.data.should.have.property('isAdmin').eql(res.body.data.isAdmin);
+        done();
+      });
+  });
+});
