@@ -7,15 +7,15 @@ chai.use(chaiHttp);
 const should = chai.should();
 
 describe('API Test', () => {
-  it('should return success if user navigate to localhost:7000/', (done) => {
+  it('should return success if user navigate to localhost:7000/api/v1', (done) => {
     chai.request(server)
-      .get('/')
+      .get('/api/v1')
       .end((err, res) => {
         should.not.exist(err);
         res.body.should.have.status(200);
         res.body.should.have.property('message');
-        res.body.should.have.property('message').eql('You\'re welcome');
+        res.body.should.have.property('message').eql('You\'re welcome to index API Endpoint');
+        done();
       });
-    done();
   });
 });
