@@ -1,4 +1,7 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const createToken = (newUser, res) => {
   const payLoad = {
@@ -8,7 +11,7 @@ const createToken = (newUser, res) => {
     status: newUser.status,
     isAdmin: newUser.isAdmin,
   };
-  jwt.sign(payLoad, 'bonjourmonamicavabienmerci', (err, token) => {
+  jwt.sign(payLoad, process.env.APP_TOKEN, (err, token) => {
     if (err) {
       return res.status(500).json({
         status: 500,
