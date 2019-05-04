@@ -1,8 +1,13 @@
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const users = [
   {
     id: 1,
     email: 'admin@quickcredit.com',
-    password: 'admin001',
+    password: bcrypt.hashSync(process.env.ADMIN_PASS, 8),
     isAdmin: true,
   },
 ];

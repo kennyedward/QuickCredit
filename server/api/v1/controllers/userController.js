@@ -29,7 +29,8 @@ const userSignUp = (req, res) => {
       }
       newUser.password = hashPassword;
       users.push(newUser);
-      return jwt.createToken(newUser, res);
+      const status = 201;
+      return jwt.createToken(newUser, res, status);
     });
   } else {
     res.status(409).json({
@@ -39,6 +40,35 @@ const userSignUp = (req, res) => {
   }
 };
 
+const userLogin = (req, res) => {
+  const user = {
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  const result = users.find(registeredUser => registeredUser.email === user.email);
+
+  if (!result) {
+    res.status(404).json({
+      status: 404,
+      error: 'User not found',
+    });
+  } else {
+    bcrypt.compare(user.password, result.password, (err, match) => {
+      if (err) {
+        return res.status(401).json({
+          status: 401,
+          error: 'An error occured during log in',
+        });
+      }
+      const status = 200;
+      return match ? jwt.createToken(result, res, status)
+        : res.status(401).json({ status: 401, error: 'Auth failed' });
+    });
+  }
+};
+
 export default {
   userSignUp,
+  userLogin,
 };

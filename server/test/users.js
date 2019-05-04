@@ -487,8 +487,8 @@ describe('Login Test', () => {
   });
   it('should fail if user is not found', (done) => {
     const user = {
-      email: 'kennyedward99@gmail.com',
-      password: 'love',
+      email: 'debby@gmail.com',
+      password: 'debby',
     };
     chai.request(server)
       .post('/api/v1/users/auth/login')
