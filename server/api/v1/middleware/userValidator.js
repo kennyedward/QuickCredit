@@ -42,6 +42,21 @@ const valiidateSignUp = (req, res, next) => {
     : res.status(400).json({ status: 400, error: validationMessage });
 };
 
+const valiidateLogin = (req, res, next) => {
+  let validationMessage = '';
+
+  if (!req.body.email) {
+    validationMessage += 'Email is required';
+  } else if (req.body.email && !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(req.body.email)) {
+    validationMessage += 'Invalid email: example - user@domain.com';
+  } else if (!req.body.password) {
+    validationMessage += 'password is required';
+  }
+  return (validationMessage.length === 0) ? next()
+    : res.status(400).json({ status: 400, error: validationMessage });
+};
+
 export default {
   valiidateSignUp,
+  valiidateLogin,
 };

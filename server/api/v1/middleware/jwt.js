@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const createToken = (newUser, res) => {
+const createToken = (newUser, res, status) => {
   const payLoad = {
     id: newUser.id,
     email: newUser.email,
@@ -18,8 +18,8 @@ const createToken = (newUser, res) => {
         error: 'There was an error creating token.',
       });
     }
-    return res.status(201).json({
-      status: 201,
+    return res.status(status).json({
+      status,
       data: {
         token,
         id: newUser.id,
@@ -27,9 +27,9 @@ const createToken = (newUser, res) => {
         lastName: newUser.lastName,
         email: newUser.email,
         address: newUser.address,
-        status: 'unverified',
-        isAdmin: false,
-        registered: new Date(),
+        status: newUser.status,
+        isAdmin: newUser.isAdmin,
+        registered: newUser.registered,
       },
     });
   });
