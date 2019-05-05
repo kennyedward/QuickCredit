@@ -68,7 +68,38 @@ const userLogin = (req, res) => {
   }
 };
 
+const adminVerifyAccount = (req, res) => {
+  if (req.authData.isAdmin) {
+    const { userEmail } = req.params;
+    const { status } = req.body;
+    const user = users.find(account => account.email === userEmail);
+    if (user) {
+      user.status = status;
+      return res.status(200).json({
+        status: 200,
+        data: {
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          password: user.password,
+          address: user.address,
+          status: user.status,
+        },
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'User with the email address is not found.',
+    });
+  }
+  return res.status(403).json({
+    status: 403,
+    error: 'You\'re forbidden to perform this action.',
+  });
+};
+
 export default {
   userSignUp,
   userLogin,
+  adminVerifyAccount,
 };

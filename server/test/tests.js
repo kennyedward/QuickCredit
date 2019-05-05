@@ -6,7 +6,9 @@ import server from '../api/v1';
 chai.use(chaiHttp);
 const should = chai.should();
 
+let adminToken = '';
 let userToken = '';
+const invalidToken = 'd0NtBedEcE1vEdtH15T0kEn1s1NvAlId';
 
 describe('API Test', () => {
   it('should return success if user navigate to localhost:7000/api/v1', (done) => {
@@ -574,5 +576,97 @@ describe('User account before verification attempts to apply for loan', () => {
             done();
           });
       });
+  });
+});
+
+describe('Admin Test', () => {
+  it('admin should be able to verify user account if user is created', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/users/kennyedward99@gmail.com/verify')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'verified' })
+          .end((error, response) => {
+            response.body.should.have.status(200);
+            response.body.should.have.property('data');
+            response.body.data.status.should.eql('verified');
+          });
+        done();
+      });
+  });
+  it('should fail if admin attempt to verify a user account NOT created', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/users/olabode_prof@gmail.com/verify')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'verified' })
+          .end((error, response) => {
+            response.body.should.have.status(404);
+            response.body.should.have.property('error');
+            response.body.error.should.eql('User with the email address is not found.');
+          });
+        done();
+      });
+  });
+  it('should fail if a user without a valid token attempts to verify a user account', (done) => {
+    chai.request(server)
+      .patch('/api/v1/users/kennyedward99@gmail.com/verify')
+      .set('authorization', `Bearer ${invalidToken}`)
+      .send({ status: 'verified' })
+      .end((error, response) => {
+        response.body.should.have.status(403);
+        response.body.should.have.property('error');
+        response.body.error.should.eql('Invalid token, You need to login or signup');
+      });
+    done();
+  });
+  it('should fail if a user without admin rights attempts to verify a user account', (done) => {
+    chai.request(server)
+      .patch('/api/v1/users/kennyedward99@gmail.com/verify')
+      .set('authorization', `Bearer ${userToken}`)
+      .send({ status: 'verified' })
+      .end((error, response) => {
+        response.body.should.have.status(403);
+        response.body.should.have.property('error');
+        response.body.error.should.eql('You\'re forbidden to perform this action.');
+      });
+    done();
+  });
+  it('should fail if a user without a token attempts to verify a user account', (done) => {
+    chai.request(server)
+      .patch('/api/v1/users/kennyedward99@gmail.com/verify')
+      .send({ status: 'verified' })
+      .end((error, response) => {
+        response.body.should.have.status(401);
+        response.body.should.have.property('error');
+        response.body.error.should.eql('Auth failed');
+      });
+    done();
   });
 });
