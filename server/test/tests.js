@@ -6,6 +6,8 @@ import server from '../api/v1';
 chai.use(chaiHttp);
 const should = chai.should();
 
+let userToken = '';
+
 describe('API Test', () => {
   it('should return success if user navigate to localhost:7000/api/v1', (done) => {
     chai.request(server)
@@ -517,7 +519,7 @@ describe('Login Test', () => {
         done();
       });
   });
-  it('should return success if signup fields supplied are valid', (done) => {
+  it('should return success if login fields supplied are valid', (done) => {
     const user = {
       email: 'kennyedward99@gmail.com',
       password: 'love',
@@ -538,6 +540,39 @@ describe('Login Test', () => {
         res.body.data.should.have.property('status').eql(res.body.data.status);
         res.body.data.should.have.property('isAdmin').eql(res.body.data.isAdmin);
         done();
+      });
+  });
+});
+
+describe('User account before verification attempts to apply for loan', () => {
+  it('should fail if a LOGGED IN, TOKEN VALID BUT UNVERIFIED User attempts to Apply for loan', (done) => {
+    const userLoggin = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(userLoggin)
+      .end((error, response) => {
+        userToken = response.body.data.token;
+        const loan = {
+          tenor: 5,
+          amount: 5000.00,
+          purpose: 'Business',
+          startDate: new Date(),
+        };
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(loan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Your account is yet to be verified. Please hold on for verification.');
+            done();
+          });
       });
   });
 });
