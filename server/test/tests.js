@@ -914,6 +914,62 @@ describe('Loan Test', () => {
       });
   });
 });
+describe('Admin Approves Loan Test', () => {
+  it('admin should be able to APPROVE a loan if user account EXISTS AND loan is CREATED and status is PENDING', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/loans/:loanId')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'approved' })
+          .end((error, response) => {
+            response.body.should.have.status(200);
+            response.body.should.have.property('data');
+            response.body.data.status.should.eql('approved');
+          });
+        done();
+      });
+  });
+  it('admin should be able to REJECT a loan if user account EXISTS AND loan is CREATED and status is PENDING', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/loans/:loanId')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'rejected' })
+          .end((error, response) => {
+            response.body.should.have.status(200);
+            response.body.should.have.property('data');
+            response.body.data.status.should.eql('rejected');
+          });
+        done();
+      });
+  });
+});
 describe('Admin Create Loan Repayment Test', () => {
   it('should fail if token is not found', (done) => {
     const loanRepayment = {
