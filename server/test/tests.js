@@ -4,6 +4,25 @@ import chaiHttp from 'chai-http';
 import server from '../api/v1';
 
 chai.use(chaiHttp);
+const should = chai.should();
+
+let adminToken = '';
+let userToken = '';
+const invalidToken = 'd0NtBedEcE1vEdtH15T0kEn1s1NvAlId';
+
+describe('API Test', () => {
+  it('should return success if user navigate to localhost:7000/api/v1', (done) => {
+    chai.request(server)
+      .get('/api/v1')
+      .end((err, res) => {
+        should.not.exist(err);
+        res.body.should.have.status(200);
+        res.body.should.have.property('message');
+        res.body.should.have.property('message').eql('You\'re welcome to index API Endpoint');
+        done();
+      });
+  });
+});
 
 describe('SignUp Test', () => {
   it('should fail if email field is empty', (done) => {
@@ -502,7 +521,7 @@ describe('Login Test', () => {
         done();
       });
   });
-  it('should return success if signup fields supplied are valid', (done) => {
+  it('should return success if login fields supplied are valid', (done) => {
     const user = {
       email: 'kennyedward99@gmail.com',
       password: 'love',
@@ -523,6 +542,375 @@ describe('Login Test', () => {
         res.body.data.should.have.property('status').eql(res.body.data.status);
         res.body.data.should.have.property('isAdmin').eql(res.body.data.isAdmin);
         done();
+      });
+  });
+});
+
+describe('User account before verification attempts to apply for loan', () => {
+  it('should fail if a LOGGED IN, TOKEN VALID BUT UNVERIFIED User attempts to Apply for loan', (done) => {
+    const userLoggin = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(userLoggin)
+      .end((error, response) => {
+        userToken = response.body.data.token;
+        const loan = {
+          tenor: 5,
+          amount: 5000.00,
+          purpose: 'Business',
+          startDate: new Date(),
+        };
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(loan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Your account is yet to be verified. Please hold on for verification.');
+            done();
+          });
+      });
+  });
+});
+
+describe('Admin Test', () => {
+  it('admin should be able to verify user account if user is created', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/users/kennyedward99@gmail.com/verify')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'verified' })
+          .end((error, response) => {
+            response.body.should.have.status(200);
+            response.body.should.have.property('data');
+            response.body.data.status.should.eql('verified');
+          });
+        done();
+      });
+  });
+  it('should fail if admin attempt to verify a user account NOT created', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/users/olabode_prof@gmail.com/verify')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'verified' })
+          .end((error, response) => {
+            response.body.should.have.status(404);
+            response.body.should.have.property('error');
+            response.body.error.should.eql('User with the email address is not found.');
+          });
+        done();
+      });
+  });
+  it('should fail if a user without a valid token attempts to verify a user account', (done) => {
+    chai.request(server)
+      .patch('/api/v1/users/kennyedward99@gmail.com/verify')
+      .set('authorization', `Bearer ${invalidToken}`)
+      .send({ status: 'verified' })
+      .end((error, response) => {
+        response.body.should.have.status(403);
+        response.body.should.have.property('error');
+        response.body.error.should.eql('Invalid token, You need to login or signup');
+      });
+    done();
+  });
+  it('should fail if a user without admin rights attempts to verify a user account', (done) => {
+    chai.request(server)
+      .patch('/api/v1/users/kennyedward99@gmail.com/verify')
+      .set('authorization', `Bearer ${userToken}`)
+      .send({ status: 'verified' })
+      .end((error, response) => {
+        response.body.should.have.status(403);
+        response.body.should.have.property('error');
+        response.body.error.should.eql('You\'re forbidden to perform this action.');
+      });
+    done();
+  });
+  it('should fail if a user without a token attempts to verify a user account', (done) => {
+    chai.request(server)
+      .patch('/api/v1/users/kennyedward99@gmail.com/verify')
+      .send({ status: 'verified' })
+      .end((error, response) => {
+        response.body.should.have.status(401);
+        response.body.should.have.property('error');
+        response.body.error.should.eql('Auth failed');
+      });
+    done();
+  });
+});
+describe('Loan Test', () => {
+  it('should fail if user is not logged in', (done) => {
+    const loan = {
+      tenor: 5,
+      amount: 5000.00,
+      purpose: 'Business',
+      startDate: new Date(),
+    };
+    chai.request(server)
+      .post('/api/v1/loans')
+      .send(loan)
+      .end((err, res) => {
+        res.body.should.have.status(401);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Auth failed');
+        done();
+      });
+  });
+  it('should fail if user token is invalid', (done) => {
+    const loan = {
+      tenor: 5,
+      amount: 5000.00,
+      purpose: 'Business',
+      startDate: new Date(),
+    };
+    chai.request(server)
+      .post('/api/v1/loans')
+      .set('authorization', `Bearer ${invalidToken}`)
+      .send(loan)
+      .end((err, res) => {
+        res.body.should.have.status(403);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Invalid token, You need to login or signup');
+        done();
+      });
+  });
+  it('should create Loan if user is logged in, token is valid and status is VERIFIED', (done) => {
+    const userLoggin = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(userLoggin)
+      .end((error, response) => {
+        userToken = response.body.data.token;
+        const loan = {
+          tenor: 8,
+          amount: 50000.00,
+          purpose: 'Business',
+          startDate: new Date(),
+        };
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(loan)
+          .end((err, res) => {
+            res.body.should.have.status(201);
+            res.body.should.be.a('object');
+            res.body.should.have.property('data');
+            res.body.data.should.be.a('object');
+            done();
+          });
+      });
+  });
+  it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if TENOR IS EMPTY', (done) => {
+    const userLoggin = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(userLoggin)
+      .end((error, response) => {
+        userToken = response.body.data.token;
+        const loan = {
+          tenor: '',
+          amount: 50000.78,
+          purpose: 'Business',
+          startDate: new Date(),
+        };
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(loan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan tenor is required');
+            done();
+          });
+      });
+  });
+  it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if TENOR IS NOT AN INTEGER', (done) => {
+    const userLoggin = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(userLoggin)
+      .end((error, response) => {
+        userToken = response.body.data.token;
+        const loan = {
+          tenor: 8.8,
+          amount: 50000.00,
+          purpose: 'Business',
+          startDate: new Date(),
+        };
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(loan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan tenor must be an integer');
+            done();
+          });
+      });
+  });
+  it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if TENOR IS LESS THAN 1 OR GREATER THAN 12', (done) => {
+    const userLoggin = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(userLoggin)
+      .end((error, response) => {
+        userToken = response.body.data.token;
+        const loan = {
+          tenor: '13',
+          amount: '50000.00',
+          purpose: 'Business',
+          startDate: new Date(),
+        };
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(loan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan tenor must be between 1 and 12');
+            done();
+          });
+      });
+  });
+  it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if AMOUNT IS INVALID', (done) => {
+    const userLoggin = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(userLoggin)
+      .end((error, response) => {
+        userToken = response.body.data.token;
+        const loan = {
+          tenor: 3,
+          amount: '@5577.977',
+          purpose: 'Business',
+          startDate: new Date(),
+        };
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(loan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan amount is required');
+            done();
+          });
+      });
+  });
+  it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if PURPOSE IS EMPTY', (done) => {
+    const userLoggin = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(userLoggin)
+      .end((error, response) => {
+        userToken = response.body.data.token;
+        const loan = {
+          tenor: 3,
+          amount: '95577.97',
+          purpose: '',
+          startDate: new Date(),
+        };
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(loan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan purpose is required');
+            done();
+          });
+      });
+  });
+  it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if PURPOSE IS INVALID', (done) => {
+    const userLoggin = {
+      email: 'kennyedward99@gmail.com',
+      password: 'love',
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(userLoggin)
+      .end((error, response) => {
+        userToken = response.body.data.token;
+        const loan = {
+          tenor: 3,
+          amount: '95577.97',
+          purpose: '#$@#Fraud',
+          startDate: new Date(),
+        };
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(loan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan purpose can only contain alphabets');
+            done();
+          });
       });
   });
 });

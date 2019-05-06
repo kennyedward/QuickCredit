@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const createToken = (newUser, res, status) => {
+const createToken = (newUser, res, status, next) => {
   const payLoad = {
     id: newUser.id,
     email: newUser.email,
@@ -13,12 +13,12 @@ const createToken = (newUser, res, status) => {
   };
   jwt.sign(payLoad, process.env.APP_TOKEN, (err, token) => {
     if (err) {
-      return res.status(500).json({
-        status: 500,
-        error: 'There was an error creating token.',
+      res.status(422).json({
+        status: 422,
+        error: 'An error occurred while verifying your details.',
       });
     }
-    return res.status(status).json({
+    res.status(status).json({
       status,
       data: {
         token,
@@ -32,9 +32,34 @@ const createToken = (newUser, res, status) => {
         registered: newUser.registered,
       },
     });
+    next();
+  });
+};
+
+const validateToken = (req, res, next) => {
+  const bearerHeader = req.headers.authorization;
+  if (bearerHeader) {
+    const bearer = bearerHeader.split(' ');
+    const bearerToken = bearer[1];
+    req.token = bearerToken;
+    return jwt.verify(req.token, process.env.APP_TOKEN, (err, authData) => {
+      if (err) {
+        return res.status(403).json({
+          status: 403,
+          error: 'Invalid token, You need to login or signup',
+        });
+      }
+      req.authData = authData;
+      return next();
+    });
+  }
+  return res.status(401).json({
+    status: 401,
+    error: 'Auth failed',
   });
 };
 
 export default {
   createToken,
+  validateToken,
 };
