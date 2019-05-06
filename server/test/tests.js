@@ -914,3 +914,102 @@ describe('Loan Test', () => {
       });
   });
 });
+describe('Admin Create Loan Repayment Test', () => {
+  it('should fail if token is not found', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/:loanId/repayment')
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(401);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Auth failed');
+        done();
+      });
+  });
+  it('should fail if admin token is invalid', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/:loanId/repayment')
+      .set('authorization', `Bearer ${invalidToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(403);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Invalid token, You need to login or signup');
+        done();
+      });
+  });
+  it('should return forbidden if a user without admin rights attempts to create loan repayment', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/:loanId/repayment')
+      .set('authorization', `Bearer ${invalidToken}`)
+      .send(loanRepayment)
+      .end((error, response) => {
+        response.body.should.have.status(403);
+        response.body.should.have.property('error');
+        response.body.error.should.eql('You\'re forbidden to perform this action.');
+      });
+    done();
+  });
+  it('should fail if admin token is VALID and PAIDAMOUNT IS INVALID', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/:loanId/repayment')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(400);
+        res.body.should.be.a('object');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Paid amount is required');
+        done();
+      });
+  });
+  it('should should fail if admin TOKEN is VALID, and PAIDAMOUNT IS VALID and Loan status is PENDING OR REJECTED', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/:loanId/repayment')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(401);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Your loan is yet to be approved.');
+        done();
+      });
+  });
+  it('should create Loan Repayment if admin TOKEN is valid, and PAIDAMOUNT IS VALID', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/:loanId/repayment')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(201);
+        res.body.should.be.a('object');
+        res.body.should.have.property('data');
+        res.body.data.should.be.a('object');
+        done();
+      });
+  });
+});
