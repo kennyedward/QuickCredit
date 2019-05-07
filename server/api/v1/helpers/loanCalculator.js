@@ -1,8 +1,8 @@
 const loanCalculator = (amount, tenor) => {
   const interestRate = 0.05;
-  const interest = interestRate * amount;
-  const balance = amount + interest;
-  const paymentInstallment = balance / tenor;
+  const interest = (Number(interestRate) * Number(amount)).toFixed(2);
+  const balance = (Number(amount) + Number(interest)).toFixed(2);
+  const paymentInstallment = (Number(balance) / Number(tenor)).toFixed(2);
 
   return {
     interest,

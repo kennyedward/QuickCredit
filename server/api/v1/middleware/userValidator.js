@@ -56,7 +56,17 @@ const valiidateLogin = (req, res, next) => {
     : res.status(400).json({ status: 400, error: validationMessage });
 };
 
+const validateVerificationStatus = (req, res, next) => {
+  let validationMessage = '';
+  if (!req.body.status) {
+    validationMessage += 'Status is required';
+  }
+  return (validationMessage.length === 0) ? next()
+    : res.status(400).json({ status: 400, error: validationMessage });
+};
+
 export default {
   valiidateSignUp,
   valiidateLogin,
+  validateVerificationStatus,
 };
