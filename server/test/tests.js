@@ -580,6 +580,33 @@ describe('User account before verification attempts to apply for loan', () => {
 });
 
 describe('Admin Test', () => {
+  it('should fail if status is not present in req.body when admin attempts to verify user account if user is created', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/users/kennyedward99@gmail.com/verify')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: '' })
+          .end((error, response) => {
+            response.body.should.have.status(400);
+            response.body.should.have.property('error');
+            response.body.error.should.eql('Status is required');
+          });
+        done();
+      });
+  });
   it('admin should be able to verify user account if user is created', (done) => {
     const adminLoggin = {
       email: 'admin@quickcredit.com',
@@ -710,7 +737,7 @@ describe('Loan Test', () => {
         done();
       });
   });
-  it('should create Loan if user is logged in, token is valid and status is VERIFIED', (done) => {
+  it('should fail if user already has an UNPAID load running', (done) => {
     const userLoggin = {
       email: 'kennyedward99@gmail.com',
       password: 'love',
@@ -731,10 +758,10 @@ describe('Loan Test', () => {
           .set('authorization', `Bearer ${userToken}`)
           .send(loan)
           .end((err, res) => {
-            res.body.should.have.status(201);
+            res.body.should.have.status(409);
             res.body.should.be.a('object');
-            res.body.should.have.property('data');
-            res.body.data.should.be.a('object');
+            res.body.should.have.property('error');
+            res.body.error.should.be.a('string').eql('You have an existing loan');
             done();
           });
       });
@@ -911,6 +938,248 @@ describe('Loan Test', () => {
             res.body.error.should.eql('Loan purpose can only contain alphabets');
             done();
           });
+      });
+  });
+});
+describe('Admin Approves Loan Test', () => {
+  it('admin should fail if loan is NOT FOUND', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/loans/79567888')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'approved' })
+          .end((error, response) => {
+            response.body.should.have.status(404);
+            response.body.should.have.property('error');
+            response.body.error.should.be.a('string');
+            response.body.error.should.eql('Loan not found.');
+          });
+        done();
+      });
+  });
+  it('admin should be able to APPROVE a loan if user account EXISTS AND loan is CREATED and status is PENDING', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/loans/44068301')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'approved' })
+          .end((error, response) => {
+            response.body.should.have.status(200);
+            response.body.should.have.property('data');
+            response.body.data.status.should.eql('approved');
+          });
+        done();
+      });
+  });
+  it('admin should be able to REJECT a loan if user account EXISTS AND loan is CREATED and status is PENDING', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/loans/44068301')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'rejected' })
+          .end((error, response) => {
+            response.body.should.have.status(200);
+            response.body.should.have.property('data');
+            response.body.data.status.should.eql('rejected');
+          });
+        done();
+      });
+  });
+  it('admin can even return REJECTED loan to PENDING OR APPROVED as the case may be', (done) => {
+    const adminLoggin = {
+      email: 'admin@quickcredit.com',
+      password: process.env.ADMIN_PASS,
+    };
+    chai.request(server)
+      .post('/api/v1/users/auth/login')
+      .send(adminLoggin)
+      .end((err, res) => {
+        adminToken = res.body.data.token;
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('isAdmin');
+        res.body.data.isAdmin.should.eql(true);
+        chai.request(server)
+          .patch('/api/v1/loans/44068301')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'pending' })
+          .end((error, response) => {
+            response.body.should.have.status(200);
+            response.body.should.have.property('data');
+            response.body.data.status.should.eql('pending');
+          });
+        done();
+      });
+  });
+});
+describe('Admin Create Loan Repayment Test', () => {
+  it('should fail if token is not found', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/:loanId/repayment')
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(401);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Auth failed');
+        done();
+      });
+  });
+  it('should fail if admin token is invalid', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/:loanId/repayment')
+      .set('authorization', `Bearer ${invalidToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(403);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Invalid token, You need to login or signup');
+        done();
+      });
+  });
+  it('should return forbidden if a user without admin rights attempts to create loan repayment', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/:loanId/repayment')
+      .set('authorization', `Bearer ${userToken}`)
+      .send(loanRepayment)
+      .end((error, response) => {
+        response.body.should.have.status(403);
+        response.body.should.have.property('error');
+        response.body.error.should.eql('You\'re forbidden to perform this action.');
+      });
+    done();
+  });
+  it('should fail if admin token is VALID and loan is NOT FOUND', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/83736219/repayment')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(404);
+        res.body.should.be.a('object');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Loan not found.');
+        done();
+      });
+  });
+  it('should return LOAN NOT YET APPROVED', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/44068301/repayment')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Your loan is yet to be approved');
+        done();
+      });
+  });
+  it('should pass if admin token is VALID, loan is APPROVED and paid amount is VALID', (done) => {
+    const loanRepayment = {
+      paidAmount: 5000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/82928475/repayment')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(201);
+        res.body.should.be.a('object');
+        res.body.data.should.be.a('object');
+        res.body.data.should.have.property('balance').eql(res.body.data.balance);
+        done();
+      });
+  });
+  it('SECOND PAYMENT: should pass if admin token is VALID, loan is APPROVED and paid amount is VALID', (done) => {
+    const loanRepayment = {
+      paidAmount: 15000.00,
+    };
+    chai.request(server)
+      .post('/api/v1/loans/82928475/repayment')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(201);
+        res.body.should.be.a('object');
+        res.body.data.should.be.a('object');
+        res.body.data.should.have.property('balance').eql(res.body.data.balance);
+        done();
+      });
+  });
+  it('should should fail if admin TOKEN is VALID, loan is APPROVED but paid amount is INVALID', (done) => {
+    const loanRepayment = {
+      paidAmount: '@#$$#',
+    };
+    chai.request(server)
+      .post('/api/v1/loans/82928475/repayment')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string');
+        res.body.error.should.eql('Paid amount is required');
+        done();
       });
   });
 });

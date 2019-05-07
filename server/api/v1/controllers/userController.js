@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 
 import users from '../db/users';
-import idGenerator from '../helpers/userIdGenerator';
+import idGenerator from '../helpers/IdGenerator';
 import jwt from '../middleware/jwt';
 
 const userSignUp = (req, res) => {
