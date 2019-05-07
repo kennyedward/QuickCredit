@@ -62,9 +62,11 @@ const adminApproveRejectLoan = (req, res) => {
         status: existingLoan.status,
         monthlyInstallment: existingLoan.paymentInstallment,
         interest: existingLoan.interest,
+        totalRepayment: existingLoan.balance,
       };
       if (existingLoan.status === 'pending') {
         data.status = status;
+        existingLoan.status = status;
         return res.status(200).json({
           status: 200,
           data,
@@ -72,6 +74,7 @@ const adminApproveRejectLoan = (req, res) => {
       }
       if (existingLoan.status === 'approved') {
         data.status = status;
+        existingLoan.status = status;
         return res.status(200).json({
           status: 200,
           data,
@@ -79,6 +82,7 @@ const adminApproveRejectLoan = (req, res) => {
       }
       if (existingLoan.status === 'rejected') {
         data.status = status;
+        existingLoan.status = status;
         return res.status(200).json({
           status: 200,
           data,
@@ -107,6 +111,7 @@ const loanRepayment = (req, res) => {
         amount: existingLoan.amount,
         monthlyInstallment: existingLoan.paymentInstallment,
         balance: existingLoan.balance,
+        totalRepayment: existingLoan.balance,
       };
       if (existingLoan.status === 'approved' && existingLoan.repaid === false) {
         const { paidAmount } = req.body;
@@ -114,6 +119,7 @@ const loanRepayment = (req, res) => {
         data.paidAmount = paidAmount;
         const balance = data.balance - paidAmount;
         existingLoan.balance = balance;
+        data.balance = balance;
         loanRepayments.push(data);
         return res.status(201).json({
           status: 201,

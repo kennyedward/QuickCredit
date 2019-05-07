@@ -30,7 +30,20 @@ const valiidateLoanRepayment = (req, res, next) => {
     : res.status(400).json({ status: 400, error: validationMessage });
 };
 
+const validateLoanStatus = (req, res, next) => {
+  let validationMessage = '';
+  const status = req.body.status.trim();
+  if (!status) {
+    validationMessage += 'Status is required';
+  } else if (status.trim() !== 'approved' && status !== 'rejected' && status !== 'pending') {
+    validationMessage += 'Status can only be either \'approved\', \'rejected\' or \'pending\'';
+  }
+  return (validationMessage.length === 0) ? next()
+    : res.status(400).json({ status: 400, error: validationMessage });
+};
+
 export default {
   valiidateLoan,
   valiidateLoanRepayment,
+  validateLoanStatus,
 };

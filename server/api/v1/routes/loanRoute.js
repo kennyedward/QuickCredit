@@ -7,7 +7,7 @@ import loanValidator from '../middleware/loanValidator';
 const loanRouter = express.Router();
 
 loanRouter.post('/', jwt.validateToken, loanValidator.valiidateLoan, loanController.applyForLoan);
-loanRouter.patch('/:loanId', jwt.validateToken, loanController.adminApproveRejectLoan);
+loanRouter.patch('/:loanId', jwt.validateToken, loanValidator.validateLoanStatus, loanController.adminApproveRejectLoan);
 loanRouter.post('/:loanId/repayment', jwt.validateToken, loanValidator.valiidateLoanRepayment, loanController.loanRepayment);
 
 export default loanRouter;
