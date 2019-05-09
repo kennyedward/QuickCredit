@@ -11,7 +11,7 @@ const createToken = (newUser, res, status, next) => {
     status: newUser.status,
     isAdmin: newUser.isAdmin,
   };
-  jwt.sign(payLoad, process.env.APP_TOKEN, (err, token) => {
+  jwt.sign(payLoad, process.env.APP_TOKEN || 'jhgsfcvgbhbjvc', (err, token) => {
     if (err) {
       res.status(422).json({
         status: 422,
@@ -42,7 +42,7 @@ const validateToken = (req, res, next) => {
     const bearer = bearerHeader.split(' ');
     const bearerToken = bearer[1];
     req.token = bearerToken;
-    return jwt.verify(req.token, process.env.APP_TOKEN, (err, authData) => {
+    return jwt.verify(req.token, process.env.APP_TOKEN || 'jhgsfcvgbhbjvc', (err, authData) => {
       if (err) {
         return res.status(403).json({
           status: 403,

@@ -13,7 +13,7 @@ const invalidToken = 'd0NtBedEcE1vEdtH15T0kEn1s1NvAlId';
 
 const adminCredentials = {
   email: 'admin@quickcredit.com',
-  password: process.env.ADMIN_PASS,
+  password: process.env.ADMIN_PASS || 'learn',
 };
 
 const userCredentials = {
