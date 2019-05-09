@@ -1,5 +1,6 @@
 # QuickCredit
-[![Build Status](https://travis-ci.org/kennyedward/QuickCredit.svg?branch=develop)](https://travis-ci.org/kennyedward/QuickCredit)
+[![Build Status](https://travis-ci.org/kennyedward/QuickCredit.svg?branch=develop)](https://travis-ci.org/kennyedward/QuickCredit) [![Coverage Status](https://coveralls.io/repos/github/kennyedward/QuickCredit/badge.svg?branch=ch-integrate-coveralls-165909918)](https://coveralls.io/github/kennyedward/QuickCredit?branch=ch-integrate-coveralls-165909918)
+
 Quick Credit is an online lending platform that provides short term soft loans to individuals.  [Get Started](https://kennyedward.github.io/QuickCredit/UI/)
 > **Note**: This project is currently under development. It will be updated on a regular basis.
 
