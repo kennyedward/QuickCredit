@@ -7,7 +7,7 @@ const users = [
   {
     id: 1,
     email: 'admin@quickcredit.com',
-    password: bcrypt.hashSync(process.env.ADMIN_PASS, 8),
+    password: bcrypt.hashSync(process.env.ADMIN_PASS || 'learn', 8),
     isAdmin: true,
   },
 ];
