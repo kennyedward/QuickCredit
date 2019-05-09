@@ -1091,6 +1091,50 @@ describe('User View Repayment History Test', () => {
           done();
         });
     });
+    it('admin should be able to view all current loan application', (done) => {
+      chai.request(server)
+        .get('/api/v1/loans/?status=approved&repaid=false')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.data.should.be.a('array');
+          done();
+        });
+    });
+    it('admin should be able to view all paid loan application', (done) => {
+      chai.request(server)
+        .get('/api/v1/loans/?status=approved&repaid=true')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.data.should.be.a('array');
+          done();
+        });
+    });
+    it('should fail if query status is not approved', (done) => {
+      chai.request(server)
+        .get('/api/v1/loans/?status=approve&repaid=true')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.error.should.be.a('string').eql('status can only have the value: \'approved\'');
+          done();
+        });
+    });
+    it('should fail if query repaid is not correct', (done) => {
+      chai.request(server)
+        .get('/api/v1/loans/?status=approved&repaid=truty')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.error.should.be.a('string').eql('repaid can only have the value: \'true\' or \'false\'');
+          done();
+        });
+    });
     it('should return empty array if admin token is VALID and no loan exists yet', (done) => {
       loans.splice(0, loans.length);
       chai.request(server)

@@ -44,6 +44,21 @@ const loans = [
     purpose: 'Education',
     createdOn: new Date(),
   },
+  {
+    loanId: 34526719,
+    firstName: 'taiwo',
+    lastName: 'charles',
+    user: 'taewole@gmail.com',
+    tenor: 3,
+    amount: 90000,
+    status: 'approved',
+    repaid: true,
+    balance: 94500,
+    interest: 4500,
+    paymentInstallment: 31500.00,
+    purpose: 'Travel',
+    createdOn: new Date(),
+  },
 ];
 
 export default loans;
