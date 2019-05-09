@@ -150,6 +150,7 @@ const loanRepayment = (req, res) => {
   });
 };
 
+// eslint-disable-next-line consistent-return
 const getRepayment = (req, res) => {
   const loanId = Number(req.params.loanId);
   const existingLoan = loans.find(loan => loan.loanId === loanId);
@@ -159,18 +160,19 @@ const getRepayment = (req, res) => {
       const repaymentTransaction = loanRepayments
         .filter(repayment => repayment.loanId === loanId);
       if (repaymentTransaction) {
-        res.status(200).json({
+        if (repaymentTransaction.length === 0) {
+          return res.status(404).json({
+            status: 404,
+            data: 'Loan repayment transaction NOT found for this loan.',
+          });
+        }
+        return res.status(200).json({
           status: 200,
           data: repaymentTransaction,
         });
-      } else if (repaymentTransaction.length === 0) {
-        res.status(404).json({
-          status: 404,
-          data: 'Loan repayment transaction NOT found for this loan.',
-        });
       }
     } else {
-      res.status(400).json({
+      return res.status(400).json({
         status: 400,
         error: 'You can\'t view this loan repayment transaction',
       });
@@ -182,9 +184,31 @@ const getRepayment = (req, res) => {
     });
   }
 };
+
+const getAllLoan = (req, res) => {
+  if (req.authData.isAdmin) {
+    if (loans.length === 0) {
+      return res.status(200).json({
+        status: 404,
+        data: loans,
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: loans,
+    });
+  }
+  return res.status(403).json({
+    status: 403,
+    error: 'You\'re forbidden to perform this action.',
+  });
+};
+
+
 export default {
   applyForLoan,
   adminApproveRejectLoan,
   loanRepayment,
   getRepayment,
+  getAllLoan,
 };
