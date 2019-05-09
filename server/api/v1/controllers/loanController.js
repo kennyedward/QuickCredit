@@ -105,25 +105,25 @@ const loanRepayment = (req, res) => {
     const { loanId } = req.params;
     const existingLoan = loans.find(loan => loan.loanId === Number(loanId));
     if (existingLoan) {
-      const data = {
+      const repaymentTransaction = {
+        id: loanIdGenerator(),
         loanId: existingLoan.loanId,
         createdOn: existingLoan.createdOn,
         amount: existingLoan.amount,
         monthlyInstallment: existingLoan.paymentInstallment,
         balance: existingLoan.balance,
-        totalRepayment: existingLoan.balance,
+        user: existingLoan.user,
       };
       if (existingLoan.status === 'approved' && existingLoan.repaid === false) {
         const { paidAmount } = req.body;
-        data.id = loanIdGenerator();
-        data.paidAmount = paidAmount;
-        const balance = data.balance - paidAmount;
-        existingLoan.balance = balance;
-        data.balance = balance;
-        loanRepayments.push(data);
+        repaymentTransaction.paidAmount = parseFloat(paidAmount);
+        const balance = existingLoan.balance - paidAmount;
+        existingLoan.balance = parseFloat(balance);
+        repaymentTransaction.balance = existingLoan.balance;
+        loanRepayments.push(repaymentTransaction);
         return res.status(201).json({
           status: 201,
-          data,
+          data: repaymentTransaction,
         });
       }
       if (existingLoan.status === 'pending') {
@@ -150,8 +150,41 @@ const loanRepayment = (req, res) => {
   });
 };
 
+const getRepayment = (req, res) => {
+  const loanId = Number(req.params.loanId);
+  const existingLoan = loans.find(loan => loan.loanId === loanId);
+  if (existingLoan && (existingLoan.loanId === loanId)) {
+    const loan = loans.find(userLoan => userLoan.user === req.authData.email);
+    if (loan) {
+      const repaymentTransaction = loanRepayments
+        .filter(repayment => repayment.loanId === loanId);
+      if (repaymentTransaction) {
+        res.status(200).json({
+          status: 200,
+          data: repaymentTransaction,
+        });
+      } else if (repaymentTransaction.length === 0) {
+        res.status(404).json({
+          status: 404,
+          data: 'Loan repayment transaction NOT found for this loan.',
+        });
+      }
+    } else {
+      res.status(400).json({
+        status: 400,
+        error: 'You can\'t view this loan repayment transaction',
+      });
+    }
+  } else {
+    res.status(404).json({
+      status: 404,
+      error: 'Loan not found.',
+    });
+  }
+};
 export default {
   applyForLoan,
   adminApproveRejectLoan,
   loanRepayment,
+  getRepayment,
 };
