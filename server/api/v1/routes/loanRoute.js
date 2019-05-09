@@ -11,5 +11,6 @@ loanRouter.patch('/:loanId', jwt.validateToken, loanValidator.validateLoanStatus
 loanRouter.post('/:loanId/repayment', jwt.validateToken, loanValidator.valiidateLoanRepayment, loanController.loanRepayment);
 loanRouter.get('/:loanId/repayment', jwt.validateToken, loanValidator.validateLoanId, loanController.getRepayment);
 loanRouter.get('/', jwt.validateToken, loanController.getAllLoan);
+loanRouter.get('/:loanId', jwt.validateToken, loanValidator.validateLoanId, loanController.getALoan);
 
 export default loanRouter;

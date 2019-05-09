@@ -1047,6 +1047,50 @@ describe('User View Repayment History Test', () => {
           done();
         });
     });
+    it('should fail if loan id is invalid', (done) => {
+      chai.request(server)
+        .get('/api/v1/loans/abcd1234')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.error.should.be.a('string').eql('Loan ID is invalid.');
+          done();
+        });
+    });
+    it('should fail if user without admin rights attempts to view a specific loan', (done) => {
+      chai.request(server)
+        .get('/api/v1/loans/12345678')
+        .set('authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(403);
+          res.body.should.be.a('object');
+          res.body.error.should.be.a('string').eql('You\'re forbidden to perform this action.');
+          done();
+        });
+    });
+    it('should return 404 if loan is not found', (done) => {
+      chai.request(server)
+        .get('/api/v1/loans/12345678')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(404);
+          res.body.should.be.a('object');
+          res.body.error.should.be.a('string').eql('Loan not found.');
+          done();
+        });
+    });
+    it('admin should be able to view a specific loan application if its exists', (done) => {
+      chai.request(server)
+        .get('/api/v1/loans/82928475')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.data.should.be.a('array');
+          done();
+        });
+    });
     it('should return empty array if admin token is VALID and no loan exists yet', (done) => {
       loans.splice(0, loans.length);
       chai.request(server)

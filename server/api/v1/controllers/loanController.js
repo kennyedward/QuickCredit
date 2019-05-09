@@ -150,7 +150,6 @@ const loanRepayment = (req, res) => {
   });
 };
 
-// eslint-disable-next-line consistent-return
 const getRepayment = (req, res) => {
   const loanId = Number(req.params.loanId);
   const existingLoan = loans.find(loan => loan.loanId === loanId);
@@ -171,18 +170,16 @@ const getRepayment = (req, res) => {
           data: repaymentTransaction,
         });
       }
-    } else {
-      return res.status(400).json({
-        status: 400,
-        error: 'You can\'t view this loan repayment transaction',
-      });
     }
-  } else {
-    res.status(404).json({
-      status: 404,
-      error: 'Loan not found.',
+    return res.status(400).json({
+      status: 400,
+      error: 'You can\'t view this loan repayment transaction',
     });
   }
+  return res.status(404).json({
+    status: 404,
+    error: 'Loan not found.',
+  });
 };
 
 const getAllLoan = (req, res) => {
@@ -204,6 +201,27 @@ const getAllLoan = (req, res) => {
   });
 };
 
+const getALoan = (req, res) => {
+  if (req.authData.isAdmin) {
+    const loanId = Number(req.params.loanId);
+    const existingLoan = loans.find(loan => loan.loanId === loanId);
+    if (!existingLoan) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Loan not found.',
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: loans,
+    });
+  }
+  return res.status(403).json({
+    status: 403,
+    error: 'You\'re forbidden to perform this action.',
+  });
+};
+
 
 export default {
   applyForLoan,
@@ -211,4 +229,5 @@ export default {
   loanRepayment,
   getRepayment,
   getAllLoan,
+  getALoan,
 };
