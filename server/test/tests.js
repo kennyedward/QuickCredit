@@ -2,6 +2,7 @@ import { describe, it, before } from 'mocha';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../api/v1';
+import loans from '../api/v1/db/loans';
 
 chai.use(chaiHttp);
 const should = chai.should();
@@ -1018,9 +1019,45 @@ describe('User View Repayment History Test', () => {
       .end((err, res) => {
         res.body.should.have.status(404);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Loan repayment transaction NOT found for this loan.');
+        res.body.data.should.be.a('string');
+        res.body.data.should.eql('Loan repayment transaction NOT found for this loan.');
         done();
       });
+  });
+  describe('Admin should be able to View All Loan Test', () => {
+    it('should fail if a non admin credential attempts to view all loans', (done) => {
+      chai.request(server)
+        .get('/api/v1/loans/')
+        .set('authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(403);
+          res.body.should.be.a('object');
+          res.body.error.should.be.a('string').eql('You\'re forbidden to perform this action.');
+          done();
+        });
+    });
+    it('should pass if admin token is VALID and loan exists', (done) => {
+      chai.request(server)
+        .get('/api/v1/loans/')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.data.should.be.a('array');
+          done();
+        });
+    });
+    it('should return empty array if admin token is VALID and no loan exists yet', (done) => {
+      loans.splice(0, loans.length);
+      chai.request(server)
+        .get('/api/v1/loans/')
+        .set('authorization', `Bearer ${adminToken}`)
+        .end((err, res) => {
+          res.body.should.have.status(404);
+          res.body.should.be.a('object');
+          res.body.data.should.be.a('array');
+          done();
+        });
+    });
   });
 });
