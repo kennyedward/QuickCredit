@@ -1,4 +1,5 @@
 # QuickCredit
+[![Build Status](https://travis-ci.org/kennyedward/QuickCredit.svg?branch=develop)](https://travis-ci.org/kennyedward/QuickCredit)
 Quick Credit is an online lending platform that provides short term soft loans to individuals.  [Get Started](https://kennyedward.github.io/QuickCredit/UI/)
 > **Note**: This project is currently under development. It will be updated on a regular basis.
 
