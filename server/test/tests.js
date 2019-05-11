@@ -33,6 +33,16 @@ describe('API Test', () => {
         done();
       });
   });
+  it('should fail if user enters an endpoint that doesn\'t exists', (done) => {
+    chai.request(server)
+      .get('/api/v1/doesitexists')
+      .end((err, res) => {
+        should.not.exist(err);
+        res.body.should.have.status(400);
+        res.body.should.have.property('error').eql('The Enpoint requested doesn\'t exist');
+        done();
+      });
+  });
 });
 
 describe('SignUp Test', () => {
@@ -1087,7 +1097,7 @@ describe('User View Repayment History Test', () => {
         .end((err, res) => {
           res.body.should.have.status(200);
           res.body.should.be.a('object');
-          res.body.data.should.be.a('array');
+          res.body.data.should.be.a('object');
           done();
         });
     });
