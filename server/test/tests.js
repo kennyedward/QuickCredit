@@ -38,8 +38,8 @@ describe('API Test', () => {
       .get('/api/v1/doesitexists')
       .end((err, res) => {
         should.not.exist(err);
-        res.body.should.have.status(400);
-        res.body.should.have.property('error').eql('The Enpoint requested doesn\'t exist');
+        res.body.should.have.status(404);
+        res.body.should.have.property('error').eql('The Endpoint requested doesn\'t exist');
         done();
       });
   });

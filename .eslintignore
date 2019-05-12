@@ -1,1 +1,2 @@
 build/*
+./server/api/v1/swagger.json
