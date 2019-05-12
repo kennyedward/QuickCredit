@@ -1,0 +1,436 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Quick Credit is an online lending platform that provides short term soft loans to individuals. The endpoint can be accessed on heroku via: [quickcredit-heroku](https://quickcredit-heroku.herokuapp.com/api/v1/). You can find the source code on  [github](https://github.com/kennyedward/QuickCredit).",
+    "version": "1.0.0",
+    "title": "QuickCredit",
+    "contact": {
+      "email": "kennyedward99@gmail.com"
+    }
+  },
+  "host": "localhost:7000",
+  "basePath": "/api/v1/",
+  "tags": [
+    {
+      "name": "QuickCredit",
+      "description": "All Endpoints about QuickCredit"
+    },
+    {
+      "name": "user",
+      "description": "Operations for users"
+    },
+    {
+      "name": "admin",
+      "description": "Operations for admin"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "securityDefinitions": {
+    "APIKeyHeader": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "paths": {
+    "/users/auth/signup": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Creates user",
+        "operationId": "createUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Enter your signup details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          },
+          "400": {
+            "description": "Invalid input supplied"
+          },
+          "409": {
+            "description": "User with the email already exists"
+          }
+        }
+      }
+    },
+    "/users/auth/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Login a user",
+        "operationId": "loginUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Enter the Login details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "log in successful"
+          },
+          "400": {
+            "description": "Invalid input supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/loans": {
+      "post": {
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "User apply for loan",
+        "operationId": "requestLoan",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Apply for a loan",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoanApplication"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Loan application successful"
+          },
+          "400": {
+            "description": "Invalid input supplied"
+          },
+          "409": {
+            "description": "You have an existing loan"
+          }
+        }
+      },
+      "get": {
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ],
+        "summary": "Admin gets all loans",
+        "operationId": "getAllLoan",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All Loan application"
+          },
+          "401": {
+            "description": "Unathorized"
+          },
+          "404": {
+            "description": "Loans not found"
+          }
+        }
+      }
+    },
+    "/loans/:loanId/repayment": {
+      "get": {
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "User view loan repayment history",
+        "operationId": "viewLoanRepayment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "loanId",
+            "description": "Enter the Loan ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Loan repayment history found"
+          },
+          "404": {
+            "description": "Loan Repayment not found"
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ],
+        "summary": "Admin post loan repayment",
+        "operationId": "LoanRepayment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Enter the paid amount",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Repayment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Loan repayment transaction successful"
+          },
+          "400": {
+            "description": "Invalid input supplied"
+          }
+        }
+      }
+    },
+    "/loans/:loanId/": {
+      "get": {
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ],
+        "summary": "Admin gets a specific loan",
+        "operationId": "adminViewSpecificLoan",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "loanId",
+            "description": "Enter the Loan ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Loan found"
+          },
+          "400": {
+            "description": "Invalid Loan ID"
+          },
+          "404": {
+            "description": "Loan not found"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ],
+        "summary": "Admin approves or reject loan application",
+        "operationId": "approveOrRejectLoan",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "type": "string",
+            "description": "Enter loan ID",
+            "required": true
+          },
+          {
+            "name": "status",
+            "in": "body",
+            "description": "verify user status",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User verification successful"
+          }
+        }
+      }
+    },
+    "/users/:userEmail/verify": {
+      "patch": {
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ],
+        "summary": "Admin verifies user account by email",
+        "operationId": "accountVerification",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "path",
+            "type": "string",
+            "description": "Enter the user email",
+            "required": true
+          },
+          {
+            "name": "status",
+            "in": "body",
+            "description": "verify user status",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User verification successful"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "confirmPassword": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Login"
+      }
+    },
+    "LoanApplication": {
+      "type": "object",
+      "properties": {
+        "tenor": {
+          "type": "integer"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "purpose": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "LoanApplication"
+      }
+    },
+    "Repayment": {
+      "type": "object",
+      "properties": {
+        "paidAmount": {
+          "type": "number"
+        }
+      },
+      "xml": {
+        "name": "Repayment"
+      }
+    }
+  }
+}
