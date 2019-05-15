@@ -18,23 +18,26 @@
         <section class="topNavbar">
                 <div class="dashboard__container">
                         <div class="topNavbar__wrapper mb">
-                                <img src="./img/logo-w.svg" alt="QuickCredit Logo">
+                                <a href="index.html"><img src="./img/logo-w.svg" alt="QuickCredit Logo"></a>
 
                                 <div class="topNavbar__wrapper__notificationArea">
                                         <a href="#" class="topNavbar__wrapper__notificationArea__anchor">
-                                                <span class="notificationNumber notificationNumberUser">0</span>
+                                                <span class="notificationNumber">0</span>
                                                 <img src="./img/notification.svg" alt="Notification icon"></a>
-                                        <img src="./img/avatar.svg" alt="User Avatar"
-                                                class="topNavbar__wrapper__notificationArea__anchor avatar">
+                                        <div class="topNavbar__wrapper__notificationArea__anchor avatar"></div>
                                         <a class="topNavbar__wrapper__notificationArea__anchor">Kenny E.</a>
                                         <a href="#" class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
                                 </div>
                         </div>
+                        <div class="topNavbar__wrapper mb flex-center">
+                                <div class="topLoanBtn-wrapper">
+                                        <button type="button" disabled="disabled"
+                                                class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--whiteDisabled">Apply
+                                                for loan</button>
+                                </div>
 
-                        <div class="topLoanBtn-wrapper">
-                                <button type="button" disabled="disabled"
-                                        class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--whiteDisabled">Apply
-                                        for loan</button>
+                                <a href="#" class="yellow"> Your loan will be approved in 20 mins or less!</a>
+
                         </div>
 
                         <div class="cardHolder">
@@ -42,7 +45,7 @@
                                         <div class="largeCard__leftSection">
                                                 <span class="largeCard__leftSection__ongoingLoans uppercase">Ongoing
                                                         loan</span>
-                                                <span class="largeCard__leftSection__amount">N0.00</span>
+                                                <span class="largeCard__leftSection__amount">₦0.00</span>
                                                 <span class="largeCard__leftSection__daysLeft">0 days left</span>
                                         </div>
 
@@ -51,10 +54,10 @@
                                                         <span class="largeCard__rightSection__upper__title uppercase">Verification
                                                                 status</span>
                                                         <span
-                                                                class="largeCard__rightSection__upper__verificationStatus uppercase">Pending</span>
-                                                        <img src="./img/unverified-icon.svg"
-                                                                alt="Unverifies status icon">
-                                                        <span class="statusText">Awaiting QuickCredit approval.</span>
+                                                                class="largeCard__rightSection__upper__verificationStatus uppercase green">verified</span>
+                                                        <img src="./img/verified-icon.svg" alt="verified status icon">
+                                                        <span class="statusText green">You
+                                                                are verified.</span>
                                                 </div>
 
                                                 <div class="largeCard__rightSection__lower">
@@ -62,39 +65,37 @@
                                                                 Eligibility</span>
                                                         <span class="minorBtns minorBtns--orange uppercase">Not
                                                                 Eligible</span>
-                                                        <span class="statusText">Not eligible for a loan at this
-                                                                time.</span>
+                                                        <span class="statusText">You have a pending loan request.</span>
                                                 </div>
 
                                         </div>
 
                                 </div>
-                                <div class="smallCard">
-                                        <p class="smallCard__paragraph mb-1rem loanStatusText">
-                                                After requesting for a loan, <br> your <span class="emphasis">loan
-                                                        status</span> will appear here.
-                                        </p>
-                                        <buton
-                                                class="minorBtns minorBtns--orange darkGrey loanStatusTextOnBtn minorBtn--padding">
-                                                No transaction yet</button>
-                                </div>
                         </div>
-                        <p class="repaymentText">Update your profile for verification.
+                        <p class="repaymentText">Your loan repayment history will appear here.
                         </p>
 
                         <div class="lowerCardHolder boxShadow">
                                 <div class="contentWrapper">
-                                        <span class="darkGreyText mb-1rem">Your request for verification
-                                                was sent successfully</span>
+                                        <span class="contentWrapper__noTransaction mb-1rem">No
+                                                transaction recorded yet</span>
 
-                                        <div class="checkIcon">
-                                                <img src="./img/check.svg" alt="Update Request Sent Icon">
+                                        <div class="form__inputWrapper">
+                                                <input type="submit" value="Apply for loan"
+                                                        class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--purpleDisabled"
+                                                        disabled>
                                         </div>
                                 </div>
                         </div>
                 </div>
         </section>
-
+        <script>
+                const redirect =
+                        setTimeout(() => {
+                                window.location = 'user-loan-request-success.html';
+                        }, 10000)
+                clearTimeout('redirect')
+        </script>
 </body>
 
 </html>

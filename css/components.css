@@ -37,7 +37,7 @@
     padding-left: 1rem;
 }
 
-.form__input[type='text'] {
+.form__input[type='text'], .form__input[type='number'] {
     font-family: 'Rubik', sans-serif;
 }
 

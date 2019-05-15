@@ -16,28 +16,29 @@
 
 <body>
         <section class="topNavbar">
-
                 <div class="dashboard__container">
                         <div class="topNavbar__wrapper mb">
-                                <img src="./img/logo-w.svg" alt="QuickCredit Logo">
+                                <a href="index.html"><img src="./img/logo-w.svg" alt="QuickCredit Logo"></a>
 
                                 <div class="topNavbar__wrapper__notificationArea">
-                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">
-                                                <span class="notificationNumber notificationNumberUser">0</span>
+                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor" id="notify">
+                                                <span class="notificationNumber pink">1</span>
                                                 <img src="./img/notification.svg" alt="Notification icon"></a>
-                                        <img src="./img/avatar.svg" alt="User Avatar"
-                                                class="topNavbar__wrapper__notificationArea__anchor avatar">
+                                        <div class="topNavbar__wrapper__notificationArea__anchor avatar"></div>
                                         <a class="topNavbar__wrapper__notificationArea__anchor">Kenny E.</a>
-                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
+                                        <a href="index.html"
+                                                class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
+                                </div>
+                        </div>
+                        <div class="topNavbar__wrapper mb flex-center">
+                                <div class="topLoanBtn-wrapper">
+                                        <a href="user-request-loan-page.html#loanForm"><button type="button" disabled
+                                                        class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--whiteDisabled">Apply
+                                                        for loan</button></a>
                                 </div>
 
-                        </div>
+                                <a href="#" class="white alertMsg greenMobile"> You made a repayment!</a>
 
-
-                        <div class="topLoanBtn-wrapper">
-                                <button type="button" disabled="disabled" id="cta-upper"
-                                        class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--whiteDisabled">Apply
-                                        for loan</button>
                         </div>
 
                         <div class="cardHolder">
@@ -49,7 +50,7 @@
                                                         class="largeCard__leftSection__amount amountSize">₦50,000.00</span>
                                                 <span class="largeCard__leftSection__daysLeft">90 days left</span>
 
-                                                <span class="largeCard__leftSection__amount amountDue">₦36,875.00</span>
+                                                <span class="largeCard__leftSection__amount amountDue">₦4,062.53</span>
                                                 <span class="largeCard__leftSection__daysLeft">Amount Due</span>
                                         </div>
 
@@ -58,10 +59,10 @@
                                                         <span class="largeCard__rightSection__upper__title uppercase">Verification
                                                                 status</span>
                                                         <span
-                                                                class="largeCard__rightSection__upper__verificationStatus verifiedText uppercase">Verified</span>
-                                                        <img src="./img/verified-icon.svg"
-                                                                alt="user verified status icon">
-                                                        <span class="statusText">Your are verified</span>
+                                                                class="largeCard__rightSection__upper__verificationStatus uppercase green">verified</span>
+                                                        <img src="./img/verified-icon.svg" alt="verified status icon">
+                                                        <span class="statusText green">You
+                                                                are verified.</span>
                                                 </div>
 
                                                 <div class="largeCard__rightSection__lower">
@@ -69,33 +70,21 @@
                                                                 Eligibility</span>
                                                         <span class="minorBtns minorBtns--orange uppercase">
                                                                 Not Eligible</span>
-                                                        <span class="statusText lowertText">You have an ongoing
-                                                                loan</span>
+                                                        <span class="statusText">You have an ongoing loan.</span>
                                                 </div>
-
                                         </div>
 
                                 </div>
-                                <div class="smallCard">
-                                        <p class="smallCard__paragraph mb-1rem loanStatusText">
-                                                <span class="emphasis">N50,000.00</span> requested
-                                                for business. <br> Due in <span class="emphasis">8 months</span>
-                                        </p>
-                                        <buton
-                                                class="minorBtns minorBtns--whiteTextGreenBG loanStatusTextOnBtn minorBtn--padding">
-                                                Approved</button>
-                                </div>
                         </div>
-                        <p class="repaymentText">Your loan repayment history.
+                        <p class="repaymentText">Your loan repayment history will appear here.
                         </p>
 
                         <div class="boxShadow whiteSPace">
                                 <div class="historyWrapper whiteSpace">
                                         <span>1.</span>
                                         <div class="loanID">
-                                                <strong class="loanID__code">QC-552625TF</strong>
-                                                <p class="loanID__purpose">Received <strong
-                                                                class="emphasis">N50,000.00</strong> loan for business
+                                                <strong class="loanID__code">55262574</strong>
+                                                <p class="loanID__purpose">Loan ID
                                                 </p>
                                                 <span class="minorBtns minorBtns--purple uppercase">
                                                         Current</span>
@@ -105,55 +94,48 @@
                                                 <div class="paymentDateWrapper">
                                                         <div class="paidIndicator"></div>
                                                         <span class="paymentDateWrapper__text">Paid <span
-                                                                        class="emphasis">N6562.50</span> on
+                                                                        class="emphasis">₦6562.50</span> on
                                                                 31-05-2019</span>
                                                 </div>
 
                                                 <div class="paymentDateWrapper">
                                                         <div class="paidIndicator"></div>
                                                         <span class="paymentDateWrapper__text">Paid <span
-                                                                        class="emphasis">N6562.50</span> on
+                                                                        class="emphasis">₦6562.50</span> on
                                                                 31-06-2019</span>
                                                 </div>
 
                                                 <div class="paymentDateWrapper">
-                                                        <div class="unPaidIndicator"></div>
+                                                        <div class="paidIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis">N6562.50 due</span> on
+                                                                        class="emphasis">₦6562.50 due</span> on
                                                                 31-07-2019</span>
                                                 </div>
 
                                                 <div class="paymentDateWrapper">
-                                                        <div class="unPaidIndicator"></div>
+                                                        <div class="paidIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis">N6562.50 due</span> on
+                                                                        class="emphasis">₦6562.50 due</span> on
                                                                 31-08-2019</span>
                                                 </div>
                                                 <div class="paymentDateWrapper">
-                                                        <div class="unPaidIndicator"></div>
+                                                        <div class="paidIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis">N6562.50 due</span> on
+                                                                        class="emphasis">₦6562.50 due</span> on
                                                                 31-09-2019</span>
                                                 </div>
 
                                                 <div class="paymentDateWrapper">
-                                                        <div class="unPaidIndicator"></div>
+                                                        <div class="paidIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis">N6562.50 due</span> on
+                                                                        class="emphasis">₦6562.50 due</span> on
                                                                 31-10-2019</span>
                                                 </div>
                                                 <div class="paymentDateWrapper">
-                                                        <div class="unPaidIndicator"></div>
+                                                        <div class="paidIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis">N6562.50 due</span> on
+                                                                        class="emphasis">₦6562.50 due</span> on
                                                                 31-11-2019</span>
-                                                </div>
-
-                                                <div class="paymentDateWrapper">
-                                                        <div class="unPaidIndicator"></div>
-                                                        <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis">N6562.50 due</span> on
-                                                                31-12-2019</span>
                                                 </div>
                                         </div>
 
@@ -162,10 +144,8 @@
                                 <div class="historyWrapper whiteSpace">
                                         <span class="grey">2.</span>
                                         <div class="loanID">
-                                                <strong class="loanID__code grey">QC-837629JK</strong>
-                                                <p class="loanID__purpose grey">Received <strong
-                                                                class="emphasis grey">N120,000.00</strong> loan for
-                                                        education
+                                                <strong class="loanID__code grey">83762935</strong>
+                                                <p class="loanID__purpose grey">Loan ID
                                                 </p>
                                                 <span class="minorBtns minorBtns--grey uppercase grey">
                                                         Paid</span>
@@ -175,54 +155,54 @@
                                                 <div class="paymentDateWrapper">
                                                         <div class="greyIndicator"></div>
                                                         <span class="paymentDateWrapper__text">Paid <span
-                                                                        class="emphasis grey">N6562.50</span> on
+                                                                        class="emphasis grey">₦6562.50</span> on
                                                                 31-05-2019</span>
                                                 </div>
 
                                                 <div class="paymentDateWrapper">
                                                         <div class="greyIndicator"></div>
                                                         <span class="paymentDateWrapper__text">Paid <span
-                                                                        class="emphasis grey">N6562.50</span> on
+                                                                        class="emphasis grey">₦6562.50</span> on
                                                                 31-06-2019</span>
                                                 </div>
 
                                                 <div class="paymentDateWrapper">
                                                         <div class="greyIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis grey">N6562.50 due</span> on
+                                                                        class="emphasis grey">₦6562.50 due</span> on
                                                                 31-07-2019</span>
                                                 </div>
 
                                                 <div class="paymentDateWrapper">
                                                         <div class="greyIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis grey">N6562.50 due</span> on
+                                                                        class="emphasis grey">₦6562.50 due</span> on
                                                                 31-08-2019</span>
                                                 </div>
                                                 <div class="paymentDateWrapper">
                                                         <div class="greyIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis grey">N6562.50 due</span> on
+                                                                        class="emphasis grey">₦6562.50 due</span> on
                                                                 31-09-2019</span>
                                                 </div>
 
                                                 <div class="paymentDateWrapper">
                                                         <div class="greyIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis grey">N6562.50 due</span> on
+                                                                        class="emphasis grey">₦6562.50 due</span> on
                                                                 31-10-2019</span>
                                                 </div>
                                                 <div class="paymentDateWrapper">
                                                         <div class="greyIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis grey">N6562.50 due</span> on
+                                                                        class="emphasis grey">₦6562.50 due</span> on
                                                                 31-11-2019</span>
                                                 </div>
 
                                                 <div class="paymentDateWrapper">
                                                         <div class="greyIndicator"></div>
                                                         <span class="paymentDateWrapper__text"><span
-                                                                        class="emphasis grey">N6562.50 due</span> on
+                                                                        class="emphasis grey">₦6562.50 due</span> on
                                                                 31-12-2019</span>
                                                 </div>
                                         </div>
@@ -232,8 +212,8 @@
                         </div>
                 </div>
         </section>
-
-        <script src="./js/notificationScripts.js"></script>
+        <script>clearTimeout();</script>
+        <script src="./js/notification.js"></script>
 </body>
 
 </html>
