@@ -225,6 +225,25 @@
     top: -3px;
 }
 
+.alignCenter {
+        align-items: center;
+}
+
+.confirmationBtn {
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    color: #FFF;
+}
+
+.greenConfirmBtn {
+    background: #03CB4E;
+    margin-right: 1rem;
+}
+
+.yellowConfirmBtn {
+    background: rgb(245, 131, 2);
+}
+
 @media (max-width: 710px) {
     .greenMobile {
         color: #03CB4E;

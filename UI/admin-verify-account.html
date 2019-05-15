@@ -31,16 +31,16 @@
 
                                 <div id="sideMenu" class="sideMenu">
                                         <a href="#" id="closeBtn" class="closeBtn">&times;</a>
-                                        <a href="#" class="sideBarLinks">
+                                        <a href="admin-verify-account.html" class="sideBarLinks">
                                                 All Verification
                                         </a>
-                                        <a href="#" class="sideBarLinks">
+                                        <a href="admin-approves-rejects-loans.html" class="sideBarLinks">
                                                 Loan Request
                                         </a>
-                                        <a href="#" class="sideBarLinks">
+                                        <a href="admin-view-all-loan-applications.html" class="sideBarLinks">
                                                 All Loan Application
                                         </a>
-                                        <a href="#" class="sideBarLinks">
+                                        <a href="admin-post-loan-repayment-transaction.html" class="sideBarLinks">
                                                 Loan Repayment
                                         </a>
                                 </div>
@@ -59,14 +59,14 @@
 
 
                         <div class="topLoanBtn-wrapper adminTopNavBar">
-                                <a href="" class="admin-hyperlinks">All Verification</a>
-                                <a href="" class="admin-hyperlinks">Loan Request</a>
-                                <a href="" class="admin-hyperlinks">All Loan Application</a>
-                                <a href="" class="admin-hyperlinks">Loan Repayment</a>
+                                <a href="admin-verify-account.html" class="admin-hyperlinks">All Verification</a>
+                                <a href="admin-approves-rejects-loans.html" class="admin-hyperlinks">Loan Request</a>
+                                <a href="admin-view-all-loan-applications.html" class="admin-hyperlinks">All Loan Application</a>
+                                <a href="admin-post-loan-repayment-transaction.html" class="admin-hyperlinks">Loan Repayment</a>
                         </div>
 
                         <div class="verificationListWrapper">
-                                <p class="repaymentText">Verification List
+                                <p class="repaymentText">Users Requesting Verification
 
                                 </p>
 
@@ -96,7 +96,7 @@
                                                                         class="form__inputWrapper__checkbox radioCheck"
                                                                         id="verify-one" required>
                                                                 <label for="verify-one"
-                                                                        class="radioCheck__label greenBold uppercase">
+                                                                        class="radioCheck__label greenBold uppercase verifyRadio">
                                                                         Verify
                                                                 </label>
 
@@ -104,7 +104,7 @@
                                                                         class="form__inputWrapper__checkbox radioCheck2"
                                                                         id="unverified-one" required checked>
                                                                 <label for="unverified-one"
-                                                                        class="radioCheck2__label yellowBold uppercase">
+                                                                        class="radioCheck2__label yellowBold uppercase unVerifyRadio">
                                                                         Unverified
                                                                 </label>
                                                         </div>
@@ -125,7 +125,7 @@
                                                                         class="form__inputWrapper__checkbox radioCheck"
                                                                         id="verify-two" required>
                                                                 <label for="verify-two"
-                                                                        class="radioCheck__label greenBold uppercase">
+                                                                        class="radioCheck__label greenBold uppercase verifyRadio">
                                                                         Verify
                                                                 </label>
 
@@ -133,7 +133,7 @@
                                                                         class="form__inputWrapper__checkbox radioCheck2"
                                                                         id="unVerify-two" required checked>
                                                                 <label for="unVerify-two"
-                                                                        class="radioCheck2__label yellowBold uppercase">
+                                                                        class="radioCheck2__label yellowBold uppercase unVerifyRadio">
                                                                         Unverified
                                                                 </label>
                                                         </div>
@@ -153,7 +153,7 @@
                                                                         class="form__inputWrapper__checkbox radioCheck"
                                                                         id="verify-three" required>
                                                                 <label for="verify-three"
-                                                                        class="radioCheck__label greenBold uppercase">
+                                                                        class="radioCheck__label greenBold uppercase verifyRadio">
                                                                         Verify
                                                                 </label>
 
@@ -161,7 +161,7 @@
                                                                         class="form__inputWrapper__checkbox radioCheck2"
                                                                         id="unVerify-three" required checked>
                                                                 <label for="unVerify-three"
-                                                                        class="radioCheck2__label yellowBold uppercase">
+                                                                        class="radioCheck2__label yellowBold uppercase unVerifyRadio">
                                                                         Unverified
                                                                 </label>
                                                         </div>
@@ -181,7 +181,7 @@
                                                                         class="form__inputWrapper__checkbox radioCheck"
                                                                         id="verify-four" required>
                                                                 <label for="verify-four"
-                                                                        class="radioCheck__label greenBold uppercase">
+                                                                        class="radioCheck__label greenBold uppercase verifyRadio">
                                                                         Verify
                                                                 </label>
 
@@ -189,7 +189,7 @@
                                                                         class="form__inputWrapper__checkbox radioCheck2"
                                                                         id="unVerify-four" required checked>
                                                                 <label for="unVerify-four"
-                                                                        class="radioCheck2__label yellowBold uppercase">
+                                                                        class="radioCheck2__label yellowBold uppercase unVerifyRadio">
                                                                         Unverified
                                                                 </label>
                                                         </div>
@@ -198,9 +198,29 @@
                                 </div>
                         </div>
                 </div>
+
+
+                <div class="modal" id="myModal">
+                        <div class="modalContent">
+                                <span id="modalClose" class="modalClose">&times;</span>
+                                <div class="modalWrapper alignCenter">
+
+                                        <div class="mb-1rem mt-1rem">
+                                                <p class="mb-1rem"> <strong class="emphasis">Are you sure you want to verify user?</p>
+               
+                                        </div>
+
+                                        <div>
+                                                <a href="" class="confirmationBtn greenConfirmBtn">Yes</a>
+                                                <a href="" class="confirmationBtn yellowConfirmBtn">No</a>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
         </section>
 
         <script src="./js/sideMenuScripts.js"></script>
+        <script src="./js/verifyModalScripts.js"></script>
 </body>
 
 </html>

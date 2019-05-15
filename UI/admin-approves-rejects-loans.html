@@ -31,16 +31,16 @@
 
                                 <div id="sideMenu" class="sideMenu">
                                         <a href="#" id="closeBtn" class="closeBtn">&times;</a>
-                                        <a href="#" class="sideBarLinks">
+                                        <a href="admin-verify-account.html" class="sideBarLinks">
                                                 All Verification
                                         </a>
-                                        <a href="#" class="sideBarLinks">
+                                        <a href="admin-approves-rejects-loans.html" class="sideBarLinks">
                                                 Loan Request
                                         </a>
-                                        <a href="#" class="sideBarLinks">
+                                        <a href="admin-view-all-loan-applications.html" class="sideBarLinks">
                                                 All Loan Application
                                         </a>
-                                        <a href="#" class="sideBarLinks">
+                                        <a href="admin-post-loan-repayment-transaction.html" class="sideBarLinks">
                                                 Loan Repayment
                                         </a>
                                 </div>
@@ -58,10 +58,10 @@
 
 
                         <div class="topLoanBtn-wrapper adminTopNavBar">
-                                <a href="" class="admin-hyperlinks">All Verification</a>
-                                <a href="" class="admin-hyperlinks">Loan Request</a>
-                                <a href="" class="admin-hyperlinks">All Loan Application</a>
-                                <a href="" class="admin-hyperlinks">Loan Repayment</a>
+                                <a href="admin-verify-account.html" class="admin-hyperlinks">All Verification</a>
+                                <a href="admin-approves-rejects-loans.html" class="admin-hyperlinks">Loan Request</a>
+                                <a href="admin-view-all-loan-applications.html" class="admin-hyperlinks">All Loan Application</a>
+                                <a href="admin-post-loan-repayment-transaction.html" class="admin-hyperlinks">Loan Repayment</a>
                         </div>
 
                         <div class="verificationListWrapper">
@@ -83,7 +83,7 @@
                                 <div class="historyWrapper whiteSpace">
                                         <span class="numbering">1.</span>
                                         <div class="loanID">
-                                                <strong class="loanID__code">Loan ID: QC-552625TF</strong>
+                                                <strong class="loanID__code">Loan ID: 55262598</strong>
                                                 <p class="loanID__purpose"><strong class="emphasis">Amount: </strong>
                                                         N50,000.00
                                                 </p>
@@ -108,7 +108,7 @@
                                                                 class="form__inputWrapper__checkbox radioCheck"
                                                                 id="approve-one" required>
                                                         <label for="approve-one"
-                                                                class="radioCheck__label greenBold lineHeightInitial uppercase">
+                                                                class="radioCheck__label greenBold lineHeightInitial uppercase approveCheck">
                                                                 Approve
                                                         </label>
                                                 </div>
@@ -164,7 +164,7 @@
                                                                 class="form__inputWrapper__checkbox radioCheck"
                                                                 id="approve-two" required>
                                                         <label for="approve-two"
-                                                                class="radioCheck__label greenBold lineHeightInitial uppercase">
+                                                                class="radioCheck__label greenBold lineHeightInitial uppercase approveCheck">
                                                                 Approve
                                                         </label>
                                                 </div>
@@ -194,9 +194,27 @@
 
                         </div>
                 </div>
+                <div class="modal" id="myModal">
+                        <div class="modalContent">
+                                <span id="modalClose" class="modalClose">&times;</span>
+                                <div class="modalWrapper alignCenter">
+
+                                        <div class="mb-1rem mt-1rem">
+                                                <p class="mb-1rem"> <strong class="emphasis">Are you sure you want to approve this loan?</p>
+               
+                                        </div>
+
+                                        <div>
+                                                <a href="" class="confirmationBtn greenConfirmBtn">Yes</a>
+                                                <a href="" class="confirmationBtn yellowConfirmBtn">No</a>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
         </section>
 
         <script src="./js/sideMenuScripts.js"></script>
+        <script src="./js/approveLoanScripts.js"></script>
 </body>
 
 </html>
