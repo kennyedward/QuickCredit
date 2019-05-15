@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import ghPages from 'gh-pages';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDoc from './swagger.json';
 
@@ -20,6 +21,7 @@ app.use('/api/v1/users', usersRoute);
 app.use('/api/v1/loans', loanRoute);
 
 app.use('/api/v1/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
+ghPages.publish('UI', () => {});
 
 app.all('/api/v1/*', (req, res) => {
   res.status(404).json({
