@@ -28,7 +28,6 @@ describe('API Test', () => {
       .end((err, res) => {
         should.not.exist(err);
         res.body.should.have.status(200);
-        res.body.should.have.property('message');
         res.body.should.have.property('message').eql('You\'re welcome to index API Endpoint');
         done();
       });
@@ -51,14 +50,13 @@ describe('SignUp Test', () => {
       email: '',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Email is required');
+        res.body.error.should.be.a('string').eql('Email is required');
         done();
       });
   });
@@ -67,14 +65,13 @@ describe('SignUp Test', () => {
       email: 'taewoleatgmail.com',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Invalid email: example - user@domain.com');
+        res.body.error.should.be.a('string').eql('Invalid email: example - user@domain.com');
         done();
       });
   });
@@ -84,14 +81,13 @@ describe('SignUp Test', () => {
       firstName: '',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('First name is required');
+        res.body.error.should.be.a('string').eql('First name is required');
         done();
       });
   });
@@ -101,14 +97,13 @@ describe('SignUp Test', () => {
       firstName: 1234,
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Invalid first name');
+        res.body.error.should.be.a('string').eql('Invalid first name');
         done();
       });
   });
@@ -118,14 +113,13 @@ describe('SignUp Test', () => {
       firstName: '   ',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('First name is empty');
+        res.body.error.should.be.a('string').eql('First name is empty');
         done();
       });
   });
@@ -135,14 +129,13 @@ describe('SignUp Test', () => {
       firstName: 'tae123',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('First name can only contain alphabets.');
+        res.body.error.should.be.a('string').eql('First name can only contain alphabets.');
         done();
       });
   });
@@ -152,14 +145,13 @@ describe('SignUp Test', () => {
       firstName: 'k',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('First name length should be between 3 and 20');
+        res.body.error.should.be.a('string').eql('First name length should be between 3 and 20');
         done();
       });
   });
@@ -170,14 +162,13 @@ describe('SignUp Test', () => {
       lastName: '',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Last name is required');
+        res.body.error.should.be.a('string').eql('Last name is required');
         done();
       });
   });
@@ -188,14 +179,13 @@ describe('SignUp Test', () => {
       lastName: 1234,
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Invalid last name');
+        res.body.error.should.be.a('string').eql('Invalid last name');
         done();
       });
   });
@@ -206,14 +196,13 @@ describe('SignUp Test', () => {
       lastName: '    ',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Last name is empty');
+        res.body.error.should.be.a('string').eql('Last name is empty');
         done();
       });
   });
@@ -224,14 +213,13 @@ describe('SignUp Test', () => {
       lastName: 'charles123',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Last name can only contain alphabets.');
+        res.body.error.should.be.a('string').eql('Last name can only contain alphabets.');
         done();
       });
   });
@@ -242,14 +230,13 @@ describe('SignUp Test', () => {
       lastName: 'c',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Last name length should be between 3 and 20');
+        res.body.error.should.be.a('string').eql('Last name length should be between 3 and 20');
         done();
       });
   });
@@ -261,34 +248,13 @@ describe('SignUp Test', () => {
       password: '',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('password is required');
-        done();
-      });
-  });
-  it('should fail if password does not match', (done) => {
-    const user = {
-      email: 'taewole@gmail.com',
-      firstName: 'taiwo',
-      lastName: 'charles',
-      password: 'archt',
-      confirmPassword: 'arch',
-    };
-    chai.request(server)
-      .post('/api/v1/users/auth/signup')
-      .send(user)
-      .end((err, res) => {
-        res.body.should.have.status(400);
-        res.body.should.be.a('object');
-        res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('password does not match');
+        res.body.error.should.be.a('string').eql('password is required');
         done();
       });
   });
@@ -298,18 +264,16 @@ describe('SignUp Test', () => {
       firstName: 'taiwo',
       lastName: 'charles',
       password: 'archt',
-      confirmPassword: 'archt',
       address: '',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Address is required');
+        res.body.error.should.be.a('string').eql('Address is required');
         done();
       });
   });
@@ -319,18 +283,16 @@ describe('SignUp Test', () => {
       firstName: 'taiwo',
       lastName: 'charles',
       password: 'archt',
-      confirmPassword: 'archt',
       address: 123,
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Invalid address');
+        res.body.error.should.be.a('string').eql('Invalid address');
         done();
       });
   });
@@ -340,18 +302,16 @@ describe('SignUp Test', () => {
       firstName: 'taiwo',
       lastName: 'charles',
       password: 'archt',
-      confirmPassword: 'archt',
       address: '   ',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Address is empty');
+        res.body.error.should.be.a('string').eql('Address is empty');
         done();
       });
   });
@@ -361,18 +321,35 @@ describe('SignUp Test', () => {
       firstName: 'taiwo',
       lastName: 'charles',
       password: 'archt',
-      confirmPassword: 'archt',
       address: '@No 1, Planet #Earth.',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Address can only contain alphabets, numbers, comma and hyphen.');
+        res.body.error.should.be.a('string').eql('Address can only contain alphabets, numbers, comma and hyphen.');
+        done();
+      });
+  });
+  it('should fail if address field if address length is less than 100', (done) => {
+    const user = {
+      email: 'taewole@gmail.com',
+      firstName: 'taiwo',
+      lastName: 'charles',
+      password: 'archt',
+      address: 'No 1, Planet Earth.',
+    };
+    chai.request(server)
+      .post('/api/v1/auth/signup')
+      .send(user)
+      .end((err, res) => {
+        res.body.should.have.status(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        res.body.error.should.be.a('string').eql('Address must be greater than 20 characters.');
         done();
       });
   });
@@ -382,11 +359,10 @@ describe('SignUp Test', () => {
       firstName: 'taiwo',
       lastName: 'charles',
       password: 'archt',
-      confirmPassword: 'archt',
-      address: 'No 1, Planet Earth.',
+      address: 'No 1, Planet Earth. Thanos Plaza, Street of Gold',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(201);
@@ -409,18 +385,16 @@ describe('SignUp Test', () => {
       firstName: 'taiwo',
       lastName: 'charles',
       password: 'archt',
-      confirmPassword: 'archt',
-      address: 'No 1, Planet Earth.',
+      address: 'No 1, Planet Earth. Thanos Plaza, Street of Gold',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(409);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('User already exists');
+        res.body.error.should.be.a('string').eql('User already exists');
         done();
       });
   });
@@ -432,14 +406,13 @@ describe('Login Test', () => {
       email: '',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/login')
+      .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Email is required');
+        res.body.error.should.be.a('string').eql('Email is required');
         done();
       });
   });
@@ -448,14 +421,13 @@ describe('Login Test', () => {
       email: 'taewoleatgmail.com',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/login')
+      .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Invalid email: example - user@domain.com');
+        res.body.error.should.be.a('string').eql('Invalid email: example - user@domain.com');
         done();
       });
   });
@@ -465,14 +437,13 @@ describe('Login Test', () => {
       password: '',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/login')
+      .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('password is required');
+        res.body.error.should.be.a('string').eql('password is required');
         done();
       });
   });
@@ -482,14 +453,13 @@ describe('Login Test', () => {
       password: 'unregistered',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/login')
+      .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(404);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('User not found');
+        res.body.error.should.be.a('string').eql('User not found');
         done();
       });
   });
@@ -499,7 +469,7 @@ describe('Login Test', () => {
       password: 'archt',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/login')
+      .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(200);
@@ -525,7 +495,7 @@ describe('User account before verification attempts to apply for loan', () => {
       password: 'archt',
     };
     chai.request(server)
-      .post('/api/v1/users/auth/login')
+      .post('/api/v1/auth/login')
       .send(userLoggin)
       .end((error, response) => {
         userToken = response.body.data.token;
@@ -543,8 +513,7 @@ describe('User account before verification attempts to apply for loan', () => {
             res.body.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.have.property('error');
-            res.body.error.should.be.a('string');
-            res.body.error.should.eql('Your account is yet to be verified. Please hold on for verification.');
+            res.body.error.should.be.a('string').eql('Your account is yet to be verified. Please hold on for verification.');
             done();
           });
       });
@@ -554,7 +523,7 @@ describe('User account before verification attempts to apply for loan', () => {
 describe('Admin Test', () => {
   before((done) => {
     chai.request(server)
-      .post('/api/v1/users/auth/login')
+      .post('/api/v1/auth/login')
       .send(adminCredentials)
       .end((error, response) => {
         adminToken = response.body.data.token;
@@ -568,8 +537,7 @@ describe('Admin Test', () => {
       .send({ status: '' })
       .end((error, response) => {
         response.body.should.have.status(400);
-        response.body.should.have.property('error');
-        response.body.error.should.eql('Status is required');
+        response.body.should.have.property('error').eql('Status is required');
       });
     done();
   });
@@ -581,7 +549,7 @@ describe('Admin Test', () => {
       .end((error, response) => {
         response.body.should.have.status(200);
         response.body.should.have.property('data');
-        response.body.data.status.should.eql('verified');
+        response.body.data.status.should.be.a('string').eql('verified');
       });
     done();
   });
@@ -592,8 +560,7 @@ describe('Admin Test', () => {
       .send({ status: 'verified' })
       .end((error, response) => {
         response.body.should.have.status(404);
-        response.body.should.have.property('error');
-        response.body.error.should.eql('User with the email address is not found.');
+        response.body.should.have.property('error').eql('User with the email address is not found.');
       });
     done();
   });
@@ -604,8 +571,7 @@ describe('Admin Test', () => {
       .send({ status: 'verified' })
       .end((error, response) => {
         response.body.should.have.status(403);
-        response.body.should.have.property('error');
-        response.body.error.should.eql('Invalid token, You need to login or signup');
+        response.body.should.have.property('error').eql('Invalid token, You need to login or signup');
       });
     done();
   });
@@ -616,8 +582,7 @@ describe('Admin Test', () => {
       .send({ status: 'verified' })
       .end((error, response) => {
         response.body.should.have.status(403);
-        response.body.should.have.property('error');
-        response.body.error.should.eql('You\'re forbidden to perform this action.');
+        response.body.should.have.property('error').eql('You\'re forbidden to perform this action.');
       });
     done();
   });
@@ -627,8 +592,7 @@ describe('Admin Test', () => {
       .send({ status: 'verified' })
       .end((error, response) => {
         response.body.should.have.status(401);
-        response.body.should.have.property('error');
-        response.body.error.should.eql('Auth failed');
+        response.body.should.have.property('error').eql('Auth failed');
       });
     done();
   });
@@ -649,8 +613,7 @@ describe('Loan Test', () => {
         res.body.should.have.status(401);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Auth failed');
+        res.body.error.should.be.a('string').eql('Auth failed');
         done();
       });
   });
@@ -663,15 +626,14 @@ describe('Loan Test', () => {
         res.body.should.have.status(403);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Invalid token, You need to login or signup');
+        res.body.error.should.be.a('string').eql('Invalid token, You need to login or signup');
         done();
       });
   });
   describe('Logged in user create loan test', () => {
     before((done) => {
       chai.request(server)
-        .post('/api/v1/users/auth/login')
+        .post('/api/v1/auth/login')
         .send(userCredentials)
         .end((error, response) => {
           userToken = response.body.data.token;
@@ -700,8 +662,7 @@ describe('Loan Test', () => {
         .end((err, res) => {
           res.body.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string');
-          res.body.error.should.eql('Loan tenor is required');
+          res.body.error.should.be.a('string').eql('Loan tenor is required');
           done();
         });
     });
@@ -714,8 +675,7 @@ describe('Loan Test', () => {
         .end((err, res) => {
           res.body.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string');
-          res.body.error.should.eql('Loan tenor must be an integer');
+          res.body.error.should.be.a('string').eql('Loan tenor must be an integer');
           done();
         });
     });
@@ -728,8 +688,7 @@ describe('Loan Test', () => {
         .end((err, res) => {
           res.body.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string');
-          res.body.error.should.eql('Loan tenor must be between 1 and 12');
+          res.body.error.should.be.a('string').eql('Loan tenor must be between 1 and 12');
           done();
         });
     });
@@ -743,8 +702,7 @@ describe('Loan Test', () => {
         .end((err, res) => {
           res.body.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string');
-          res.body.error.should.eql('Loan amount is required');
+          res.body.error.should.be.a('string').eql('Loan amount is required');
           done();
         });
     });
@@ -758,8 +716,7 @@ describe('Loan Test', () => {
         .end((err, res) => {
           res.body.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string');
-          res.body.error.should.eql('Loan purpose is required');
+          res.body.error.should.be.a('string').eql('Loan purpose is required');
           done();
         });
     });
@@ -772,8 +729,7 @@ describe('Loan Test', () => {
         .end((err, res) => {
           res.body.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string');
-          res.body.error.should.eql('Loan purpose can only contain alphabets');
+          res.body.error.should.be.a('string').eql('Loan purpose can only contain alphabets');
           done();
         });
     });
@@ -783,7 +739,7 @@ describe('Loan Test', () => {
 describe('Admin Approves Loan Test', () => {
   before((done) => {
     chai.request(server)
-      .post('/api/v1/users/auth/login')
+      .post('/api/v1/auth/login')
       .send(adminCredentials)
       .end((error, response) => {
         adminToken = response.body.data.token;
@@ -803,8 +759,7 @@ describe('Admin Approves Loan Test', () => {
       .end((error, response) => {
         response.body.should.have.status(404);
         response.body.should.have.property('error');
-        response.body.error.should.be.a('string');
-        response.body.error.should.eql('Loan not found.');
+        response.body.error.should.be.a('string').eql('Loan not found.');
       });
     done();
   });
@@ -858,8 +813,7 @@ describe('Admin Create Loan Repayment Test', () => {
         res.body.should.have.status(401);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Auth failed');
+        res.body.error.should.be.a('string').eql('Auth failed');
         done();
       });
   });
@@ -872,8 +826,7 @@ describe('Admin Create Loan Repayment Test', () => {
         res.body.should.have.status(403);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Invalid token, You need to login or signup');
+        res.body.error.should.be.a('string').eql('Invalid token, You need to login or signup');
         done();
       });
   });
@@ -884,8 +837,7 @@ describe('Admin Create Loan Repayment Test', () => {
       .send(loanRepayment)
       .end((error, response) => {
         response.body.should.have.status(403);
-        response.body.should.have.property('error');
-        response.body.error.should.eql('You\'re forbidden to perform this action.');
+        response.body.should.have.property('error').eql('You\'re forbidden to perform this action.');
       });
     done();
   });
@@ -897,8 +849,7 @@ describe('Admin Create Loan Repayment Test', () => {
       .end((err, res) => {
         res.body.should.have.status(404);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Loan not found.');
+        res.body.error.should.be.a('string').eql('Loan not found.');
         done();
       });
   });
@@ -910,8 +861,7 @@ describe('Admin Create Loan Repayment Test', () => {
       .end((err, res) => {
         res.body.should.have.status(200);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Your loan is yet to be approved');
+        res.body.error.should.be.a('string').eql('Your loan is yet to be approved');
         done();
       });
   });
@@ -954,8 +904,7 @@ describe('Admin Create Loan Repayment Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Paid amount is required');
+        res.body.error.should.be.a('string').eql('Paid amount is required');
         done();
       });
   });
@@ -969,8 +918,7 @@ describe('User View Repayment History Test', () => {
         res.body.should.have.status(401);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Auth failed');
+        res.body.error.should.be.a('string').eql('Auth failed');
         done();
       });
   });
@@ -982,8 +930,7 @@ describe('User View Repayment History Test', () => {
         res.body.should.have.status(403);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Invalid token, You need to login or signup');
+        res.body.error.should.be.a('string').eql('Invalid token, You need to login or signup');
         done();
       });
   });
@@ -994,8 +941,7 @@ describe('User View Repayment History Test', () => {
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Loan ID is invalid.');
+        res.body.error.should.be.a('string').eql('Loan ID is invalid.');
         done();
       });
   });
@@ -1006,8 +952,7 @@ describe('User View Repayment History Test', () => {
       .end((err, res) => {
         res.body.should.have.status(404);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string');
-        res.body.error.should.eql('Loan not found.');
+        res.body.error.should.be.a('string').eql('Loan not found.');
         done();
       });
   });
@@ -1029,8 +974,7 @@ describe('User View Repayment History Test', () => {
       .end((err, res) => {
         res.body.should.have.status(404);
         res.body.should.be.a('object');
-        res.body.data.should.be.a('string');
-        res.body.data.should.eql('Loan repayment transaction NOT found for this loan.');
+        res.body.data.should.be.a('string').eql('Loan repayment transaction NOT found for this loan.');
         done();
       });
   });

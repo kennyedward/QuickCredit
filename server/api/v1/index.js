@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', indexRoute);
-app.use('/api/v1/users', usersRoute);
+app.use('/api/v1/', usersRoute);
 app.use('/api/v1/loans', loanRoute);
 
 app.use('/api/v1/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
