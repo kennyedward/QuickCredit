@@ -1,0 +1,62 @@
+.align-logo {
+    margin-left: 8.5rem;
+    margin-top: -50px;
+    margin-bottom: 5rem;
+}
+
+.time-text {
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+.rm-label-spacing {
+    margin-bottom: 0;
+}
+
+.align-to-left {
+    text-align: left;
+}
+
+.rm-btm-spacing {
+    margin-bottom: 0.4rem;
+}
+
+.btm-text {
+    color: rgb(174, 183, 238);
+}
+
+.btn-btm-spacing {
+    margin-bottom: 2rem;
+}
+
+.bottom-spacing {
+    margin-bottom: 3rem
+}
+
+.index-illustration {
+    padding-top: 5rem;
+    background: rgba(241, 241, 241, 0.822);
+}
+
+body {
+    background: white;
+}
+
+@media (max-width: 710px) {
+    .align-logo {
+        margin-left: 0;
+        margin-top: 0;
+        margin-bottom: 4rem;
+    }
+    .index-illustration {
+        padding-bottom: 4rem;
+    }
+}
+
+@media (min-width: 710px) {
+    .align-logo {
+        margin-left: 0;
+        margin-top: -50px;
+        margin-bottom: 5rem;
+    }
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>QuickCredit</title>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/components.css">
+        <link rel="stylesheet" href="css/userStyles.css">
+        <link rel="stylesheet" href="css/helpers.css">
+        <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
+</head>
+
+<body>
+        <section class="topNavbar">
+                <div class="dashboard__container">
+                        <div class="topNavbar__wrapper mb">
+                                <a href="index.html"><img src="./img/logo-w.svg" alt="QuickCredit Logo"></a>
+
+                                <div class="topNavbar__wrapper__notificationArea">
+                                        <a href="#" class="topNavbar__wrapper__notificationArea__anchor" id="notify">
+                                                <span class="notificationNumber pink">1</span>
+                                                <img src="./img/notification.svg" alt="Notification icon"></a>
+                                        <div class="topNavbar__wrapper__notificationArea__anchor avatar"></div>
+                                        <a class="topNavbar__wrapper__notificationArea__anchor">Kenny E.</a>
+                                        <a href="index.html"
+                                                class="topNavbar__wrapper__notificationArea__anchor">Logout</a>
+                                </div>
+                        </div>
+                        <div class="topNavbar__wrapper mb flex-center">
+                                <div class="topLoanBtn-wrapper">
+                                        <a href="user-request-loan-page.html#loanForm"><button type="button" disabled
+                                                        class="form__inputWrapper__largeBtn form__inputWrapper__largeBtn--whiteDisabled">Apply
+                                                        for loan</button></a>
+                                </div>
+
+                                <a href="#" class="white alertMsg greenMobile"> You made a repayment!</a>
+
+                        </div>
+
+                        <div class="cardHolder">
+                                <div class="largeCard">
+                                        <div class="largeCard__leftSection">
+                                                <span class="largeCard__leftSection__ongoingLoans uppercase">Ongoing
+                                                        loan</span>
+                                                <span
+                                                        class="largeCard__leftSection__amount amountSize">₦50,000.00</span>
+                                                <span class="largeCard__leftSection__daysLeft">90 days left</span>
+
+                                                <span class="largeCard__leftSection__amount amountDue">₦43,437.50</span>
+                                                <span class="largeCard__leftSection__daysLeft">Amount Due</span>
+                                        </div>
+
+                                        <div class="largeCard__rightSection">
+                                                <div class="largeCard__rightSection__upper">
+                                                        <span class="largeCard__rightSection__upper__title uppercase">Verification
+                                                                status</span>
+                                                        <span
+                                                                class="largeCard__rightSection__upper__verificationStatus uppercase green">verified</span>
+                                                        <img src="./img/verified-icon.svg" alt="verified status icon">
+                                                        <span class="statusText green">You
+                                                                are verified.</span>
+                                                </div>
+
+                                                <div class="largeCard__rightSection__lower">
+                                                        <span class="largeCard__rightSection__lower__title uppercase">Loan
+                                                                Eligibility</span>
+                                                        <span class="minorBtns minorBtns--orange uppercase">
+                                                                Eligible</span>
+                                                        <span class="statusText">You have an ongoing loan.</span>
+                                                </div>
+                                        </div>
+
+                                </div>
+                        </div>
+                        <p class="repaymentText">Your loan repayment history will appear here.
+                        </p>
+
+                        <div class="boxShadow whiteSPace">
+                                <div class="historyWrapper whiteSpace">
+                                        <span>1.</span>
+                                        <div class="loanID">
+                                                <strong class="loanID__code">55262574</strong>
+                                                <p class="loanID__purpose">Loan ID
+                                                </p>
+                                                <span class="minorBtns minorBtns--purple uppercase">
+                                                        Current</span>
+                                        </div>
+                                        <div class="repaymentSpacer"></div>
+                                        <div class="repaymentBreakdown">
+                                                <div class="paymentDateWrapper">
+                                                        <div class="paidIndicator"></div>
+                                                        <span class="paymentDateWrapper__text">Paid <span
+                                                                        class="emphasis">₦6562.50</span> on
+                                                                31-05-2019</span>
+                                                </div>
+                                        </div>
+
+                                </div>
+
+                        </div>
+                </div>
+        </section>
+        <script>const redirect =
+                        setTimeout(() => {
+                                window.location = 'user-make-more-repayment.html';
+                        }, 10000)
+                clearTimeout('redirect')</script>
+        <script src="./js/notification.js"></script>
+</body>
+
+</html>

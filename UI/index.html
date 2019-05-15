@@ -10,71 +10,54 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/components.css">
         <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/signup.css">
         <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
 </head>
 
 <body>
         <section class="body">
                 <div class="body__container">
-                        <div class="body__container__one">
-                                <img src="./img/logo.svg" alt="QuickCredit Logo" class="body__container__one__logo">
-                                <img src="./img/heroIllustration.svg" alt="QuickCredit Hero Illustration"
-                                        class="body__container__one__hero">
-                        </div>
                         <div class="body__container__two">
-                                <form class="form" action="user-dashboard-empty.html">
-                                        <h1 class="formHeading">Signup to QuickCredit</h1>
-                                        <div class="form__inputWrapper">
-                                                <label class="form__inputWrapper__label" for="firstName">First
-                                                        Name</label>
-                                                <input type="text" class="form__inputWrapper__input" id="firstName"
-                                                        required>
+                                <form class="form" action="signup.html">
+                                                <img src="./img/logo.svg" alt="QuickCredit Logo"
+                                                class="body__container__one__logo align-logo">
+                                        <div class="form__inputWrapper rm-label-spacing">
+                                                <label class="form__inputWrapper__label" for="firstName">Get a short
+                                                        term loan in less than</label>
                                         </div>
                                         <div class="form__inputWrapper">
-                                                <label class="form__inputWrapper__label" for="lastName">Last
-                                                        Name</label>
-                                                <input type="text" class="form__inputWrapper__input" id="lastName"
-                                                        required>
-                                        </div>
-                                        <div class="form__inputWrapper">
-                                                <label class="form__inputWrapper__label" for="emailAddress">Email
-                                                        Address</label>
-                                                <input type="email" class="form__inputWrapper__input" id="emailAddress"
-                                                        required>
-                                        </div>
-                                        <div class="form__inputWrapper">
-                                                <label class="form__inputWrapper__label" for="password">Password</label>
-                                                <input type="password" class="form__inputWrapper__input" id="password"
-                                                        required>
-                                        </div>
-                                        <div class="form__inputWrapper">
-                                                <label class="form__inputWrapper__label" for="confirmPassword">Confirm
-                                                        Password</label>
-                                                <input type="password" class="form__inputWrapper__input"
-                                                        id="confirmPassword" required>
+                                                <label class="form__inputWrapper__label time-text"
+                                                        for="confirmPassword">5 hours</label>
                                         </div>
 
                                         <div class="form__inputWrapper">
-                                                <input type="checkbox" class="form__inputWrapper__checkbox" id="terms"
-                                                        required>
-                                                <label for="terms"
-                                                        class="form__inputWrapper__label form__inputWrapper__label--labelTerms">
-                                                        By checking this box, you are agreeing to our terms and
-                                                        conditions.
-                                                </label>
+                                                <input type="submit" value="Get started"
+                                                        class="form__inputWrapper__largeBtn btn-btm-spacing">
                                         </div>
 
-                                        <div class="form__inputWrapper">
-                                                <input type="submit" value="Signup"
-                                                        class="form__inputWrapper__largeBtn">
+                                        <div
+                                                class="form__inputWrapper form__inputWrapper--alignCenter align-to-left rm-btm-spacing">
+                                                <span class="form__inputWrapper__footer">- No collateral</span>
+                                        </div>
+                                        <div
+                                                class="form__inputWrapper form__inputWrapper--alignCenter align-to-left rm-btm-spacing">
+                                                <span class="form__inputWrapper__footer">- Cash loans quickly</span>
+                                        </div>
+                                        <div
+                                                class="form__inputWrapper form__inputWrapper--alignCenter align-to-left bottom-spacing">
+                                                <span class="form__inputWrapper__footer">- Flexible repayments</span>
                                         </div>
 
-                                        <div class="form__inputWrapper form__inputWrapper--alignCenter">
-                                                <span class="form__inputWrapper__footer">Already a user? <a
+                                        <div class="form__inputWrapper form__inputWrapper--alignCenter align-to-left">
+                                                <span class="form__inputWrapper__footer btm-text">Already a user? <a
                                                                 href="login.html"
-                                                                class="form__inputWrapper__footer__link">Login</a></span>
+                                                                class="form__inputWrapper__footer__link">Apply</a></span>
                                         </div>
                                 </form>
+                        </div>
+                        <div class="body__container__one index-illustration">
+                                <img src="./img/heroIllustration.svg" alt="QuickCredit Hero Illustration"
+                                        class="body__container__one__hero">
                         </div>
 
                 </div>

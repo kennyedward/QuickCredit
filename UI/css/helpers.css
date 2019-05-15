@@ -116,6 +116,20 @@
     background: #FF08A3;
 }
 
+.yellow {
+    color: #FFAD08;
+    text-decoration: none;
+}
+
+.green {
+    color: #03CB4E;
+}
+
+.white {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
 .positionRelative {
     position: relative;
 }
@@ -211,11 +225,45 @@
     top: -3px;
 }
 
+.alignCenter {
+        align-items: center;
+}
+
+.confirmationBtn {
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    color: #FFF;
+}
+
+.greenConfirmBtn {
+    background: #03CB4E;
+    margin-right: 1rem;
+}
+
+.yellowConfirmBtn {
+    background: rgb(245, 131, 2);
+}
+
+@media (max-width: 710px) {
+    .greenMobile {
+        color: #03CB4E;
+    }
+}
+
 @media (max-width: 426px) {
     .avatar {
         display: none;
     }
     .notificationNumber {
         top: -11px;
+    }
+}
+
+@media (max-width: 768px) {
+    .paymentRate {
+        font-size: 1.5rem;
+    }
+    .loanTextLabel {
+        font-size: 1rem;
     }
 }

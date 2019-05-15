@@ -24,7 +24,19 @@
                         </div>
                         <div class="body__container__two">
                                 <form class="form" action="user-dashboard-empty.html">
-                                        <h1 class="formHeading">Welcome back</h1>
+                                        <h1 class="formHeading">We want to know you</h1>
+                                        <div class="form__inputWrapper">
+                                                <label class="form__inputWrapper__label" for="firstName">First
+                                                        Name</label>
+                                                <input type="text" class="form__inputWrapper__input" id="firstName"
+                                                        required>
+                                        </div>
+                                        <div class="form__inputWrapper">
+                                                <label class="form__inputWrapper__label" for="lastName">Last
+                                                        Name</label>
+                                                <input type="text" class="form__inputWrapper__input" id="lastName"
+                                                        required>
+                                        </div>
                                         <div class="form__inputWrapper">
                                                 <label class="form__inputWrapper__label" for="emailAddress">Email
                                                         Address</label>
@@ -37,15 +49,31 @@
                                                         required>
                                         </div>
                                         <div class="form__inputWrapper">
+                                                <label class="form__inputWrapper__label" for="address"
+                                                        style="display: block;">Address</label>
+                                                <textarea name="" id="address" cols="30" rows="5" style="width: 100%;"
+                                                        required></textarea>
+                                        </div>
+
+                                        <div class="form__inputWrapper">
+                                                <input type="checkbox" class="form__inputWrapper__checkbox" id="terms"
+                                                        required>
+                                                <label for="terms"
+                                                        class="form__inputWrapper__label form__inputWrapper__label--labelTerms">
+                                                        By checking this box, you are agreeing to our terms and
+                                                        conditions.
+                                                </label>
+                                        </div>
+
+                                        <div class="form__inputWrapper">
                                                 <input type="submit" value="Continue"
                                                         class="form__inputWrapper__largeBtn">
                                         </div>
 
                                         <div class="form__inputWrapper form__inputWrapper--alignCenter">
-                                                <span class="form__inputWrapper__footer">Don't have an account? <a
-                                                                href="signup.html"
-                                                                class="form__inputWrapper__footer__link">Create
-                                                                one</a></span>
+                                                <a href="login.html" class="form__inputWrapper__footer__link"><span
+                                                                class="form__inputWrapper__footer">Already a
+                                                                user?</span></a>
                                         </div>
                                 </form>
                         </div>
