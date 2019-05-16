@@ -1197,7 +1197,7 @@ describe('User View Repayment History Test', () => {
         .end((err, res) => {
           res.body.should.have.status(404);
           res.body.should.be.a('object');
-          res.body.data.should.be.a('array');
+          res.body.error.should.be.a('string').eql('There are no loans listed');
           done();
         });
     });
