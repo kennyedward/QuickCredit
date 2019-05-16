@@ -2,11 +2,14 @@ import express from 'express';
 import cors from 'cors';
 import ghPages from 'gh-pages';
 import swaggerUI from 'swagger-ui-express';
+import dotenv from 'dotenv';
 import swaggerDoc from './swagger.json';
 
 import indexRoute from './routes/indexRoute';
 import usersRoute from './routes/usersRoute';
 import loanRoute from './routes/loanRoute';
+
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 7000;
