@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import users from '../db/users';
 import idGenerator from '../helpers/IdGenerator';
 import jwt from '../middleware/jwt';
+import statusValidator from '../helpers/verifyStatus';
 
 class UserController {
   static userSignUp(req, res) {
@@ -66,32 +67,32 @@ class UserController {
   }
 
   static adminVerifyAccount(req, res) {
-    if (req.authData.isAdmin) {
-      const { userEmail } = req.params;
-      const { status } = req.body;
-      const user = users.find(account => account.email === userEmail);
-      if (user) {
-        user.status = status;
-        return res.status(200).json({
-          status: 200,
-          data: {
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            password: user.password,
-            address: user.address,
-            status: user.status,
-          },
-        });
-      }
+    const { userEmail } = req.params;
+    const user = users.find(account => account.email === userEmail);
+    if (!user) {
       return res.status(404).json({
         status: 404,
         error: 'User with the email address is not found.',
       });
     }
-    return res.status(403).json({
-      status: 403,
-      error: 'You\'re forbidden to perform this action.',
+    const verificationMessage = statusValidator.checkStatus(req.body.status);
+    if (verificationMessage !== '') {
+      return res.status(400).json({
+        status: 400,
+        error: verificationMessage,
+      });
+    }
+    user.status = req.body.status;
+    return res.status(200).json({
+      status: 200,
+      data: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        password: user.password,
+        address: user.address,
+        status: user.status,
+      },
     });
   }
 }

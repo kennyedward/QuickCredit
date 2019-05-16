@@ -532,12 +532,12 @@ describe('Admin Test', () => {
   });
   it('should fail if status is not present in req.body when admin attempts to verify user account if user is created', (done) => {
     chai.request(server)
-      .patch('/api/v1/users/kennyedward99@gmail.com/verify')
+      .patch('/api/v1/users/taewole@gmail.com/verify')
       .set('authorization', `Bearer ${adminToken}`)
       .send({ status: '' })
       .end((error, response) => {
         response.body.should.have.status(400);
-        response.body.should.have.property('error').eql('Status is required');
+        response.body.should.have.property('error').eql('verification status is required');
       });
     done();
   });
