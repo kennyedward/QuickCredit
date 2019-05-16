@@ -903,7 +903,7 @@ describe('Admin Approves Loan Test', () => {
 
 describe('Admin Create Loan Repayment Test', () => {
   const loanRepayment = {
-    paidAmount: '5000.00',
+    paidAmount: 5000.00,
   };
   it('should fail if token is not found', (done) => {
     chai.request(server)
@@ -953,19 +953,33 @@ describe('Admin Create Loan Repayment Test', () => {
         done();
       });
   });
-  // it('should return LOAN NOT YET APPROVED', (done) => {
-  //   chai.request(server)
-  //     .post('/api/v1/loans/44068301/repayment')
-  //     .set('authorization', `Bearer ${adminToken}`)
-  //     .send(loanRepayment)
-  //     .end((err, res) => {
-  //       res.body.should.have.status(200);
-  //       res.body.should.be.a('object');
-  //       res.body.error.should.be.a('string').eql('Your loan is yet to be approved');
-  //       done();
-  //     });
-  // });
+  it('should return LOAN NOT YET APPROVED', (done) => {
+    chai.request(server)
+      .post('/api/v1/loans/485756982/repayment')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.error.should.be.a('string').eql('Your loan is yet to be approved');
+        done();
+      });
+  });
+  it('should fail if admin token is VALID, loan is APPROVED and paid amount is EMPTY', (done) => {
+    loanRepayment.paidAmount = '';
+    chai.request(server)
+      .post('/api/v1/loans/82928475/repayment')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(loanRepayment)
+      .end((err, res) => {
+        res.body.should.have.status(400);
+        res.body.should.be.a('object');
+        res.body.error.should.be.a('string').eql('Paid amount is required');
+        done();
+      });
+  });
   it('should pass if admin token is VALID, loan is APPROVED and paid amount is VALID', (done) => {
+    loanRepayment.paidAmount = 5000.00;
     chai.request(server)
       .post('/api/v1/loans/82928475/repayment')
       .set('authorization', `Bearer ${adminToken}`)
@@ -980,7 +994,7 @@ describe('Admin Create Loan Repayment Test', () => {
       });
   });
   it('SECOND PAYMENT: should pass if admin token is VALID, loan is APPROVED and paid amount is VALID', (done) => {
-    loanRepayment.paidAmount = '15000.00';
+    loanRepayment.paidAmount = 15000.00;
     chai.request(server)
       .post('/api/v1/loans/82928475/repayment')
       .set('authorization', `Bearer ${adminToken}`)
@@ -1004,7 +1018,7 @@ describe('Admin Create Loan Repayment Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Paid amount is required');
+        res.body.error.should.be.a('string').eql('Paid amount must be a number');
         done();
       });
   });
@@ -1013,7 +1027,7 @@ describe('Admin Create Loan Repayment Test', () => {
 describe('User View Repayment History Test', () => {
   it('should fail if token is not found', (done) => {
     chai.request(server)
-      .get('/api/v1/loans/12345678/repayment')
+      .get('/api/v1/loans/12345678/repayments')
       .end((err, res) => {
         res.body.should.have.status(401);
         res.body.should.be.a('object');
@@ -1024,7 +1038,7 @@ describe('User View Repayment History Test', () => {
   });
   it('should fail if user token is invalid', (done) => {
     chai.request(server)
-      .get('/api/v1/loans/12345678/repayment')
+      .get('/api/v1/loans/12345678/repayments')
       .set('authorization', `Bearer ${invalidToken}`)
       .end((err, res) => {
         res.body.should.have.status(403);
@@ -1036,7 +1050,7 @@ describe('User View Repayment History Test', () => {
   });
   it('should fail if user token is VALID and loan ID is INVALID', (done) => {
     chai.request(server)
-      .get('/api/v1/loans/abcd1234/repayment')
+      .get('/api/v1/loans/abcd1234/repayments')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
         res.body.should.have.status(400);
@@ -1047,7 +1061,7 @@ describe('User View Repayment History Test', () => {
   });
   it('should fail if user token is VALID and loan is NOT FOUND', (done) => {
     chai.request(server)
-      .get('/api/v1/loans/12345678/repayment')
+      .get('/api/v1/loans/12345678/repayments')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
         res.body.should.have.status(404);
@@ -1058,7 +1072,7 @@ describe('User View Repayment History Test', () => {
   });
   it('should return success if user token is VALID and loan is APPROVED and Repayment Transaction has been created', (done) => {
     chai.request(server)
-      .get('/api/v1/loans/82928475/repayment')
+      .get('/api/v1/loans/82928475/repayments')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
         res.body.should.have.status(200);
@@ -1069,7 +1083,7 @@ describe('User View Repayment History Test', () => {
   });
   it('should return empty array if user token is VALID and loan is VALID and NO Repayment Transaction FOUND', (done) => {
     chai.request(server)
-      .get('/api/v1/loans/73637837/repayment')
+      .get('/api/v1/loans/73637837/repayments')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
         res.body.should.have.status(404);

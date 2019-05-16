@@ -1,9 +1,11 @@
 class LoanValidator {
   static validateLoanRepayment(req, res, next) {
     let validationMessage = '';
-    const paidAmount = parseFloat(req.body.paidAmount);
-    if (!paidAmount) {
+
+    if (!req.body.paidAmount) {
       validationMessage += 'Paid amount is required';
+    } else if (typeof req.body.paidAmount !== 'number') {
+      validationMessage += 'Paid amount must be a number';
     }
     return (validationMessage.length === 0) ? next()
       : res.status(400).json({ status: 400, error: validationMessage });

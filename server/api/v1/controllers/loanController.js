@@ -106,52 +106,51 @@ class LoanController {
   }
 
   static loanRepayment(req, res) {
-    if (req.authData.isAdmin) {
-      const { loanId } = req.params;
-      const existingLoan = loans.find(loan => loan.loanId === Number(loanId));
-      if (existingLoan) {
-        const repaymentTransaction = {
-          id: loanIdGenerator(),
-          loanId: existingLoan.loanId,
-          createdOn: existingLoan.createdOn,
-          amount: existingLoan.amount,
-          monthlyInstallment: existingLoan.paymentInstallment,
-          balance: existingLoan.balance,
-          user: existingLoan.user,
-        };
-        if (existingLoan.status === 'approved' && existingLoan.repaid === false) {
-          const { paidAmount } = req.body;
-          repaymentTransaction.paidAmount = parseFloat(paidAmount);
-          const balance = existingLoan.balance - paidAmount;
-          existingLoan.balance = parseFloat(balance);
-          repaymentTransaction.balance = existingLoan.balance;
-          loanRepayments.push(repaymentTransaction);
-          return res.status(201).json({
-            status: 201,
-            data: repaymentTransaction,
-          });
+    const { loanId } = req.params;
+    const existingLoan = loans.find(loan => loan.loanId === Number(loanId));
+    if (existingLoan) {
+      const repaymentTransaction = {
+        id: loanIdGenerator(),
+        loanId: existingLoan.loanId,
+        createdOn: existingLoan.createdOn,
+        amount: existingLoan.amount,
+        monthlyInstallment: existingLoan.paymentInstallment,
+        balance: existingLoan.balance,
+        user: existingLoan.user,
+      };
+      if (existingLoan.status === 'approved' && existingLoan.repaid === false) {
+        const { paidAmount } = req.body;
+        repaymentTransaction.paidAmount = parseFloat(paidAmount);
+        const balance = existingLoan.balance - paidAmount;
+        existingLoan.balance = parseFloat(balance);
+        repaymentTransaction.balance = existingLoan.balance;
+        if (existingLoan.balance === 0 || existingLoan.balance < 0) {
+          repaymentTransaction.balance = 0;
+          existingLoan.repaid = true;
+          existingLoan.balance = 0;
         }
-        if (existingLoan.status === 'pending') {
-          return res.status(200).json({
-            status: 200,
-            error: 'Your loan is yet to be approved',
-          });
-        }
-        if (existingLoan.repaid === true) {
-          return res.status(200).json({
-            status: 200,
-            error: 'You have paid all your loans.',
-          });
-        }
+        loanRepayments.push(repaymentTransaction);
+        return res.status(201).json({
+          status: 201,
+          data: repaymentTransaction,
+        });
       }
-      return res.status(404).json({
-        status: 404,
-        error: 'Loan not found.',
-      });
+      if (existingLoan.status === 'pending') {
+        return res.status(200).json({
+          status: 200,
+          error: 'Your loan is yet to be approved',
+        });
+      }
+      if (existingLoan.repaid === true) {
+        return res.status(200).json({
+          status: 200,
+          error: 'You have paid all your loans.',
+        });
+      }
     }
-    return res.status(403).json({
-      status: 403,
-      error: 'You\'re forbidden to perform this action.',
+    return res.status(404).json({
+      status: 404,
+      error: 'Loan not found.',
     });
   }
 
@@ -160,7 +159,7 @@ class LoanController {
     const existingLoan = loans.find(loan => loan.loanId === loanId);
     if (existingLoan && (existingLoan.loanId === loanId)) {
       const loan = loans.find(userLoan => userLoan.user === req.authData.email);
-      if (loan) {
+      if (loan || req.authData.isAdmin) {
         const repaymentTransaction = loanRepayments
           .filter(repayment => repayment.loanId === loanId);
         if (repaymentTransaction) {
@@ -176,8 +175,8 @@ class LoanController {
           });
         }
       }
-      return res.status(400).json({
-        status: 400,
+      return res.status(403).json({
+        status: 403,
         error: 'You can\'t view this loan repayment transaction',
       });
     }
@@ -217,23 +216,17 @@ class LoanController {
   }
 
   static getALoan(req, res) {
-    if (req.authData.isAdmin) {
-      const loanId = Number(req.params.loanId);
-      const existingLoan = loans.find(loan => loan.loanId === loanId);
-      if (!existingLoan) {
-        return res.status(404).json({
-          status: 404,
-          error: 'Loan not found.',
-        });
-      }
-      return res.status(200).json({
-        status: 200,
-        data: existingLoan,
+    const loanId = Number(req.params.loanId);
+    const existingLoan = loans.find(loan => loan.loanId === loanId);
+    if (!existingLoan) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Loan not found.',
       });
     }
-    return res.status(403).json({
-      status: 403,
-      error: 'You\'re forbidden to perform this action.',
+    return res.status(200).json({
+      status: 200,
+      data: existingLoan,
     });
   }
 }
