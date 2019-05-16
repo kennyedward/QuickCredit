@@ -188,37 +188,31 @@ class LoanController {
   }
 
   static getAllLoan(req, res) {
-    if (req.authData.isAdmin) {
-      const { status } = req.query;
-      const { repaid } = req.query;
-      if (typeof status !== 'undefined' && typeof repaid !== 'undefined') {
-        if (status !== 'approved') {
-          return res.status(400).json({ status: 400, error: 'status can only have the value: \'approved\'' });
-        }
-        if (repaid.toString() !== 'true' && repaid.toString() !== 'false') {
-          return res.status(400).json({ status: 400, error: 'repaid can only have the value: \'true\' or \'false\'' });
-        }
-        const currentLoans = loans.filter(existingLoan => ((existingLoan.status === status)
+    const { status } = req.query;
+    const { repaid } = req.query;
+    if (typeof status !== 'undefined' && typeof repaid !== 'undefined') {
+      if (status !== 'approved') {
+        return res.status(400).json({ status: 400, error: 'status can only have the value: \'approved\'' });
+      }
+      if (repaid.toString() !== 'true' && repaid.toString() !== 'false') {
+        return res.status(400).json({ status: 400, error: 'repaid can only have the value: \'true\' or \'false\'' });
+      }
+      const currentLoans = loans.filter(existingLoan => ((existingLoan.status === status)
         && ((existingLoan.repaid).toString() === repaid.toString())));
-        return res.status(200).json({
-          status: 200,
-          data: currentLoans,
-        });
-      }
-      if (loans.length === 0) {
-        return res.status(200).json({
-          status: 404,
-          data: loans,
-        });
-      }
       return res.status(200).json({
         status: 200,
+        data: currentLoans,
+      });
+    }
+    if (loans.length === 0) {
+      return res.status(200).json({
+        status: 404,
         data: loans,
       });
     }
-    return res.status(403).json({
-      status: 403,
-      error: 'You\'re forbidden to perform this action.',
+    return res.status(200).json({
+      status: 200,
+      data: loans,
     });
   }
 
