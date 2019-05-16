@@ -16,10 +16,15 @@ const adminCredentials = {
   password: process.env.ADMIN_PASS || 'learn',
 };
 
-const userCredentials = {
-  email: 'taewole@gmail.com',
-  password: 'archt',
-};
+// const userCredentials = {
+//   email: 'taewole@gmail.com',
+//   password: 'archt',
+// };
+
+// const anotherUserCredentials = {
+//   email: 'kenny@gmail.com',
+//   password: 'kenny',
+// };
 
 describe('API Test', () => {
   it('should return success if user navigate to localhost:7000/api/v1', (done) => {
@@ -541,6 +546,17 @@ describe('Admin Test', () => {
       });
     done();
   });
+  it('should fail if status is not equal to verified or unverified', (done) => {
+    chai.request(server)
+      .patch('/api/v1/users/taewole@gmail.com/verify')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send({ status: 'verifiedWrongly' })
+      .end((error, response) => {
+        response.body.should.have.status(400);
+        response.body.should.have.property('error').eql('to verify a user, Status can only be either \'verified\', or \'unverified\'');
+      });
+    done();
+  });
   it('admin should be able to verify user account if user is created', (done) => {
     chai.request(server)
       .patch('/api/v1/users/taewole@gmail.com/verify')
@@ -600,10 +616,8 @@ describe('Admin Test', () => {
 
 describe('Loan Test', () => {
   const validLoan = {
-    tenor: '5',
-    amount: '5000.00',
-    purpose: 'Business',
-    startDate: new Date(),
+    tenor: 5,
+    amount: 5000.00,
   };
   it('should fail if user is not logged in', (done) => {
     chai.request(server)
@@ -632,106 +646,157 @@ describe('Loan Test', () => {
   });
   describe('Logged in user create loan test', () => {
     before((done) => {
+      const user = {
+        email: 'kenny@gmail.com',
+        password: 'kenny',
+      };
       chai.request(server)
         .post('/api/v1/auth/login')
-        .send(userCredentials)
+        .send(user)
         .end((error, response) => {
           userToken = response.body.data.token;
           done();
         });
     });
-    it('should fail if user already has an UNPAID load running', (done) => {
+    it('should fail if user status is unverified', (done) => {
       chai.request(server)
         .post('/api/v1/loans')
         .set('authorization', `Bearer ${userToken}`)
         .send(validLoan)
         .end((err, res) => {
-          res.body.should.have.status(409);
+          res.body.should.have.status(400);
           res.body.should.be.a('object');
           res.body.should.have.property('error');
-          res.body.error.should.be.a('string').eql('You have an existing loan');
+          res.body.error.should.be.a('string').eql('Your account is yet to be verified. Please hold on for verification.');
           done();
         });
     });
-    it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if TENOR IS EMPTY', (done) => {
-      validLoan.tenor = '';
-      chai.request(server)
-        .post('/api/v1/loans')
-        .set('authorization', `Bearer ${userToken}`)
-        .send(validLoan)
-        .end((err, res) => {
-          res.body.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('Loan tenor is required');
-          done();
-        });
-    });
-    it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if TENOR IS NOT AN INTEGER', (done) => {
-      validLoan.tenor = 8.8;
-      chai.request(server)
-        .post('/api/v1/loans')
-        .set('authorization', `Bearer ${userToken}`)
-        .send(validLoan)
-        .end((err, res) => {
-          res.body.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('Loan tenor must be an integer');
-          done();
-        });
-    });
-    it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if TENOR IS LESS THAN 1 OR GREATER THAN 12', (done) => {
-      validLoan.tenor = '13';
-      chai.request(server)
-        .post('/api/v1/loans')
-        .set('authorization', `Bearer ${userToken}`)
-        .send(validLoan)
-        .end((err, res) => {
-          res.body.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('Loan tenor must be between 1 and 12');
-          done();
-        });
-    });
-    it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if AMOUNT IS INVALID', (done) => {
-      validLoan.tenor = '5';
-      validLoan.amount = '@5577.977';
-      chai.request(server)
-        .post('/api/v1/loans')
-        .set('authorization', `Bearer ${userToken}`)
-        .send(validLoan)
-        .end((err, res) => {
-          res.body.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('Loan amount is required');
-          done();
-        });
-    });
-    it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if PURPOSE IS EMPTY', (done) => {
-      validLoan.amount = '95577.97';
-      validLoan.purpose = '';
-      chai.request(server)
-        .post('/api/v1/loans')
-        .set('authorization', `Bearer ${userToken}`)
-        .send(validLoan)
-        .end((err, res) => {
-          res.body.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('Loan purpose is required');
-          done();
-        });
-    });
-    it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if PURPOSE IS INVALID', (done) => {
-      validLoan.purpose = '#$@#Fraud';
-      chai.request(server)
-        .post('/api/v1/loans')
-        .set('authorization', `Bearer ${userToken}`)
-        .send(validLoan)
-        .end((err, res) => {
-          res.body.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('Loan purpose can only contain alphabets');
-          done();
-        });
+    describe('nows lets veriffy the new user', () => {
+      before('verify the new user account created', (done) => {
+        chai.request(server)
+          .patch('/api/v1/users/kenny@gmail.com/verify')
+          .set('authorization', `Bearer ${adminToken}`)
+          .send({ status: 'verified' })
+          .end((error, response) => {
+            response.body.should.have.status(200);
+            response.body.should.have.property('data');
+            response.body.data.status.should.be.a('string').eql('verified');
+          });
+        done();
+      });
+      it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if Amount is EMPTY', (done) => {
+        validLoan.amount = '';
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(validLoan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan amount is required');
+            done();
+          });
+      });
+      it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if Amount is not valid', (done) => {
+        validLoan.amount = 'im paying in dollars';
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(validLoan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan amount must be a number');
+            done();
+          });
+      });
+      it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if Tenor is EMPTY', (done) => {
+        validLoan.amount = 5000.00;
+        validLoan.tenor = '';
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(validLoan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan tenor is required');
+            done();
+          });
+      });
+      it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if Amount is not valid', (done) => {
+        validLoan.tenor = '8';
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(validLoan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan tenor must be a number');
+            done();
+          });
+      });
+      it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if Amount is not a number', (done) => {
+        validLoan.tenor = '8';
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(validLoan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan tenor must be a number');
+            done();
+          });
+      });
+      it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if Amount is not a number', (done) => {
+        validLoan.tenor = 8.8;
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(validLoan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan tenor must be an integer');
+            done();
+          });
+      });
+      it('Given a user is logged in, token is valid and status is VERIFIED, it should NOT create Loan if TENOR IS LESS THAN 1 OR GREATER THAN 12', (done) => {
+        validLoan.tenor = 13;
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(validLoan)
+          .end((err, res) => {
+            res.body.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.be.a('string');
+            res.body.error.should.eql('Loan tenor must be between 1 and 12');
+            done();
+          });
+      });
+      it('Given a user is logged in, token is valid and status is VERIFIED, it should create Loan if TENOR and AMOUNT is VALID', (done) => {
+        validLoan.tenor = 5;
+        validLoan.amount = 5000.00;
+        chai.request(server)
+          .post('/api/v1/loans')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(validLoan)
+          .end((err, res) => {
+            res.body.should.have.status(201);
+            res.body.should.be.a('object');
+            res.body.data.should.be.a('object');
+            done();
+          });
+      });
     });
   });
 });
