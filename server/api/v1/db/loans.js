@@ -74,6 +74,21 @@ const loans = [
     purpose: 'Flexing',
     createdOn: new Date(),
   },
+  {
+    loanId: 485756982,
+    firstName: 'test',
+    lastName: 'testing',
+    user: 'test@gmail.com',
+    tenor: 3,
+    amount: 90000,
+    status: 'pending',
+    repaid: false,
+    balance: 94500,
+    interest: 4500,
+    paymentInstallment: 31500.00,
+    purpose: 'Flexing',
+    createdOn: new Date(),
+  },
 ];
 
 export default loans;
