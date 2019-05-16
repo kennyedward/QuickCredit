@@ -59,6 +59,21 @@ const loans = [
     purpose: 'Travel',
     createdOn: new Date(),
   },
+  {
+    loanId: 856598562,
+    firstName: 'taiwo',
+    lastName: 'charles',
+    user: 'taewole@gmail.com',
+    tenor: 3,
+    amount: 90000,
+    status: 'pending',
+    repaid: false,
+    balance: 94500,
+    interest: 4500,
+    paymentInstallment: 31500.00,
+    purpose: 'Flexing',
+    createdOn: new Date(),
+  },
 ];
 
 export default loans;

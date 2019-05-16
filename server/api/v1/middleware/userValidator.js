@@ -60,18 +60,6 @@ class UserValidator {
     return (validationMessage.length === 0) ? next()
       : res.status(400).json({ status: 400, error: validationMessage });
   }
-
-  static validateVerificationStatus(req, res, next) {
-    let validationMessage = '';
-    const status = req.body.status.trim();
-    if (!status) {
-      validationMessage += 'Status is required';
-    } else if (status.trim() !== 'verified' && status !== 'unverified') {
-      validationMessage += 'Status can only be either \'verified\', or \'unverified\'';
-    }
-    return (validationMessage.length === 0) ? next()
-      : res.status(400).json({ status: 400, error: validationMessage });
-  }
 }
 
 export default UserValidator;

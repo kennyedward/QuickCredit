@@ -4,6 +4,7 @@ import loanRepayments from '../db/loanRepayments';
 import loanIdGenerator from '../helpers/IdGenerator';
 import loanCalculator from '../helpers/loanCalculator';
 import loanValidator from '../helpers/loanValidator';
+import loanStatusValidator from '../helpers/loanStatus';
 
 class LoanController {
   static applyForLoan(req, res) {
@@ -65,53 +66,42 @@ class LoanController {
   }
 
   static adminApproveRejectLoan(req, res) {
-    if (req.authData.isAdmin) {
-      const { loanId } = req.params;
-      const { status } = req.body;
-      const existingLoan = loans.find(loan => loan.loanId === Number(loanId));
-      if (existingLoan) {
-        const data = {
-          loanId: existingLoan.loanId,
-          loanAmount: existingLoan.amount,
-          tenor: existingLoan.tenor,
-          status: existingLoan.status,
-          monthlyInstallment: existingLoan.paymentInstallment,
-          interest: existingLoan.interest,
-          totalRepayment: existingLoan.balance,
-        };
-        if (existingLoan.status === 'pending') {
-          data.status = status;
-          existingLoan.status = status;
-          return res.status(200).json({
-            status: 200,
-            data,
-          });
-        }
-        if (existingLoan.status === 'approved') {
-          data.status = status;
-          existingLoan.status = status;
-          return res.status(200).json({
-            status: 200,
-            data,
-          });
-        }
-        if (existingLoan.status === 'rejected') {
-          data.status = status;
-          existingLoan.status = status;
-          return res.status(200).json({
-            status: 200,
-            data,
-          });
-        }
+    const { loanId } = req.params;
+    const existingLoan = loans.find(loan => loan.loanId === Number(loanId));
+    if (existingLoan) {
+      if (existingLoan.status === 'approved') {
+        return res.status(409).json({
+          status: 409,
+          error: 'Your loan is already approved',
+        });
       }
-      return res.status(404).json({
-        status: 404,
-        error: 'Loan not found.',
-      });
+      const { status } = req.body;
+      const verificationMessage = loanStatusValidator.checkStatus(status);
+      if (verificationMessage !== '') {
+        return res.status(400).json({
+          status: 400,
+          error: verificationMessage,
+        });
+      }
+      if (existingLoan.status === 'pending' || existingLoan.status === 'rejected') {
+        existingLoan.status = status;
+        return res.status(200).json({
+          status: 200,
+          data: {
+            loanId: existingLoan.loanId,
+            loanAmount: existingLoan.amount,
+            tenor: existingLoan.tenor,
+            status: existingLoan.status,
+            monthlyInstallment: existingLoan.paymentInstallment,
+            interest: existingLoan.interest,
+            balance: existingLoan.balance,
+          },
+        });
+      }
     }
-    return res.status(403).json({
-      status: 403,
-      error: 'You\'re forbidden to perform this action.',
+    return res.status(404).json({
+      status: 404,
+      error: 'Loan not found.',
     });
   }
 
