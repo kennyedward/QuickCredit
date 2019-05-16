@@ -1,8 +1,8 @@
 # QuickCredit
-[![Build Status](https://travis-ci.org/kennyedward/QuickCredit.svg?branch=develop)](https://travis-ci.org/kennyedward/QuickCredit) [![Coverage Status](https://coveralls.io/repos/github/kennyedward/QuickCredit/badge.svg?branch=ch-integrate-coveralls-165909918)](https://coveralls.io/github/kennyedward/QuickCredit?branch=ch-integrate-coveralls-165909918)
+[![Build Status](https://travis-ci.org/kennyedward/QuickCredit.svg?branch=develop)](https://travis-ci.org/kennyedward/QuickCredit) [![Coverage Status](https://coveralls.io/repos/github/kennyedward/QuickCredit/badge.svg)](https://coveralls.io/github/kennyedward/QuickCredit)
 [![Maintainability](https://api.codeclimate.com/v1/badges/3051ce937ea013c459e7/maintainability)](https://codeclimate.com/github/kennyedward/QuickCredit/maintainability)
 
-Quick Credit is an online lending platform that provides short term soft loans to individuals.  [Get Started](https://kennyedward.github.io/QuickCredit/UI/)
+Quick Credit is an online lending platform that provides short term soft loans to individuals.  [Get Started](https://kennyedward.github.io/QuickCredit/)
 > **Note**: This project is currently under development. It will be updated on a regular basis.
 
 ## Getting Started
@@ -54,31 +54,31 @@ Run: ```npm run dev``` at the terminal  to use [Nodemon](https://nodemon.io/) an
 ## API Routes
 
 #### User
-- Sign up user: ```POST localhost:7000/api/v1/users/auth/signup ```
+- Sign up user: **POST**: ```localhost:7000/api/v1/auth/signup ```
 
-- Login user: ```POST localhost:7000/api/v1/users/auth/login ```
+- Login user: **POST**: ```localhost:7000/api/v1/auth/login ```
 
-- Apply for Loan: ```POST localhost:7000/api/v1/loans ```
+- Apply for Loan: **POST**: ```localhost:7000/api/v1/loans ```
 
-- View Loan Repayment History: ```GET localhost:7000/api/v1/:loanId/repayments ```
+- View Loan Repayment History: **GET**: ```localhost:7000/api/v1/:loanId/repayments ```
 
 #### Admin
 
-- Login: ```POST localhost:7000/api/v1/users/auth/login ```
+- Login: **POST**: ```localhost:7000/api/v1/auth/login ```
 
-- Verify registered user: ```PATCH localhost:7000/api/v1/users/:userEMail/verify ```
+- Verify registered user: **PATCH**: ```localhost:7000/api/v1/users/:userEmail/verify ```
 
-- Approves or Reject Loan Application: ```PATCH localhost:7000/api/v1/loans/:loanId ```
+- Approves or Reject Loan Application: **PATCH**: ```localhost:7000/api/v1/loans/:loanId ```
 
-- View All Loan Application: ```GET localhost:7000/api/v1/loans/ ```
+- View All Loan Application: **GET**: ```localhost:7000/api/v1/loans/ ```
 
-- View a Single Loan Application: ```GET localhost:7000/api/v1/loans/:loanId ```
+- View a Single Loan Application: **GET**: ```localhost:7000/api/v1/loans/:loanId ```
 
-- Post Loan Repayment transaction: ```POST localhost:7000/api/v1/loans/:loanId/repayments ```
+- Post Loan Repayment transaction: **POST**: ```localhost:7000/api/v1/loans/:loanId/repayment ```
 
-- View All Repaid Loan Application: ```GET localhost:7000/api/v1/loans/?status=approved&repaid=true ```
+- View All Repaid Loan Application: **GET**: ```localhost:7000/api/v1/loans/?status=approved&repaid=true ```
 
-- View All Current Loan Application: ```GET localhost:7000/api/v1/loans/?status=approved&repaid=false ```
+- View All Current Loan Application: **GET**: ```localhost:7000/api/v1/loans/?status=approved&repaid=false ```
 
 
 ## App URL
