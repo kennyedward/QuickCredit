@@ -35,9 +35,9 @@ class LoanController {
           amount: req.body.amount,
           status: 'pending',
           repaid: false,
-          balance: loan.balance,
-          interest: loan.interest,
-          paymentInstallment: loan.paymentInstallment,
+          balance: parseFloat(loan.balance),
+          interest: parseFloat(loan.interest),
+          paymentInstallment: parseFloat(loan.paymentInstallment),
           createdOn: new Date(),
         };
         loans.push(newLoan);
