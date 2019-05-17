@@ -3,6 +3,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/3051ce937ea013c459e7/maintainability)](https://codeclimate.com/github/kennyedward/QuickCredit/maintainability)
 
 Quick Credit is an online lending platform that provides short term soft loans to individuals.  [Get Started](https://kennyedward.github.io/QuickCredit/)
+
+To access the Admin dashboard. Click [here](https://kennyedward.github.io/QuickCredit/admin-verify-account.html)
 > **Note**: This project is currently under development. It will be updated on a regular basis.
 
 ## Getting Started
