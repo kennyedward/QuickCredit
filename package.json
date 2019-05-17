@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nyc mocha server/test/*js --require @babel/register --exit",
     "dev": "nodemon server/api/v1/ --exec babel-node",
-    "babel-build": "babel -d ./build ./server -s --ignore=./server/test",
+    "babel-build": "babel -d ./build ./server -s --ignore=./server/test --copy-files",
     "serve": "node ./build/index.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "clean": "rm -rf build && mkdir build",
