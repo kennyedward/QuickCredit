@@ -2,4 +2,3 @@ node_modules
 .env
 build
 .nyc_output
-server/test
