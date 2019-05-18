@@ -16,16 +16,6 @@ const adminCredentials = {
   password: process.env.ADMIN_PASS || 'learn',
 };
 
-// const userCredentials = {
-//   email: 'taewole@gmail.com',
-//   password: 'archt',
-// };
-
-// const anotherUserCredentials = {
-//   email: 'kenny@gmail.com',
-//   password: 'kenny',
-// };
-
 describe('API Test', () => {
   it('should return success if user navigate to localhost:7000/api/v1', (done) => {
     chai.request(server)
@@ -61,7 +51,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Email is required');
         done();
       });
   });
@@ -76,7 +65,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Invalid email: example - user@domain.com');
         done();
       });
   });
@@ -92,7 +80,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('First name is required');
         done();
       });
   });
@@ -108,7 +95,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Invalid first name');
         done();
       });
   });
@@ -124,7 +110,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('First name is empty');
         done();
       });
   });
@@ -140,7 +125,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('First name can only contain alphabets.');
         done();
       });
   });
@@ -156,7 +140,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('First name length should be between 3 and 20');
         done();
       });
   });
@@ -173,7 +156,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Last name is required');
         done();
       });
   });
@@ -190,7 +172,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Invalid last name');
         done();
       });
   });
@@ -207,7 +188,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Last name is empty');
         done();
       });
   });
@@ -224,7 +204,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Last name can only contain alphabets.');
         done();
       });
   });
@@ -241,7 +220,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Last name length should be between 3 and 20');
         done();
       });
   });
@@ -259,7 +237,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('password is required');
         done();
       });
   });
@@ -278,7 +255,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Address is required');
         done();
       });
   });
@@ -297,7 +273,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Invalid address');
         done();
       });
   });
@@ -316,7 +291,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Address is empty');
         done();
       });
   });
@@ -335,7 +309,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Address can only contain alphabets, numbers, comma and hyphen.');
         done();
       });
   });
@@ -354,7 +327,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Address must be greater than 20 characters.');
         done();
       });
   });
@@ -371,16 +343,8 @@ describe('SignUp Test', () => {
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(201);
-        res.body.should.be.a('object');
         res.body.should.have.property('data');
         res.body.data.should.have.property('token');
-        res.body.data.should.have.property('id');
-        res.body.data.should.have.property('firstName').eql(user.firstName);
-        res.body.data.should.have.property('lastName').eql(user.lastName);
-        res.body.data.should.have.property('email').eql(user.email);
-        res.body.data.should.have.property('address').eql(user.address);
-        res.body.data.should.have.property('status').eql('unverified');
-        res.body.data.should.have.property('isAdmin').eql(false);
         done();
       });
   });
@@ -399,7 +363,6 @@ describe('SignUp Test', () => {
         res.body.should.have.status(409);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('User already exists');
         done();
       });
   });
@@ -417,7 +380,6 @@ describe('Login Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Email is required');
         done();
       });
   });
@@ -432,7 +394,6 @@ describe('Login Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Invalid email: example - user@domain.com');
         done();
       });
   });
@@ -448,7 +409,6 @@ describe('Login Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('password is required');
         done();
       });
   });
@@ -464,7 +424,6 @@ describe('Login Test', () => {
         res.body.should.have.status(404);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('User not found');
         done();
       });
   });
@@ -478,16 +437,8 @@ describe('Login Test', () => {
       .send(user)
       .end((err, res) => {
         res.body.should.have.status(200);
-        res.body.should.be.a('object');
         res.body.should.have.property('data');
         res.body.data.should.have.property('token');
-        res.body.data.should.have.property('id');
-        res.body.data.should.have.property('firstName').eql(res.body.data.firstName);
-        res.body.data.should.have.property('lastName').eql(res.body.data.lastName);
-        res.body.data.should.have.property('email').eql(res.body.data.email);
-        res.body.data.should.have.property('address').eql(res.body.data.address);
-        res.body.data.should.have.property('status').eql(res.body.data.status);
-        res.body.data.should.have.property('isAdmin').eql(res.body.data.isAdmin);
         done();
       });
   });
@@ -518,7 +469,6 @@ describe('User account before verification attempts to apply for loan', () => {
             res.body.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.have.property('error');
-            res.body.error.should.be.a('string').eql('Your account is yet to be verified. Please hold on for verification.');
             done();
           });
       });
@@ -627,7 +577,6 @@ describe('Loan Test', () => {
         res.body.should.have.status(401);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Auth failed');
         done();
       });
   });
@@ -640,7 +589,6 @@ describe('Loan Test', () => {
         res.body.should.have.status(403);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Invalid token, You need to login or signup');
         done();
       });
   });
@@ -667,7 +615,6 @@ describe('Loan Test', () => {
           res.body.should.have.status(400);
           res.body.should.be.a('object');
           res.body.should.have.property('error');
-          res.body.error.should.be.a('string').eql('Your account is yet to be verified. Please hold on for verification.');
           done();
         });
     });
@@ -680,7 +627,6 @@ describe('Loan Test', () => {
           .end((error, response) => {
             response.body.should.have.status(200);
             response.body.should.have.property('data');
-            response.body.data.status.should.be.a('string').eql('verified');
           });
         done();
       });
@@ -694,7 +640,6 @@ describe('Loan Test', () => {
             res.body.should.have.status(400);
             res.body.should.be.a('object');
             res.body.error.should.be.a('string');
-            res.body.error.should.eql('Loan amount is required');
             done();
           });
       });
@@ -708,7 +653,6 @@ describe('Loan Test', () => {
             res.body.should.have.status(400);
             res.body.should.be.a('object');
             res.body.error.should.be.a('string');
-            res.body.error.should.eql('Loan amount must be a number');
             done();
           });
       });
@@ -723,7 +667,6 @@ describe('Loan Test', () => {
             res.body.should.have.status(400);
             res.body.should.be.a('object');
             res.body.error.should.be.a('string');
-            res.body.error.should.eql('Loan tenor is required');
             done();
           });
       });
@@ -737,7 +680,6 @@ describe('Loan Test', () => {
             res.body.should.have.status(400);
             res.body.should.be.a('object');
             res.body.error.should.be.a('string');
-            res.body.error.should.eql('Loan tenor must be a number');
             done();
           });
       });
@@ -751,7 +693,6 @@ describe('Loan Test', () => {
             res.body.should.have.status(400);
             res.body.should.be.a('object');
             res.body.error.should.be.a('string');
-            res.body.error.should.eql('Loan tenor must be a number');
             done();
           });
       });
@@ -765,7 +706,6 @@ describe('Loan Test', () => {
             res.body.should.have.status(400);
             res.body.should.be.a('object');
             res.body.error.should.be.a('string');
-            res.body.error.should.eql('Loan tenor must be an integer');
             done();
           });
       });
@@ -779,7 +719,6 @@ describe('Loan Test', () => {
             res.body.should.have.status(400);
             res.body.should.be.a('object');
             res.body.error.should.be.a('string');
-            res.body.error.should.eql('Loan tenor must be between 1 and 12');
             done();
           });
       });
@@ -811,8 +750,6 @@ describe('Admin Approves Loan Test', () => {
         response.body.should.have.status(200);
         response.body.should.be.a('object');
         response.body.data.should.have.property('token');
-        response.body.data.should.have.property('isAdmin');
-        response.body.data.isAdmin.should.eql(true);
         done();
       });
   });
@@ -823,7 +760,6 @@ describe('Admin Approves Loan Test', () => {
       .end((error, response) => {
         response.body.should.have.status(401);
         response.body.should.have.property('error');
-        response.body.error.should.be.a('string').eql('Auth failed');
       });
     done();
   });
@@ -835,7 +771,6 @@ describe('Admin Approves Loan Test', () => {
       .end((error, response) => {
         response.body.should.have.status(403);
         response.body.should.have.property('error');
-        response.body.error.should.be.a('string').eql('Invalid token, You need to login or signup');
       });
     done();
   });
@@ -847,7 +782,6 @@ describe('Admin Approves Loan Test', () => {
       .end((error, response) => {
         response.body.should.have.status(409);
         response.body.should.have.property('error');
-        response.body.error.should.be.a('string').eql('Your loan is already approved');
       });
     done();
   });
@@ -859,7 +793,6 @@ describe('Admin Approves Loan Test', () => {
       .end((error, response) => {
         response.body.should.have.status(404);
         response.body.should.have.property('error');
-        response.body.error.should.be.a('string').eql('Loan not found.');
       });
     done();
   });
@@ -871,7 +804,6 @@ describe('Admin Approves Loan Test', () => {
       .end((error, response) => {
         response.body.should.have.status(400);
         response.body.should.have.property('error');
-        response.body.error.should.be.a('string').eql('Status is required');
       });
     done();
   });
@@ -883,7 +815,6 @@ describe('Admin Approves Loan Test', () => {
       .end((error, response) => {
         response.body.should.have.status(400);
         response.body.should.have.property('error');
-        response.body.error.should.be.a('string').eql('Status can only be either \'approved\', or \'rejected\'');
       });
     done();
   });
@@ -913,7 +844,6 @@ describe('Admin Create Loan Repayment Test', () => {
         res.body.should.have.status(401);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Auth failed');
         done();
       });
   });
@@ -926,7 +856,6 @@ describe('Admin Create Loan Repayment Test', () => {
         res.body.should.have.status(403);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Invalid token, You need to login or signup');
         done();
       });
   });
@@ -937,7 +866,6 @@ describe('Admin Create Loan Repayment Test', () => {
       .send(loanRepayment)
       .end((error, response) => {
         response.body.should.have.status(403);
-        response.body.should.have.property('error').eql('You\'re forbidden to perform this action.');
       });
     done();
   });
@@ -949,7 +877,6 @@ describe('Admin Create Loan Repayment Test', () => {
       .end((err, res) => {
         res.body.should.have.status(404);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string').eql('Loan not found.');
         done();
       });
   });
@@ -961,7 +888,6 @@ describe('Admin Create Loan Repayment Test', () => {
       .end((err, res) => {
         res.body.should.have.status(200);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string').eql('Your loan is yet to be approved');
         done();
       });
   });
@@ -974,7 +900,6 @@ describe('Admin Create Loan Repayment Test', () => {
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string').eql('Paid amount is required');
         done();
       });
   });
@@ -988,8 +913,6 @@ describe('Admin Create Loan Repayment Test', () => {
         res.body.should.have.status(201);
         res.body.should.be.a('object');
         res.body.data.should.be.a('object');
-        res.body.data.should.have.property('balance').eql(res.body.data.balance);
-        res.body.data.should.have.property('user');
         done();
       });
   });
@@ -1003,8 +926,6 @@ describe('Admin Create Loan Repayment Test', () => {
         res.body.should.have.status(201);
         res.body.should.be.a('object');
         res.body.data.should.be.a('object');
-        res.body.data.should.have.property('balance').eql(res.body.data.balance);
-        res.body.data.should.have.property('user');
         done();
       });
   });
@@ -1018,7 +939,6 @@ describe('Admin Create Loan Repayment Test', () => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Paid amount must be a number');
         done();
       });
   });
@@ -1032,7 +952,6 @@ describe('User View Repayment History Test', () => {
         res.body.should.have.status(401);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Auth failed');
         done();
       });
   });
@@ -1044,7 +963,6 @@ describe('User View Repayment History Test', () => {
         res.body.should.have.status(403);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
-        res.body.error.should.be.a('string').eql('Invalid token, You need to login or signup');
         done();
       });
   });
@@ -1055,7 +973,6 @@ describe('User View Repayment History Test', () => {
       .end((err, res) => {
         res.body.should.have.status(400);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string').eql('Loan ID is invalid.');
         done();
       });
   });
@@ -1066,7 +983,6 @@ describe('User View Repayment History Test', () => {
       .end((err, res) => {
         res.body.should.have.status(404);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string').eql('Loan not found.');
         done();
       });
   });
@@ -1088,7 +1004,6 @@ describe('User View Repayment History Test', () => {
       .end((err, res) => {
         res.body.should.have.status(404);
         res.body.should.be.a('object');
-        res.body.data.should.be.a('string').eql('Loan repayment transaction NOT found for this loan.');
         done();
       });
   });
@@ -1100,7 +1015,6 @@ describe('User View Repayment History Test', () => {
         .end((err, res) => {
           res.body.should.have.status(403);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('You\'re forbidden to perform this action.');
           done();
         });
     });
@@ -1122,7 +1036,6 @@ describe('User View Repayment History Test', () => {
         .end((err, res) => {
           res.body.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('Loan ID is invalid.');
           done();
         });
     });
@@ -1133,7 +1046,6 @@ describe('User View Repayment History Test', () => {
         .end((err, res) => {
           res.body.should.have.status(403);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('You\'re forbidden to perform this action.');
           done();
         });
     });
@@ -1144,7 +1056,6 @@ describe('User View Repayment History Test', () => {
         .end((err, res) => {
           res.body.should.have.status(404);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('Loan not found.');
           done();
         });
     });
@@ -1188,7 +1099,6 @@ describe('User View Repayment History Test', () => {
         .end((err, res) => {
           res.body.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('status can only have the value: \'approved\'');
           done();
         });
     });
@@ -1199,7 +1109,6 @@ describe('User View Repayment History Test', () => {
         .end((err, res) => {
           res.body.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('repaid can only have the value: \'true\' or \'false\'');
           done();
         });
     });
@@ -1211,7 +1120,6 @@ describe('User View Repayment History Test', () => {
         .end((err, res) => {
           res.body.should.have.status(404);
           res.body.should.be.a('object');
-          res.body.error.should.be.a('string').eql('There are no loans listed');
           done();
         });
     });
