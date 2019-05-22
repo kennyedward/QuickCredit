@@ -4,8 +4,8 @@
   "description": "Quick Credit is an online lending platform that provides short term soft loans to individuals.",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha server/test/*js --require @babel/register --exit",
-    "dev": "nodemon server/api/v1/ --exec babel-node",
+    "test": "cross-env NODE_ENV=test nyc mocha server/test/*js --require @babel/register --timeout 10000 --exit",
+    "dev": "cross-env NODE_ENV=development nodemon server/api/v1/ --exec babel-node",
     "babel-build": "babel -d ./build ./server -s --ignore=./server/test --copy-files",
     "serve": "node ./build/index.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
@@ -36,6 +36,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "coveralls": "^3.0.3",
+    "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.2",
@@ -51,6 +52,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
-    "jsonwebtoken": "^8.5.1"
+    "express-promise-router": "^3.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.11.0"
   }
 }

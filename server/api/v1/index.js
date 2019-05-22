@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import '@babel/polyfill';
 import ghPages from 'gh-pages';
 import swaggerUI from 'swagger-ui-express';
 import dotenv from 'dotenv';

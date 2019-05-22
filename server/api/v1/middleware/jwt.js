@@ -1,36 +1,14 @@
 import jwt from 'jsonwebtoken';
 
-const createToken = (newUser, res, status, next) => {
+const createToken = (newUser) => {
   const payLoad = {
     id: newUser.id,
     email: newUser.email,
-    firstName: newUser.firstName,
+    firstname: newUser.firstname,
     status: newUser.status,
-    isAdmin: newUser.isAdmin,
+    isadmin: newUser.isadmin,
   };
-  jwt.sign(payLoad, process.env.APP_TOKEN || 'jhgsfcvgbhbjvc', (err, token) => {
-    if (err) {
-      res.status(422).json({
-        status: 422,
-        error: 'An error occurred while verifying your details.',
-      });
-    }
-    res.status(status).json({
-      status,
-      data: {
-        token,
-        id: newUser.id,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        email: newUser.email,
-        address: newUser.address,
-        status: newUser.status,
-        isAdmin: newUser.isAdmin,
-        registered: newUser.registered,
-      },
-    });
-    next();
-  });
+  return jwt.sign(payLoad, process.env.APP_TOKEN || 'jhgsfcvgbhbjvc');
 };
 
 const validateToken = (req, res, next) => {

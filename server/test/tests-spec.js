@@ -3,6 +3,8 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../api/v1';
 import loans from '../api/v1/db/loans';
+import tablesInit from '../api/v1/db/initTables';
+import db from '../api/v1/db/index';
 
 chai.use(chaiHttp);
 const should = chai.should();
@@ -37,6 +39,16 @@ describe('API Test', () => {
         done();
       });
   });
+});
+
+before(async () => {
+  try {
+    await db.query(tablesInit.createTableSeedData);
+    await db.query(tablesInit.seedSecodData);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
+  }
 });
 
 describe('SignUp Test', () => {
@@ -456,8 +468,8 @@ describe('User account before verification attempts to apply for loan', () => {
       .end((error, response) => {
         userToken = response.body.data.token;
         const loan = {
-          tenor: '5',
-          amount: '5000.00',
+          tenor: 5,
+          amount: 5000.00,
           purpose: 'Business',
           startDate: new Date(),
         };
