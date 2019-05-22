@@ -4,7 +4,7 @@ body {
 }
 
 .body__container {
-    width: 1200px;
+    /* width: 1200px; */
     max-width: 90%;
     margin: 0 auto;
     padding: 6rem;
@@ -36,6 +36,30 @@ body {
 .body__container__one__hero {
     width: 60%;
     margin-top: 6rem;
+}
+
+input:focus, textarea:focus, input[type="button"]:focus {
+    outline: none;
+}
+
+textarea {
+    width: 95%;
+    font-family: 'Rubik', sans-serif;
+    padding-left: 0.4rem;
+    padding-top: 0.4rem;
+}
+
+.kicker {
+    color: #6271d2;
+}
+
+.signup-text {
+    margin-top: 7rem;
+    text-align: left;
+    line-height: 1.5rem;
+    color: #6271d2;
+    border-left: 2px solid;
+    padding-left: 1rem;
 }
 
 /* Media Queries */

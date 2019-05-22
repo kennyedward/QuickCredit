@@ -1,5 +1,5 @@
 .dashboard__container {
-    width: 1200px;
+    /* width: 1200px; */
     max-width: 90%;
     margin: 0 auto;
     padding: 4rem 0;
@@ -50,6 +50,10 @@
 .form__inputWrapper__largeBtn--whiteDisabled {
     background: #FFF;
     color: #6271D2;
+}
+
+.form__inputWrapper__largeBtn--whiteDisabled:hover {
+    background: #FFF;
 }
 
 .form__inputWrapper__largeBtn--whiteDisabled:disabled {
@@ -187,7 +191,7 @@
 
 .updateProfileSection__textArea {
     text-align: left;
-    width: 100%;
+    /* width: 100%; */
     border: 1px solid #CCC;
 }
 
@@ -307,6 +311,10 @@
     display: flex;
     background: #F5F5F5;
     margin-bottom: 2rem;
+}
+
+.historyWrapper:first-of-type {
+    border-right: 1.2rem solid #FF08A3;
 }
 
 .whiteSpace {
@@ -461,6 +469,11 @@
     }
 }
 
+.smaller-font {
+    font-size: 1rem;
+}
+
+
 @media (max-width: 426px) {
     .avatar {
         display: none;
@@ -469,20 +482,6 @@
         top: -11px;
     }
 }
-
-/* @media (min-width: 710px) {
-    .showNotification {
-        top: 8rem;
-        right: 9rem;
-    }
-} */
-
-/* @media (min-width: 1300px) {
-    .showNotification {
-        top: 8rem;
-        right: 15rem;
-    }
-} */
 
 @media (max-width: 769px) {
     .loanForm {
@@ -509,6 +508,10 @@
     }
     .paymentDateWrapper {
         margin: 1.5rem 0;
+    }
+    .historyWrapper:first-of-type {
+        border-top: 1.2rem solid #FF08A3;
+        border-right: none;
     }
 }
 
