@@ -89,6 +89,9 @@
 .form__inputWrapper__checkbox[type="checkbox"]:checked+.form__inputWrapper__label--labelTerms::after {
     content: "";
 }
+.form__inputWrapper__label--labelTerms:hover {
+    cursor: pointer;
+}
 
 /* Large button component */
 
@@ -105,6 +108,12 @@
     padding: 1rem;
     border-radius: 4px;
     letter-spacing: 0.05rem;
+    transition: 0.5 ease-in-out;
+    outline: none;
+}
+
+.form__inputWrapper__largeBtn:hover {
+    background: rgb(63, 76, 160);
 }
 
 /* Footer component */
