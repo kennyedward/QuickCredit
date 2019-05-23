@@ -87,11 +87,13 @@ class LoanController {
     });
   }
 
-  static adminApproveRejectLoan(req, res) {
+  static async adminApproveRejectLoan(req, res) {
     const { loanId } = req.params;
-    const existingLoan = loans.find(loan => loan.loanId === Number(loanId));
-    if (existingLoan) {
-      if (existingLoan.status === 'approved') {
+    const loanQuery = await db.query(`SELECT * FROM loans
+    WHERE id = $1`, [Number(loanId)]);
+    const returnedLoan = loanQuery.rows[0];
+    if (returnedLoan) {
+      if (returnedLoan.status === 'approved') {
         return res.status(409).json({
           status: 409,
           error: 'Your loan is already approved',
@@ -105,18 +107,19 @@ class LoanController {
           error: verificationMessage,
         });
       }
-      if (existingLoan.status === 'pending' || existingLoan.status === 'rejected') {
-        existingLoan.status = status;
+      if (returnedLoan.status === 'pending' || returnedLoan.status === 'rejected') {
+        const updateLoanQuery = await db.query('UPDATE loans SET status = $1 WHERE id = $2 returning *', [status, returnedLoan.id]);
+        const updatedLoan = updateLoanQuery.rows[0];
         return res.status(200).json({
           status: 200,
           data: {
-            loanId: existingLoan.loanId,
-            loanAmount: existingLoan.amount,
-            tenor: existingLoan.tenor,
-            status: existingLoan.status,
-            monthlyInstallment: existingLoan.paymentInstallment,
-            interest: existingLoan.interest,
-            balance: existingLoan.balance,
+            loanId: updatedLoan.id,
+            loanAmount: parseFloat(updatedLoan.amount),
+            tenor: updatedLoan.tenure,
+            status: updatedLoan.status,
+            monthlyInstallment: parseFloat(updatedLoan.paymentinstallment),
+            interest: parseFloat(updatedLoan.interest),
+            balance: parseFloat(updatedLoan.balance),
           },
         });
       }
