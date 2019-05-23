@@ -1,23 +1,29 @@
-import users from '../db/users';
 import loans from '../db/loans';
 import loanRepayments from '../db/loanRepayments';
 import loanIdGenerator from '../helpers/IdGenerator';
 import loanCalculator from '../helpers/loanCalculator';
 import loanValidator from '../helpers/loanValidator';
 import loanStatusValidator from '../helpers/loanStatus';
+import db from '../db/index';
 
 class LoanController {
-  static applyForLoan(req, res) {
-    const user = users.find(person => person.id === req.authData.id);
-    if (user) {
-      if (user.status === 'unverified') {
+  static async applyForLoan(req, res) {
+    const { id, email } = req.authData;
+    const queryUsersTable = await db.query(`SELECT * FROM users
+    WHERE id = $1`, [id]);
+    const returnedUser = queryUsersTable.rows[0];
+    if (returnedUser) {
+      if (returnedUser.status === 'unverified') {
         return res.status(400).json({
           status: 400,
           error: 'Your account is yet to be verified. Please hold on for verification.',
         });
       }
-      const existingLoan = loans.find(loan => loan.user === req.authData.email);
-      if (!existingLoan) {
+      req.authData.status = returnedUser.status;
+      const queryLoanData = await db.query(`SELECT * FROM loans
+    WHERE useremail = $1`, [email]);
+      const queryLoanDataHolder = queryLoanData.rows[0];
+      if (queryLoanData.rows.length === 0 || queryLoanData.rows[0].repaid) {
         const verificationMessage = loanValidator.validateLoan(req.body.amount, req.body.tenor);
         if (verificationMessage !== '') {
           return res.status(400).json({
@@ -26,35 +32,51 @@ class LoanController {
           });
         }
         const loan = loanCalculator(req.body.amount, req.body.tenor);
-        const newLoan = {
-          loanId: loanIdGenerator(),
-          firstName: user.firstName,
-          lastName: user.lastName,
-          user: user.email,
-          tenor: req.body.tenor,
-          amount: req.body.amount,
-          status: 'pending',
-          repaid: false,
-          balance: parseFloat(loan.balance),
-          interest: parseFloat(loan.interest),
-          paymentInstallment: parseFloat(loan.paymentInstallment),
-          createdOn: new Date(),
-        };
-        loans.push(newLoan);
+        const values = [
+          returnedUser.email,
+          'pending',
+          false,
+          req.body.tenor,
+          req.body.amount,
+          loan.paymentInstallment,
+          loan.balance,
+          loan.interest,
+        ];
+        const text = `INSERT INTO
+                loans(useremail, status, repaid, tenure, amount, paymentinstallment, balance, interest)
+                VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+                returning *`;
+        const newLoan = await db.query(text, values);
+        const createdLoan = newLoan.rows[0];
+        const {
+          useremail, tenure, repaid, status,
+        } = createdLoan;
         return res.status(201).json({
           status: 201,
-          data: newLoan,
+          data: {
+            loanId: createdLoan.id,
+            firstName: returnedUser.firstname,
+            lastName: returnedUser.lastname,
+            email: useremail,
+            tenure,
+            amount: parseFloat(createdLoan.amount),
+            paymentInstallment: parseFloat(createdLoan.paymentinstallment),
+            status,
+            balance: parseFloat(createdLoan.balance),
+            interest: parseFloat(createdLoan.interest),
+            repaid,
+          },
         });
       }
-      if (existingLoan.repaid === false) {
+      if (queryLoanDataHolder.repaid === false) {
         return res.status(409).json({
           status: 409,
           error: 'You have an existing loan',
         });
       }
-      if (existingLoan.status === 'pending') {
-        return res.status(409).json({
-          status: 401,
+      if (queryLoanDataHolder.status === 'pending') {
+        return res.status(202).json({
+          status: 202,
           error: 'You have a pending loan',
         });
       }
