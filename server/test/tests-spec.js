@@ -3,7 +3,8 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../api/v1';
 import loans from '../api/v1/db/loans';
-import tablesInit from '../api/v1/db/initTables';
+import devTablesSetup from '../api/v1/db/devTablesSetup';
+import initTables from '../api/v1/db/initTables';
 import db from '../api/v1/db/index';
 
 chai.use(chaiHttp);
@@ -43,8 +44,8 @@ describe('API Test', () => {
 
 before(async () => {
   try {
-    await db.query(tablesInit.createTableSeedData);
-    await db.query(tablesInit.seedSecodData);
+    await db.query(devTablesSetup.setupDevDB);
+    await db.query(initTables.seedSecodData);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
@@ -570,7 +571,7 @@ describe('Admin Test', () => {
       .send({ status: 'verified' })
       .end((error, response) => {
         response.body.should.have.status(401);
-        response.body.should.have.property('error').eql('Auth failed');
+        response.body.should.have.property('error').eql('Incorrect login credentials');
       });
     done();
   });
