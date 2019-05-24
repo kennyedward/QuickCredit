@@ -79,7 +79,17 @@ class UserController {
         delete returnedUser.password;
         return res.status(200).json({
           status: 200,
-          data: { token, returnedUser },
+          data: {
+            token,
+            id: returnedUser.id,
+            email: returnedUser.email,
+            firstName: returnedUser.firstname,
+            lastName: returnedUser.lastname,
+            address: returnedUser.address,
+            status: returnedUser.status,
+            isAdmin: returnedUser.isadmin,
+            createdOn: returnedUser.createdon,
+          },
         });
       });
     }
