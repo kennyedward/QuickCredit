@@ -40,7 +40,17 @@ class UserController {
     delete createdUser.password;
     return res.status(201).json({
       status: 201,
-      data: { token, ...createdUser },
+      data: {
+        token,
+        id: createdUser.id,
+        email: createdUser.email,
+        FirstName: createdUser.firstname,
+        lastName: createdUser.lastname,
+        address: createdUser.address,
+        status: createdUser.status,
+        isAdmin: createdUser.isadmin,
+        createdOn: createdUser.createdon,
+      },
     });
   }
 
