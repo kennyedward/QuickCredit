@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS users(
    );
 INSERT INTO
 users(email, firstname, lastname, password, address, status, isadmin)
-VALUES('admin@quickcredit.com',
+VALUES('realadmin@quickcredit.com',
 'QuickCredit',
 'Admin',
 '${adminpassword}',

@@ -11,7 +11,7 @@ import indexRoute from './routes/indexRoute';
 import usersRoute from './routes/usersRoute';
 import loanRoute from './routes/loanRoute';
 import db from './db/index';
-import devTableInit from './db/devTablesSetup';
+import devTablesSetup from './db/devTablesSetup';
 
 dotenv.config();
 
@@ -23,10 +23,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.DATABASE_URL) {
   (async () => {
     try {
-      await db.query(devTableInit.setupDevDB);
+      await db.query(devTablesSetup.setupDevDB);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);

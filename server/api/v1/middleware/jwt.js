@@ -8,7 +8,7 @@ const createToken = (newUser) => {
     status: newUser.status,
     isadmin: newUser.isadmin,
   };
-  return jwt.sign(payLoad, process.env.APP_TOKEN || 'jhgsfcvgbhbjvc');
+  return jwt.sign(payLoad, process.env.APP_TOKEN);
 };
 
 const validateToken = (req, res, next) => {
@@ -17,7 +17,7 @@ const validateToken = (req, res, next) => {
     const bearer = bearerHeader.split(' ');
     const bearerToken = bearer[1];
     req.token = bearerToken;
-    return jwt.verify(req.token, process.env.APP_TOKEN || 'jhgsfcvgbhbjvc', (err, authData) => {
+    return jwt.verify(req.token, process.env.APP_TOKEN, (err, authData) => {
       if (err) {
         return res.status(403).json({
           status: 403,
