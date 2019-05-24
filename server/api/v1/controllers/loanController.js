@@ -176,7 +176,7 @@ class LoanController {
             loanId: loanRepaid.loanid,
             amount: parseFloat(loanRepaid.amount),
             createdon: loanRepaid.createdon,
-            monthlyInstallment: updatedLoanData.paymentinstallment,
+            monthlyInstallment: parseFloat(updatedLoanData.paymentinstallment),
           },
         });
       }
