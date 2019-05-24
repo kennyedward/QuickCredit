@@ -40,7 +40,7 @@ class UserController {
     delete createdUser.password;
     return res.status(201).json({
       status: 201,
-      data: { token, createdUser },
+      data: { token, ...createdUser },
     });
   }
 
@@ -63,7 +63,7 @@ class UserController {
           });
         }
         if (!match) {
-          return res.status(401).json({ status: 401, error: 'Auth failed' });
+          return res.status(401).json({ status: 401, error: 'Incorrect login credentials' });
         }
         const token = jwt.createToken(returnedUser);
         delete returnedUser.password;
